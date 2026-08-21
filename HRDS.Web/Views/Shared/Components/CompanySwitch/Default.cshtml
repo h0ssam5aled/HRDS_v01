@@ -1,0 +1,72 @@
+﻿@using HRDS.Web.Models.Entities
+@model IEnumerable<HRDS.Web.Models.Entities.Company>
+
+@{
+    bool isAr = ViewBag.IsArabic ?? false;
+    var allBranches = ViewBag.Branches as List<CompanyBranch> ?? new List<CompanyBranch>();
+    int? selectedBranchId = ViewBag.SelectedBranchId;
+
+    // 1. استخدام الفرع المختار من السيشن، 2. أو الفرع الرئيسي، 3. أو أول فرع متوفر
+    var currentBranch = allBranches.FirstOrDefault(b => b.CompanyBranchId == selectedBranchId)
+                        ?? allBranches.FirstOrDefault(b => b.IsMainBranch)
+                        ?? allBranches.FirstOrDefault();
+
+    var currentCompany = currentBranch != null ? Model.FirstOrDefault(c => c.CompanyId == currentBranch.CompanyId) : null;
+
+    var currentDisplayName = currentBranch != null && currentCompany != null
+        ? (isAr ? $"{currentCompany.CompanyNameAr} - {currentBranch.BranchNameAr}" : $"{currentCompany.CompanyNameEn} - {currentBranch.BranchNameEn}")
+        : (isAr ? "اختر الشركة/الفرع" : "Select Company/Branch");
+}
+
+<div class="dropdown">
+    <button class="btn company-select-btn dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-building text-info"></i>
+        <span>@currentDisplayName</span>
+    </button>
+
+    <ul class="dropdown-menu dropdown-menu-dark shadow-lg border-secondary" style="min-width: 250px; max-height: 350px; overflow-y: auto;">
+        @foreach (var company in Model)
+        {
+            var companyBranches = allBranches.Where(b => b.CompanyId == company.CompanyId).ToList();
+
+            <li class="dropdown-header text-info fw-bold border-bottom border-secondary pb-1 mt-1">
+                <i class="bi bi-buildings me-1"></i> @(isAr? company.CompanyNameAr: company.CompanyNameEn)
+            </li>
+
+            @if (companyBranches.Any())
+            {
+                @foreach (var branch in companyBranches)
+                {
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center justify-content-between py-2 ps-4 @(branch.CompanyBranchId == currentBranch?.CompanyBranchId ? "active" : "")"
+                           href="javascript:void(0);"
+                           onclick="switchBranch(@branch.CompanyBranchId)">
+                            <span>
+                                <i class="bi bi-geo-alt me-1 text-muted"></i>
+                                @(isAr? branch.BranchNameAr: branch.BranchNameEn)
+                            </span>
+                            @if (branch.IsMainBranch)
+                            {
+                                <span class="badge bg-info-subtle text-info border border-info ms-2" style="font-size: 0.7rem;">@(isAr ? "رئيسي" : "Main")</span>
+                            }
+                        </a>
+                    </li>
+                }
+            }
+            else
+            {
+                <li><span class="dropdown-item text-muted small ps-4">@(isAr ? "لا توجد فروع" : "No branches")</span></li>
+            }
+        }
+    </ul>
+</div>
+
+<script>
+    function switchBranch(branchId) {
+        $.post('/Home/SetActiveBranch', { branchId: branchId }, function (res) {
+            if (res.success) {
+                location.reload(); // إعادة تحميل الصفحة لتحديث الفرع في القائمة وجميع الشاشات
+            }
+        });
+    }
+</script>

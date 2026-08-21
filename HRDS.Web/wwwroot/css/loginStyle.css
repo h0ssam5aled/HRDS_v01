@@ -1,0 +1,211 @@
+﻿:root {
+    --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    --accent-glow: rgba(59, 130, 246, 0.5);
+    --bg-dark: #070b14;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', 'Cairo', sans-serif;
+    background-color: var(--bg-dark);
+    background-image: radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(29, 78, 216, 0.1) 0%, transparent 40%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+.card-3d-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    padding: 1rem;
+}
+
+.card-3d {
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    border-radius: 28px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7), 0 18px 36px -18px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+
+.brand-logo-3d {
+    width: 70px;
+    height: 70px;
+    background: var(--primary-gradient);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+    box-shadow: 0 12px 25px -5px var(--accent-glow);
+    font-size: 2rem;
+    color: #ffffff;
+    transform: translateZ(30px);
+}
+
+/* زر تغيير اللغة - يعتمد على اتجاه الاتجاه الأصلي للمتصفح/الصفحة */
+.lang-switch-3d {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 10;
+    transform: translateZ(20px);
+}
+
+/* دعم الاتجاه الأيمن RTL لزر اللغة */
+[dir="rtl"] .lang-switch-3d {
+    right: auto;
+    left: 1.5rem;
+}
+
+.lang-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #e2e8f0;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(5px);
+}
+
+    .lang-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+.card-title-3d {
+    color: #ffffff;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    transform: translateZ(25px);
+}
+
+.card-subtitle-3d {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    transform: translateZ(20px);
+}
+
+.form-label-3d {
+    color: #cbd5e1;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    transform: translateZ(15px);
+    display: block;
+}
+
+/* تنسيق الـ Input الداكن الأساسي */
+.input-group-3d {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    transform: translateZ(15px);
+    position: relative;
+}
+
+    .input-group-3d:focus-within {
+        border-color: #3b82f6;
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        background: rgba(30, 41, 59, 0.9);
+    }
+
+    /* استخدام CSS Logical Properties بديل الشرط ليعمل في LTR و RTL توماتيكياً */
+    .input-group-3d .input-group-text {
+        background: transparent;
+        border: none;
+        color: #64748b;
+        padding-inline-start: 1.2rem;
+        padding-inline-end: 0;
+    }
+
+    .input-group-3d .form-control {
+        background: transparent !important;
+        border: none !important;
+        color: #ffffff !important;
+        padding: 0.85rem 1rem;
+        font-weight: 500;
+        box-shadow: none !important;
+    }
+
+        .input-group-3d .form-control::placeholder {
+            color: #475569;
+        }
+
+    /* حالة وجود خطأ في الحقل (Validation Error) */
+    .input-group-3d.has-error {
+        border-color: #ef4444 !important;
+        box-shadow: 0 0 15px rgba(239, 68, 68, 0.3) !important;
+    }
+
+/* أيكون المثلث الأحمر للتحذير داخل الحقل */
+.error-warning-icon {
+    color: #ef4444;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    font-size: 1.05rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: pulse-glow 2s infinite;
+}
+
+/* إظهار مثلث التحذير عند وجود الخطأ */
+.input-group-3d.has-error .error-warning-icon {
+    display: flex;
+}
+
+@keyframes pulse-glow {
+    0% {
+        opacity: 0.8;
+    }
+
+    50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 5px rgba(239, 68, 68, 0.8));
+    }
+
+    100% {
+        opacity: 0.8;
+    }
+}
+
+/* إخفاء رسائل الخطأ النصية الأصلية للـ Razor */
+.field-validation-error {
+    display: none !important;
+}
+
+.btn-3d {
+    background: var(--primary-gradient);
+    border: none;
+    border-radius: 16px;
+    padding: 0.9rem;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 10px 25px -5px var(--accent-glow);
+    transition: all 0.3s ease;
+    transform: translateZ(25px);
+    margin-top: 1.5rem;
+}
+
+    .btn-3d:hover {
+        transform: translateZ(30px) scale(1.02);
+        box-shadow: 0 15px 35px -5px rgba(59, 130, 246, 0.6);
+        color: #ffffff;
+    }

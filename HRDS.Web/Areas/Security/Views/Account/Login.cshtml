@@ -1,0 +1,154 @@
+﻿@using HRDS.Web.Resources
+@model HRDS.Web.Areas.Security.Models.LoginViewModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = null;
+    var currentCulture = System.Globalization.CultureInfo.CurrentUICulture.Name;
+    var isAr = currentCulture.StartsWith("ar", StringComparison.OrdinalIgnoreCase);
+    var isRtl = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
+    var returnUrl = Context.Request.Path.Value;
+}
+
+<!DOCTYPE html>
+<html lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HRDS ERP - @Resource.Login</title>
+
+    <!-- Bootstrap CSS -->
+    @if (isRtl)
+    {
+        <link href="~/bootstrap/css/bootstrap.rtl.min.css" rel="stylesheet" />
+    }
+    else
+    {
+        <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    }
+
+    <!-- Bootstrap Icons & Fonts -->
+    <link rel="stylesheet" href="~/bootstrap-icons/font/bootstrap-icons.min.css" />
+
+    <link rel="stylesheet" href="~/css/fonts.css" />
+    <link href="~/css/loginstyle.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="card-3d-wrapper">
+        <div class="card-3d" id="tiltCard">
+
+            <!-- Language Switcher -->
+            <div class="lang-switch-3d">
+                <form action="/Language/SetLanguage" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="returnUrl" value="@(Context.Request.Path + Context.Request.QueryString)" />
+
+                    @if (isAr)
+                    {
+                        <button type="submit" name="culture" value="en" class="lang-btn d-flex align-items-center gap-2">
+                            <i class="bi bi-globe"></i> English
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="submit" name="culture" value="ar" class="lang-btn d-flex align-items-center gap-2">
+                            <i class="bi bi-globe"></i> العربية
+                        </button>
+                    }
+                </form>
+            </div>
+
+            <!-- 3D Brand Icon -->
+            <div class="brand-logo-3d">
+                <i class="bi bi-layers-half"></i>
+            </div>
+
+            <!-- Header -->
+            <div class="text-center mb-4">
+                <h3 class="card-title-3d mb-1">HRDS SYSTEM</h3>
+                <p class="card-subtitle-3d">@Resource.Welcome</p>
+            </div>
+
+            <!-- Login Form -->
+            <form asp-area="Security" asp-controller="Account" asp-action="Login" method="post">
+                @Html.AntiForgeryToken()
+
+                <!-- تنبيه خطأ اسم المستخدم أو كلمة السر الخطأ القادم من الكنترولر -->
+                <div asp-validation-summary="ModelOnly" class="text-danger small text-center mb-3"></div>
+
+                <!-- Username -->
+                <div class="mb-3">
+                    <label class="form-label-3d">@Resource.Username</label>
+
+                    @{
+                        var usernameHasError = ViewData.ModelState["Username"]?.Errors.Count > 0;
+                    }
+
+                    <div class="input-group-3d d-flex align-items-center @(usernameHasError ? "has-error" : "")">
+                        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                        <input asp-for="Username" type="text" class="form-control" placeholder="admin" autofocus autocomplete="off" />
+
+                        <!-- مثلث التحذير يظهر داخل الحقل عند الخطأ -->
+                        <span class="error-warning-icon" title="@Resource.UsernameRequired">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                        </span>
+                    </div>
+                    <span asp-validation-for="Username"></span>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                    <label class="form-label-3d">@Resource.Password</label>
+
+                    @{
+                        var passwordHasError = ViewData.ModelState["Password"]?.Errors.Count > 0;
+                    }
+
+                    <div class="input-group-3d d-flex align-items-center @(passwordHasError ? "has-error" : "")">
+                        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                        <!-- تم تغيير autocomplete إلى new-password لمنع المتصفح من فرض الاقتراحات وخلفية Autofill -->
+                        <input asp-for="Password" type="password" class="form-control" placeholder="••••••••" autocomplete="new-password" />
+
+                        <!-- مثلث التحذير يظهر داخل الحقل عند الخطأ -->
+                        <span class="error-warning-icon" title="@Resource.PasswordRequired">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                        </span>
+                    </div>
+                    <span asp-validation-for="Password"></span>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-3d w-100">
+                    <i class="bi bi-box-arrow-in-right me-2"></i> @Resource.Login
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Dynamic 3D Parallax Script -->
+    <script>
+        const card = document.getElementById('tiltCard');
+        const container = document.querySelector('.card-3d-wrapper');
+
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            const tiltX = (y / rect.height) * -20;
+            const tiltY = (x / rect.width) * 20;
+
+            card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+        });
+
+        container.addEventListener('mouseleave', () => {
+            card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        });
+    </script>
+
+</body>
+</html>

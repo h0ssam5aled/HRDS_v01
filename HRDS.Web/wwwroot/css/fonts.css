@@ -1,0 +1,125 @@
+﻿/* ==========================================================================
+   Plus Jakarta Sans - Latin (English)
+   ========================================================================== */
+
+@font-face {
+    font-display: swap;
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/plus-jakarta-sans/plus-jakarta-sans-v12-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Plus Jakarta Sans';
+    font-style: italic;
+    font-weight: 400;
+    src: url('../fonts/plus-jakarta-sans/plus-jakarta-sans-v12-latin-italic.woff2') format('woff2');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../fonts/plus-jakarta-sans/plus-jakarta-sans-v12-latin-500.woff2') format('woff2');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Plus Jakarta Sans';
+    font-style: italic;
+    font-weight: 500;
+    src: url('../fonts/plus-jakarta-sans/plus-jakarta-sans-v12-latin-500italic.woff2') format('woff2');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: url('../fonts/plus-jakarta-sans/plus-jakarta-sans-v12-latin-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Plus Jakarta Sans';
+    font-style: italic;
+    font-weight: 600;
+    src: url('../fonts/plus-jakarta-sans/plus-jakarta-sans-v12-latin-600italic.woff2') format('woff2');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/plus-jakarta-sans/plus-jakarta-sans-v12-latin-700.woff2') format('woff2');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Plus Jakarta Sans';
+    font-style: italic;
+    font-weight: 700;
+    src: url('../fonts/plus-jakarta-sans/plus-jakarta-sans-v12-latin-700italic.woff2') format('woff2');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 800;
+    src: url('../fonts/plus-jakarta-sans/plus-jakarta-sans-v12-latin-800.woff2') format('woff2');
+}
+
+
+/* ==========================================================================
+   Cairo - Arabic & Latin
+   ========================================================================== */
+
+/* Cairo Regular (400) */
+@font-face {
+    font-display: swap;
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/cairo/cairo-v31-arabic-regular.woff2') format('woff2'), url('../fonts/cairo/cairo-v31-latin-regular.woff2') format('woff2');
+}
+
+/* Cairo Medium (500) */
+@font-face {
+    font-display: swap;
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../fonts/cairo/cairo-v31-arabic-500.woff2') format('woff2'), url('../fonts/cairo/cairo-v31-latin-500.woff2') format('woff2');
+}
+
+/* Cairo SemiBold (600) */
+@font-face {
+    font-display: swap;
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 600;
+    src: url('../fonts/cairo/cairo-v31-arabic-600.woff2') format('woff2'), url('../fonts/cairo/cairo-v31-latin-600.woff2') format('woff2');
+}
+
+/* Cairo Bold (700) */
+@font-face {
+    font-display: swap;
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/cairo/cairo-v31-arabic-700.woff2') format('woff2'), url('../fonts/cairo/cairo-v31-latin-700.woff2') format('woff2');
+}
+
+/* Cairo ExtraBold (800) */
+@font-face {
+    font-display: swap;
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 800;
+    src: url('../fonts/cairo/cairo-v31-arabic-800.woff2') format('woff2'), url('../fonts/cairo/cairo-v31-latin-800.woff2') format('woff2');
+}

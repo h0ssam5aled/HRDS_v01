@@ -1,0 +1,346 @@
+﻿@model HRDS.Web.Models.EditUserViewModel
+@using HRDS.Web.Models.Entities
+@using HRDS.Web.Resources
+
+@{
+    ViewData["Title"] = Resource.EditUser;
+    var roles = ViewBag.Roles as List<Role> ?? new List<Role>();
+    var isArabic = System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar";
+    var currentDir = isArabic ? "rtl" : "ltr";
+}
+
+<style>
+    .dark-card {
+        background-color: #0f172a !important;
+        border: 1px solid #1e293b !important;
+        color: #ffffff !important;
+        border-radius: 10px;
+    }
+
+    .form-control-dark {
+        background-color: #1e293b !important;
+        border: 1px solid #334155 !important;
+        color: #ffffff !important;
+        border-radius: 8px;
+    }
+
+        .form-control-dark:focus {
+            border-color: #38bdf8 !important;
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.4) !important;
+        }
+
+    .role-box, .access-box {
+        background-color: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        padding: 10px 14px;
+        transition: all 0.2s;
+    }
+
+        .role-box:hover, .access-box:hover {
+            border-color: #38bdf8;
+        }
+
+    .btn-neon-update {
+        background-color: #38bdf8 !important;
+        color: #0f172a !important;
+        font-weight: bold;
+        border: none;
+        box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    }
+
+        .btn-neon-update:hover {
+            background-color: #0284c7 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.7);
+        }
+
+    .nav-tabs {
+        border-bottom: 1px solid #334155 !important;
+    }
+
+        .nav-tabs .nav-link {
+            color: #94a3b8 !important;
+            border: none !important;
+            border-bottom: 2px solid transparent !important;
+            font-weight: 600;
+            padding: 0.75rem 1.25rem;
+        }
+
+            .nav-tabs .nav-link:hover {
+                color: #38bdf8 !important;
+                border-color: transparent !important;
+            }
+
+            .nav-tabs .nav-link.active {
+                background-color: transparent !important;
+                color: #38bdf8 !important;
+                border-bottom: 2px solid #38bdf8 !important;
+            }
+
+    /* إصلاح ألوان الجدول للوضع المظلم */
+    .table-custom-dark {
+        background-color: #1e293b !important;
+        color: #f8fafc !important;
+        border-color: #334155 !important;
+    }
+
+        .table-custom-dark th {
+            background-color: #0f172a !important;
+            color: #38bdf8 !important;
+            border-bottom: 2px solid #334155 !important;
+            font-weight: 600;
+        }
+
+        .table-custom-dark td {
+            background-color: #1e293b !important;
+            color: #f8fafc !important;
+            border-bottom: 1px solid #334155 !important;
+        }
+
+        .table-custom-dark tbody tr:hover td {
+            background-color: #334155 !important;
+        }
+
+    /* تنسيق الـ Checkbox والـ Radio لتناسب اللون السماوي */
+    .form-check-input:checked {
+        background-color: #38bdf8 !important;
+        border-color: #38bdf8 !important;
+    }
+</style>
+
+<div class="container-fluid py-3" dir="@currentDir">
+    <!-- Header -->
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-pencil-square fs-3 text-info"></i>
+                <h4 class="mb-0 fw-bold">@Resource.EditUser</h4>
+            </div>
+            <a asp-action="Index" class="btn btn-outline-light btn-sm">
+                <i class="bi bi-arrow-right me-1"></i> @Resource.BackToList
+            </a>
+        </div>
+    </div>
+
+    <!-- Tabs Header -->
+    <ul class="nav nav-tabs mb-3" id="editUserTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic-info" type="button" role="tab">
+                <i class="bi bi-person-gear me-2"></i>@(isArabic ? "البيانات الأساسية والأدوار" : "Basic Info & Roles")
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="access-tab" data-bs-toggle="tab" data-bs-target="#user-access" type="button" role="tab">
+                <i class="bi bi-building-gear me-2"></i>@(isArabic ? "صلاحيات الفروع والشركات" : "Company & Branch Access")
+            </button>
+        </li>
+    </ul>
+
+    <form asp-action="Edit" method="post" dir="@currentDir">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="UserId" />
+
+        <div class="tab-content" id="editUserTabsContent">
+
+            <!-- TAB 1: Basic Info & Roles -->
+            <div class="tab-pane fade show active" id="basic-info" role="tabpanel">
+                <div class="card dark-card shadow-sm">
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <input type="text" name="fake_username" style="display:none;" tabindex="-1" aria-hidden="true" />
+                            <input type="password" name="fake_password" style="display:none;" tabindex="-1" aria-hidden="true" />
+
+                            <!-- Username -->
+                            <div class="col-md-6">
+                                <label asp-for="Username" class="form-label text-light">@Resource.Username <span class="text-danger">*</span></label>
+                                <input asp-for="Username" class="form-control form-control-dark" placeholder="@Resource.EnterUsername" autocomplete="new-password" />
+                                <span asp-validation-for="Username" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-md-6">
+                                <label asp-for="Email" class="form-label text-light">@Resource.EmailAddress</label>
+                                <input asp-for="Email" type="email" class="form-control form-control-dark" placeholder="example@domain.com" autocomplete="off" />
+                                <span asp-validation-for="Email" class="text-danger small"></span>
+                            </div>
+
+                            <!-- New Password -->
+                            <div class="col-md-6">
+                                <label asp-for="NewPassword" class="form-label text-light">
+                                    @Resource.Password
+                                    <span class="text-info opacity-75 small">
+                                        (@(isArabic ? "اتركها فارغة إذا لم ترد التغيير" : "leave empty if you don't want to change"))
+                                    </span>
+                                </label>
+                                <input asp-for="NewPassword" type="password" class="form-control form-control-dark" placeholder="••••••••" autocomplete="new-password" />
+                                <span asp-validation-for="NewPassword" class="text-danger small"></span>
+                            </div>
+
+                            <!-- IsActive -->
+                            <div class="col-md-6 d-flex align-items-end">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" asp-for="IsActive" id="IsActiveSwitch">
+                                    <label class="form-check-label text-light ms-2" for="IsActiveSwitch">@Resource.Active</label>
+                                </div>
+                            </div>
+
+                            <hr class="border-secondary my-4" />
+
+                            <!-- Roles Selection -->
+                            <div class="col-12">
+                                <h5 class="text-info mb-3"><i class="bi bi-shield-lock me-2"></i>@Resource.AssignRoles</h5>
+                                <div class="row g-3">
+                                    @foreach (var role in roles)
+                                    {
+                                        var isChecked = Model.SelectedRoleIds != null && Model.SelectedRoleIds.Contains(role.RoleId);
+                                        <div class="col-md-4 col-sm-6">
+                                            <div class="role-box d-flex align-items-center justify-content-between">
+                                                <label class="form-check-label text-light cursor-pointer" for="role-@role.RoleId">
+                                                    @(isArabic? role.RoleNameAr: role.RoleNameEn)
+                                                </label>
+                                                <input class="form-check-input" type="checkbox" name="SelectedRoleIds" value="@role.RoleId" id="role-@role.RoleId" @(isChecked ? "checked" : "") />
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: User Access (Companies & Branches) -->
+            <div class="tab-pane fade" id="user-access" role="tabpanel">
+                <div class="card dark-card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="text-info mb-3">
+                            <i class="bi bi-diagram-3 me-2"></i>
+                            @(isArabic ? "صلاحيات الوصول للشركات والفروع" : "Company & Branch Access Control")
+                        </h5>
+
+                        <div class="table-responsive">
+                            <table class="table table-custom-dark align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 8%;" class="text-center">
+                                            @(isArabic ? "سماح" : "Allow")
+                                        </th>
+
+                                        <th>
+                                            @(isArabic ? "الشركة" : "Company")
+                                        </th>
+
+                                        <th>
+                                            @(isArabic ? "الفرع" : "Branch")
+                                        </th>
+
+                                        <th style="width: 15%;" class="text-center">
+                                            @(isArabic ? "الافتراضي" : "Default")
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @if (Model.UserBranchesAccess != null &&
+                                                                        Model.UserBranchesAccess.Any())
+                                    {
+                                        for (int i = 0;
+                                        i < Model.UserBranchesAccess.Count;
+                                        i++)
+                                        {
+                                            var item = Model.UserBranchesAccess[i];
+
+                                            <tr>
+                                                <td class="text-center">
+
+                                                    <!-- Company Id -->
+                                                    <input type="hidden"
+                                                           name="UserBranchesAccess[@i].CompanyId"
+                                                           value="@item.CompanyId" />
+
+                                                    <!-- Company Name -->
+                                                    <input type="hidden"
+                                                           name="UserBranchesAccess[@i].CompanyName"
+                                                           value="@item.CompanyName" />
+
+                                                    <!-- Branch Id -->
+                                                    <input type="hidden"
+                                                           name="UserBranchesAccess[@i].CompanyBranchId"
+                                                           value="@item.CompanyBranchId" />
+
+                                                    <!-- Branch Name -->
+                                                    <input type="hidden"
+                                                           name="UserBranchesAccess[@i].BranchName"
+                                                           value="@item.BranchName" />
+
+                                                    <!-- Allow -->
+                                                    <input type="checkbox"
+                                                           name="UserBranchesAccess[@i].IsSelected"
+                                                           value="true"
+                                                           class="form-check-input"
+                                                           @(item.IsSelected ? "checked" : null) />
+
+                                                    <!-- Hidden false value -->
+                                                    <input type="hidden"
+                                                           name="UserBranchesAccess[@i].IsSelected"
+                                                           value="false" />
+
+                                                </td>
+
+                                                <!-- Company -->
+                                                <td class="fw-semibold text-light">
+                                                    @(!string.IsNullOrWhiteSpace(item.CompanyName)
+                                                                                                ? item.CompanyName
+                                                                                                : "-")
+                                                                                                  </td>
+
+                                                <!-- Branch -->
+                                                <td class="text-light">
+                                                    @(!string.IsNullOrWhiteSpace(item.BranchName)
+                                                                                                ? item.BranchName
+                                                                                                : "-")
+                                        </td>
+
+                                                <!-- Default -->
+                                                <td class="text-center">
+
+                                                    <input type="radio"
+                                                           name="DefaultBranchId"
+                                                           value="@item.CompanyBranchId"
+                                                           class="form-check-input"
+                                                           @(item.IsDefault ? "checked" : null) />
+
+                                                </td>
+                                            </tr>
+                                                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="4"
+                                                class="text-center text-muted py-3">
+
+                                                @(isArabic
+                                                                                            ? "لا يوجد شركات أو فروع مجهزة للربط"
+                                                                                            : "No companies or branches available")
+
+                                        </td>
+                                    </tr>
+                                                                        }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Submit Controls -->
+        <div class="d-flex justify-content-end gap-2 mt-4">
+            <a asp-action="Index" class="btn btn-secondary px-4">@Resource.Cancel</a>
+            <button type="submit" class="btn btn-neon-update px-4"><i class="bi bi-check2-circle me-1"></i>@Resource.SaveData</button>
+        </div>
+    </form>
+</div>

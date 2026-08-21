@@ -1,0 +1,452 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+
+@{
+    ViewData["Title"] = Resource.PermissionsOverview;
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+<style>
+    .card.dark-card, .dark-card, .modal-content.dark-card {
+        background-color: #0f172a !important;
+        border: 1px solid #1e293b !important;
+        color: #ffffff !important;
+        border-radius: 10px;
+    }
+
+        .dark-card h4, .dark-card p, .dark-card div, .modal-title {
+            color: #ffffff !important;
+        }
+
+            .dark-card p.text-muted {
+                color: #94a3b8 !important;
+            }
+
+    .form-control.dark-input, .form-select.dark-input {
+        background-color: #1e293b !important;
+        border: 1px solid #334155 !important;
+        color: #ffffff !important;
+        border-radius: 6px;
+    }
+
+        .form-control.dark-input:focus, .form-select.dark-input:focus {
+            border-color: #00ff66 !important;
+            box-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+        }
+
+    .card-body, .table-responsive, table.dataTable, table.dataTable * {
+        background-color: transparent !important;
+    }
+
+        table.dataTable thead th {
+            background-color: #1e293b !important;
+            color: #38bdf8 !important;
+            border-bottom: 2px solid #334155 !important;
+            padding: 14px 16px !important;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-align: start !important;
+        }
+
+        table.dataTable tbody tr td {
+            color: #ffffff !important;
+            padding: 14px 16px !important;
+            vertical-align: middle;
+            border-bottom: 1px solid #1e293b !important;
+            transition: all 0.2s ease-in-out;
+            text-align: start !important;
+        }
+
+        table.dataTable tbody tr:hover td {
+            color: #00ff66 !important;
+            text-shadow: 0 0 8px rgba(0, 255, 102, 0.7);
+            background-color: rgba(0, 255, 102, 0.04) !important;
+        }
+
+    .dataTables_wrapper .row:first-child, .dataTables_wrapper > div:first-child {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+        color: #ffffff !important;
+        font-weight: 500;
+        float: none !important;
+        width: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+        .dataTables_wrapper .dataTables_filter input,
+        .dataTables_wrapper .dataTables_length select {
+            background-color: #1e293b !important;
+            border: 1px solid #334155 !important;
+            color: #ffffff !important;
+            border-radius: 6px;
+            padding: 6px 12px;
+            outline: none;
+        }
+
+            .dataTables_wrapper .dataTables_filter input:focus {
+                border-color: #00ff66 !important;
+                box-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+            }
+
+    [dir="ltr"] .dataTables_wrapper .dataTables_length {
+        order: 1 !important;
+        text-align: left !important;
+    }
+
+    [dir="ltr"] .dataTables_wrapper .dataTables_filter {
+        order: 2 !important;
+        text-align: right !important;
+    }
+
+        [dir="ltr"] .dataTables_wrapper .dataTables_filter input {
+            margin-left: 0.5em !important;
+            margin-right: 0 !important;
+        }
+
+    [dir="rtl"] .dataTables_wrapper .dataTables_length {
+        order: 1 !important;
+        text-align: right !important;
+    }
+
+    [dir="rtl"] .dataTables_wrapper .dataTables_filter {
+        order: 2 !important;
+        text-align: left !important;
+    }
+
+        [dir="rtl"] .dataTables_wrapper .dataTables_filter input {
+            margin-right: 0.5em !important;
+            margin-left: 0 !important;
+        }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        background: #1e293b !important;
+        border: 1px solid #334155 !important;
+        color: #ffffff !important;
+        border-radius: 6px !important;
+        margin: 0 2px;
+    }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+            background: #2563eb !important;
+            border-color: #2563eb !important;
+            color: #ffffff !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: #334155 !important;
+            color: #00ff66 !important;
+        }
+
+    .neon-badge-active {
+        background-color: rgba(0, 212, 255, 0.12) !important;
+        color: #00d4ff !important;
+        border: 1px solid #00d4ff !important;
+        font-weight: 600;
+        text-shadow: 0 0 6px rgba(0, 212, 255, 0.8);
+        box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+    }
+
+    .neon-badge-inactive {
+        background-color: rgba(255, 42, 109, 0.12) !important;
+        color: #ff2a6d !important;
+        border: 1px solid #ff2a6d !important;
+        font-weight: 600;
+        text-shadow: 0 0 6px rgba(255, 42, 109, 0.8);
+        box-shadow: 0 0 8px rgba(255, 42, 109, 0.3);
+    }
+
+    .dark-badge-code {
+        background-color: #1e293b !important;
+        color: #38bdf8 !important;
+        border: 1px solid #334155 !important;
+    }
+
+    .dark-badge-info {
+        background-color: rgba(168, 85, 247, 0.15) !important;
+        color: #c084fc !important;
+        border: 1px solid #a855f7 !important;
+    }
+</style>
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    @Html.AntiForgeryToken()
+
+    <!-- Header Card -->
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-shield-lock fs-3 lh-1 flex-shrink-0 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@Resource.ManagePermissions</h4>
+                    <p class="text-muted mb-0 small">@Resource.PermissionsScreensActionsOverview</p>
+                </div>
+            </div>
+            <button class="btn btn-outline-info d-flex align-items-center gap-2" onclick="openCreateModal()">
+                <i class="bi bi-plus-lg"></i>
+                <span>@Resource.AddNewPermission</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Data Table Card -->
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="permissionsTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.PermissionCode</th>
+                            <th>@Resource.PermissionName</th>
+                            <th>@Resource.Screen</th>
+                            <th>@Resource.Action</th>
+                            <th>@Resource.Status</th>
+                            <th class="text-center">@Resource.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Form -->
+<div class="modal fade" id="permissionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content dark-card">
+            <div class="modal-header border-bottom border-secondary">
+                <h5 class="modal-title fw-bold" id="modalTitle">@Resource.AddNewPermission</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="permissionForm">
+                <div class="modal-body">
+                    <input type="hidden" id="PermissionId" name="PermissionId" value="0" />
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label text-light">@Resource.Screen <span class="text-danger">*</span></label>
+                            <select id="ModelId" name="ModelId" class="form-select dark-input" asp-items="ViewBag.Models" required>
+                                <option value="">-- @Resource.SelectScreen --</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-light">@Resource.Action <span class="text-danger">*</span></label>
+                            <select id="ActionId" name="ActionId" class="form-select dark-input" asp-items="ViewBag.Actions" required>
+                                <option value="">-- @Resource.SelectAction --</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label text-light">@Resource.PermissionCode <span class="text-danger">*</span></label>
+                            <input type="text" id="PermissionCode" name="PermissionCode" class="form-control dark-input" maxlength="150" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-light">@Resource.ArabicName <span class="text-danger">*</span></label>
+                            <input type="text" id="PermissionNameAr" name="PermissionNameAr" class="form-control dark-input" maxlength="200" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-light">@Resource.EnglishName <span class="text-danger">*</span></label>
+                            <input type="text" id="PermissionNameEn" name="PermissionNameEn" class="form-control dark-input" maxlength="200" required />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label text-light">@Resource.Description</label>
+                            <textarea id="Description" name="Description" class="form-control dark-input" rows="2" maxlength="300"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check form-switch mt-2">
+                                <input class="form-check-input" type="checkbox" id="IsActive" name="IsActive" checked>
+                                <label class="form-check-label text-light" for="IsActive">@Resource.Active</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-top border-secondary">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resource.Cancel</button>
+                    <button type="submit" class="btn btn-info px-4">@Resource.SaveData</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+        const bsModal = new bootstrap.Modal(document.getElementById('permissionModal'));
+
+        $.fn.dataTable.ext.pager.three_numbers = function (page, pages) {
+            let numbers = [];
+            let buttons = 3;
+            let half = Math.floor(buttons / 2);
+
+            let start = page - half;
+            let end = page + half;
+
+            if (start < 0) {
+                start = 0;
+                end = Math.min(pages, buttons);
+            } else if (end > pages) {
+                end = pages;
+                start = Math.max(0, pages - buttons);
+            }
+
+            for (let i = start; i < end; i++) {
+                numbers.push(i);
+            }
+
+            return ['previous', numbers, 'next'];
+        };
+
+        $(document).ready(function () {
+            loadDataTable();
+
+            $('#permissionForm').on('submit', function (e) {
+                e.preventDefault();
+                savePermission();
+            });
+        });
+
+        function loadDataTable() {
+            const isArabic = '@(currentCulture == "ar")' === 'True';
+
+            const permissionNameField = isArabic ? 'permissionNameAr' : 'permissionNameEn';
+            const modelNameField      = isArabic ? 'modelNameAr'      : 'modelNameEn';
+            const actionNameField     = isArabic ? 'actionNameAr'     : 'actionNameEn';
+
+            table = $('#permissionsTable').DataTable({
+                pagingType: 'three_numbers',
+                pageLength: 10,
+                ajax: {
+                    url: '@Url.Action("GetPermissionsJson", "Permissions")',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'permissionId', width: '5%' },
+                    {
+                        data: 'permissionCode',
+                        render: function (data) {
+                            return `<span class="badge dark-badge-code font-monospace px-2 py-1">${data}</span>`;
+                        }
+                    },
+                    { data: permissionNameField },
+                    { data: modelNameField },
+                    {
+                        data: actionNameField,
+                        render: function (data) {
+                            return `<span class="badge dark-badge-info px-2 py-1">${data ?? ''}</span>`;
+                        }
+                    },
+                    {
+                        data: 'isActive',
+                        render: function (data) {
+                            return data
+                                ? `<span class="badge neon-badge-active px-2 py-1"><i class="bi bi-check-circle me-1"></i>@Resource.Active</span>`
+                                : `<span class="badge neon-badge-inactive px-2 py-1"><i class="bi bi-x-circle me-1"></i>@Resource.Inactive</span>`;
+                        }
+                    },
+                    {
+                        data: 'permissionId',
+                        className: 'text-center',
+                        render: function (data, type, row) {
+                            return `
+                                <button class="btn btn-sm btn-outline-warning me-1" onclick="openEditModal(${data})" title="@Resource.EditPermission">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-${row.isActive ? 'danger' : 'success'}" onclick="toggleStatus(${data})" title="@Resource.ToggleStatus">
+                                    <i class="bi bi-power"></i>
+                                </button>
+                            `;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        }
+
+        function openCreateModal() {
+            $('#permissionForm')[0].reset();
+            $('#PermissionId').val(0);
+            $('#IsActive').prop('checked', true);
+            $('#modalTitle').text('@Resource.AddNewPermission');
+            bsModal.show();
+        }
+
+        function openEditModal(id) {
+            $.get('@Url.Action("GetById", "Permissions")/' + id, function (data) {
+                if (data) {
+                    $('#PermissionId').val(data.permissionId);
+                    $('#ModelId').val(data.modelId);
+                    $('#ActionId').val(data.actionId);
+                    $('#PermissionCode').val(data.permissionCode);
+                    $('#PermissionNameAr').val(data.permissionNameAr);
+                    $('#PermissionNameEn').val(data.permissionNameEn);
+                    $('#Description').val(data.description);
+                    $('#IsActive').prop('checked', data.isActive);
+
+                    $('#modalTitle').text('@Resource.EditPermission');
+                    bsModal.show();
+                }
+            });
+        }
+
+        function savePermission() {
+            const formData = {
+                PermissionId: parseInt($('#PermissionId').val()),
+                ModelId: parseInt($('#ModelId').val()),
+                ActionId: parseInt($('#ActionId').val()),
+                PermissionCode: $('#PermissionCode').val(),
+                PermissionNameAr: $('#PermissionNameAr').val(),
+                PermissionNameEn: $('#PermissionNameEn').val(),
+                Description: $('#Description').val(),
+                IsActive: $('#IsActive').is(':checked')
+            };
+
+            const token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '@Url.Action("Save", "Permissions")',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                headers: {
+                    'RequestVerificationToken': token
+                },
+                success: function (response) {
+                    if (response.success) {
+                        bsModal.hide();
+                        table.ajax.reload(null, false);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert('حدث خطأ غير متوقع أثناء الحفظ');
+                }
+            });
+        }
+
+        function toggleStatus(id) {
+            $.post('@Url.Action("ToggleStatus", "Permissions")', { id: id }, function (response) {
+                if (response.success) {
+                    table.ajax.reload(null, false);
+                } else {
+                    alert(response.message);
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountsAndAssignedRolesOverview" xml:space="preserve">
+    <value>View the List of Accounts and Their Assigned Roles</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="ActionsOverview" xml:space="preserve">
+    <value>Actions Overview</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="ActiveSystemModulesAndSections" xml:space="preserve">
+    <value>View the Active System Modules and Software Sections</value>
+  </data>
+  <data name="AddNewCity" xml:space="preserve">
+    <value>Add New City</value>
+  </data>
+  <data name="AddNewCountry" xml:space="preserve">
+    <value>Add New Country</value>
+  </data>
+  <data name="AddNewGovernorate" xml:space="preserve">
+    <value>Add New Governorate</value>
+  </data>
+  <data name="AddNewMaritalStatus" xml:space="preserve">
+    <value>Add New Marital Status</value>
+  </data>
+  <data name="AddNewUser" xml:space="preserve">
+    <value>Add New User</value>
+  </data>
+  <data name="ArabicName" xml:space="preserve">
+    <value>Arabic Name</value>
+  </data>
+  <data name="AssignRoles" xml:space="preserve">
+    <value>Assign Roles</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>Back to List</value>
+  </data>
+  <data name="BasicData" xml:space="preserve">
+    <value>Basic Data</value>
+  </data>
+  <data name="BasicInfo" xml:space="preserve">
+    <value>Basic Information</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CitiesManagement" xml:space="preserve">
+    <value>Cities Management</value>
+  </data>
+  <data name="CityCode" xml:space="preserve">
+    <value>City Code</value>
+  </data>
+  <data name="Code2" xml:space="preserve">
+    <value>Code (2)</value>
+  </data>
+  <data name="Code3" xml:space="preserve">
+    <value>Code (3)</value>
+  </data>
+  <data name="CodeMaritalStatus" xml:space="preserve">
+    <value>Marital Status Code</value>
+  </data>
+  <data name="ConfiguratinData" xml:space="preserve">
+    <value>Configuratin Data</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="CountryManagement" xml:space="preserve">
+    <value>Country Management</value>
+  </data>
+  <data name="EditCity" xml:space="preserve">
+    <value>Edit City</value>
+  </data>
+  <data name="EditCountry" xml:space="preserve">
+    <value>Edit Country</value>
+  </data>
+  <data name="EditGovernorate" xml:space="preserve">
+    <value>Edit Governorate</value>
+  </data>
+  <data name="EditUser" xml:space="preserve">
+    <value>Edit User</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+  <data name="EnglishName" xml:space="preserve">
+    <value>English Name</value>
+  </data>
+  <data name="EnterUsername" xml:space="preserve">
+    <value>Enter Username</value>
+  </data>
+  <data name="Governorate" xml:space="preserve">
+    <value>Governorate</value>
+  </data>
+  <data name="GovernorateCode" xml:space="preserve">
+    <value>Governorate Code</value>
+  </data>
+  <data name="GovernoratesManagement" xml:space="preserve">
+    <value>Governorates Management</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="InvalidUsernameOrPassword" xml:space="preserve">
+    <value>Invalid username or password</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>LogIn</value>
+  </data>
+  <data name="ManageActions" xml:space="preserve">
+    <value>Manage Actions</value>
+  </data>
+  <data name="ManagePermissions" xml:space="preserve">
+    <value>Manage Permissions</value>
+  </data>
+  <data name="MaritalStatusManagement" xml:space="preserve">
+    <value>Marital Status Management</value>
+  </data>
+  <data name="ModuleCode" xml:space="preserve">
+    <value>Module Code</value>
+  </data>
+  <data name="ModulesOverview" xml:space="preserve">
+    <value>Modules Overview</value>
+  </data>
+  <data name="OperationCode" xml:space="preserve">
+    <value>Operation Code</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="ParentModule" xml:space="preserve">
+    <value>Parent Module</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Password Required</value>
+  </data>
+  <data name="PermissionCode" xml:space="preserve">
+    <value>Permission Code</value>
+  </data>
+  <data name="PermissionName" xml:space="preserve">
+    <value>Permission Name</value>
+  </data>
+  <data name="PermissionsManagement" xml:space="preserve">
+    <value>Permissions Management</value>
+  </data>
+  <data name="PermissionsOverview" xml:space="preserve">
+    <value>Permissions Overview</value>
+  </data>
+  <data name="PermissionsScreensActionsOverview" xml:space="preserve">
+    <value>View the List of Permissions and Their Relationships with Screens and Actions</value>
+  </data>
+  <data name="PleaseSelectCountry" xml:space="preserve">
+    <value>Please select a country</value>
+  </data>
+  <data name="PleaseSelectGovernorate" xml:space="preserve">
+    <value>Please select a governorate</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember Me</value>
+  </data>
+  <data name="RoleCode" xml:space="preserve">
+    <value>Role Code</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="RolesManagement" xml:space="preserve">
+    <value>Roles Management</value>
+  </data>
+  <data name="SaveData" xml:space="preserve">
+    <value>Save Data</value>
+  </data>
+  <data name="Screen" xml:space="preserve">
+    <value>Screen</value>
+  </data>
+  <data name="ScreenCode" xml:space="preserve">
+    <value>Screen Code</value>
+  </data>
+  <data name="ScreensOverview" xml:space="preserve">
+    <value>Screens Overview</value>
+  </data>
+  <data name="SelectCountry" xml:space="preserve">
+    <value>...Select Country...</value>
+  </data>
+  <data name="SelectGovernorate" xml:space="preserve">
+    <value>Select Governorate</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="EditMaritalStatus" xml:space="preserve">
+    <value>Edit Marital Status</value>
+  </data>
+  <data name="UserManagement" xml:space="preserve">
+    <value>User Management</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="UsernameRequired" xml:space="preserve">
+    <value>Username Required</value>
+  </data>
+  <data name="UsersOverview" xml:space="preserve">
+    <value>Users Overview</value>
+  </data>
+  <data name="ViewAddEditCities" xml:space="preserve">
+    <value>View, Add, and Edit City Data in the System</value>
+  </data>
+  <data name="ViewAddEditCountries" xml:space="preserve">
+    <value>View, Add, and Edit Country Data in the System</value>
+  </data>
+  <data name="ViewAddEditGovernorates" xml:space="preserve">
+    <value>View, Add, and Edit Governorate Data in the System</value>
+  </data>
+  <data name="ViewAddEditMaritalStatus" xml:space="preserve">
+    <value>View, Add, and Edit Marital Status Data in the System</value>
+  </data>
+  <data name="ViewAndAssignRolePermissions" xml:space="preserve">
+    <value>View and Select Job Roles and Assign Their Permissions</value>
+  </data>
+  <data name="ViewAndManageModuleScreens" xml:space="preserve">
+    <value>View and Manage System Screens for Each Module</value>
+  </data>
+  <data name="ViewAndSelectSystemActionsAndOperations" xml:space="preserve">
+    <value>View and Select the Basic Actions and Operations Available in the System</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="MilitaryStatusManagement" xml:space="preserve">
+    <value>Military Status Management</value>
+  </data>
+  <data name="ViewAddEditMilitaryStatus" xml:space="preserve">
+    <value>View, Add, and Edit Military Status Data in the System</value>
+  </data>
+  <data name="AddNewMilitaryStatus" xml:space="preserve">
+    <value>Add New Military Status</value>
+  </data>
+  <data name="CodeMilitaryStatus" xml:space="preserve">
+    <value>Military Status Code</value>
+  </data>
+  <data name="EditMilitaryStatus" xml:space="preserve">
+    <value>Edit Military Status</value>
+  </data>
+  <data name="ReligionManagement" xml:space="preserve">
+    <value>Religion Management</value>
+  </data>
+  <data name="ViewAddEditReligion" xml:space="preserve">
+    <value>View, Add, and Edit Religion Data in the System</value>
+  </data>
+  <data name="AddNewReligion" xml:space="preserve">
+    <value>Add New Religion</value>
+  </data>
+  <data name="CodeReligion" xml:space="preserve">
+    <value>Religion Code</value>
+  </data>
+  <data name="EditReligion" xml:space="preserve">
+    <value>Edit Religion</value>
+  </data>
+  <data name="GendersManagement" xml:space="preserve">
+    <value>Gender Management</value>
+  </data>
+  <data name="ViewAddEditGender" xml:space="preserve">
+    <value>View, Add, and Edit Gender Data in the System</value>
+  </data>
+  <data name="EditGende" xml:space="preserve">
+    <value>Edit Gender</value>
+  </data>
+  <data name="AddNewGende" xml:space="preserve">
+    <value>Add New Gender</value>
+  </data>
+  <data name="CodeGender" xml:space="preserve">
+    <value>Gender Code</value>
+  </data>
+  <data name="SecurityData" xml:space="preserve">
+    <value>Security Data</value>
+  </data>
+  <data name="NationalitiesManagement" xml:space="preserve">
+    <value>Nationality Management</value>
+  </data>
+  <data name="ViewAddEditNationality" xml:space="preserve">
+    <value>View, Add, and Edit Nationality Data in the System</value>
+  </data>
+  <data name="AddNewNationality" xml:space="preserve">
+    <value>Add New Nationality</value>
+  </data>
+  <data name="CodeNationality" xml:space="preserve">
+    <value>Nationality Code</value>
+  </data>
+  <data name="EditNationality" xml:space="preserve">
+    <value>Edit Nationality</value>
+  </data>
+  <data name="ManageCompanies" xml:space="preserve">
+    <value>Company Management</value>
+  </data>
+  <data name="CompanyBranches" xml:space="preserve">
+    <value>Company Branches</value>
+  </data>
+  <data name="AddNewScreen" xml:space="preserve">
+    <value>Add New Screen</value>
+  </data>
+  <data name="EditScreen" xml:space="preserve">
+    <value>Edit Screen</value>
+  </data>
+  <data name="MainModule" xml:space="preserve">
+    <value>Main Module</value>
+  </data>
+  <data name="SelectModule" xml:space="preserve">
+    <value>Select Module</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="ActivateScreen" xml:space="preserve">
+    <value>Activate Screen</value>
+  </data>
+  <data name="AddNewPermission" xml:space="preserve">
+    <value>Add New Permission</value>
+  </data>
+  <data name="SelectScreen" xml:space="preserve">
+    <value>Select Screen</value>
+  </data>
+  <data name="SelectAction" xml:space="preserve">
+    <value>Select Action</value>
+  </data>
+  <data name="ToggleStatus" xml:space="preserve">
+    <value>Toggle Status</value>
+  </data>
+  <data name="EditPermission" xml:space="preserve">
+    <value>Edit Permission</value>
+  </data>
+  <data name="AddNewRole" xml:space="preserve">
+    <value>Add New Role</value>
+  </data>
+  <data name="EditRole" xml:space="preserve">
+    <value>Edit Role</value>
+  </data>
+  <data name="Permissions" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+</root>

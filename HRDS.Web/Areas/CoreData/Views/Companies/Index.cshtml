@@ -1,0 +1,308 @@
+﻿@model IEnumerable<HRDS.Web.Models.Entities.Company>
+@using HRDS.Web.Resources
+
+@{
+    ViewData["Title"] = System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar" ? "إدارة الشركات" : "Manage Companies";
+    var isArabic = System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar";
+    var currentCulture = System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var currentDir = isArabic ? "rtl" : "ltr";
+}
+
+<style>
+    /* 1. إجبار الكروت على الخلفية الداكنة */
+    .card.dark-card,
+    .dark-card {
+        background-color: #0f172a !important;
+        border: 1px solid #1e293b !important;
+        color: #ffffff !important;
+        border-radius: 10px;
+    }
+
+    /* 2. إلغاء أي خلفية بيضاء قادمة من Bootstrap */
+    .table-responsive,
+    table.dataTable,
+    table.dataTable tbody,
+    table.dataTable tbody tr,
+    table.dataTable tbody td {
+        background-color: transparent !important;
+        background: transparent !important;
+    }
+
+        /* 3. رأس الجدول */
+        table.dataTable thead th {
+            background-color: #1e293b !important;
+            color: #38bdf8 !important;
+            border-bottom: 2px solid #334155 !important;
+            padding: 14px 16px !important;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-align: start !important;
+        }
+
+        /* 4. صفوف الجدول */
+        table.dataTable tbody tr td {
+            color: #ffffff !important;
+            padding: 14px 16px !important;
+            vertical-align: middle;
+            border-bottom: 1px solid #1e293b !important;
+            transition: all 0.2s ease-in-out;
+            text-align: start !important;
+        }
+
+        /* 5. التوهج الفسفوري عند التمرير */
+        table.dataTable tbody tr:hover td {
+            color: #00ff66 !important;
+            text-shadow: 0 0 8px rgba(0, 255, 102, 0.7);
+            background-color: rgba(0, 255, 102, 0.04) !important;
+        }
+
+    /* 6. أدوات DataTables (البحث - الترقيم - عدد السجلات) */
+    .dataTables_wrapper .row:first-child,
+    .dataTables_wrapper > div:first-child {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+        color: #ffffff !important;
+        font-weight: 500;
+        float: none !important;
+        width: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+        .dataTables_wrapper .dataTables_filter input,
+        .dataTables_wrapper .dataTables_length select {
+            background-color: #1e293b !important;
+            border: 1px solid #334155 !important;
+            color: #ffffff !important;
+            border-radius: 6px;
+            padding: 6px 12px;
+            outline: none;
+        }
+
+            .dataTables_wrapper .dataTables_filter input:focus {
+                border-color: #00ff66 !important;
+                box-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+            }
+
+    /* 7. الاتجاهات (RTL / LTR) */
+    [dir="ltr"] .dataTables_wrapper .dataTables_length {
+        order: 1 !important;
+        text-align: left !important;
+    }
+
+    [dir="ltr"] .dataTables_wrapper .dataTables_filter {
+        order: 2 !important;
+        text-align: right !important;
+    }
+
+        [dir="ltr"] .dataTables_wrapper .dataTables_filter input {
+            margin-left: 0.5em !important;
+            margin-right: 0 !important;
+        }
+
+    [dir="rtl"] .dataTables_wrapper .dataTables_length {
+        order: 1 !important;
+        text-align: right !important;
+    }
+
+    [dir="rtl"] .dataTables_wrapper .dataTables_filter {
+        order: 2 !important;
+        text-align: left !important;
+    }
+
+        [dir="rtl"] .dataTables_wrapper .dataTables_filter input {
+            margin-right: 0.5em !important;
+            margin-left: 0 !important;
+        }
+
+    /* 8. أزرار الترقيم */
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        background: #1e293b !important;
+        border: 1px solid #334155 !important;
+        color: #ffffff !important;
+        border-radius: 6px !important;
+        margin: 0 2px;
+    }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+            background: #2563eb !important;
+            border-color: #2563eb !important;
+            color: #ffffff !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: #334155 !important;
+            color: #00ff66 !important;
+        }
+
+    /* 9. الشارات (Badges) */
+    .neon-badge-active {
+        background-color: rgba(0, 212, 255, 0.12) !important;
+        color: #00d4ff !important;
+        border: 1px solid #00d4ff !important;
+        font-weight: 600;
+        text-shadow: 0 0 6px rgba(0, 212, 255, 0.8);
+        box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+    }
+
+    .neon-badge-inactive {
+        background-color: rgba(255, 42, 109, 0.12) !important;
+        color: #ff2a6d !important;
+        border: 1px solid #ff2a6d !important;
+        font-weight: 600;
+        text-shadow: 0 0 6px rgba(255, 42, 109, 0.8);
+        box-shadow: 0 0 8px rgba(255, 42, 109, 0.3);
+    }
+
+    .dark-badge-code {
+        background-color: #1e293b !important;
+        color: #38bdf8 !important;
+        border: 1px solid #334155 !important;
+    }
+
+    .btn-neon-add {
+        background-color: #38bdf8 !important;
+        color: #0f172a !important;
+        font-weight: bold;
+        border: none;
+        box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    }
+
+        .btn-neon-add:hover {
+            background-color: #0284c7 !important;
+            color: #ffffff !important;
+        }
+
+    .btn-action-edit {
+        color: #38bdf8 !important;
+        border: 1px solid #334155 !important;
+        background-color: #1e293b !important;
+    }
+
+        .btn-action-edit:hover {
+            background-color: #38bdf8 !important;
+            color: #0f172a !important;
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+        }
+</style>
+
+<div class="container-fluid py-3" dir="@currentDir">
+    <!-- Header Card -->
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-building fs-3 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@(isArabic ? "قائمة الشركات" : "Companies List")</h4>
+                    <p class="text-slate-400 mb-0 small" style="color: #94a3b8 !important;">@(isArabic ? "إدارة الشركات المسجلة في النظام" : "Manage registered companies in the system")</p>
+                </div>
+            </div>
+            <a asp-action="Create" class="btn btn-neon-add btn-sm px-3 py-2">
+                <i class="bi bi-plus-lg me-1"></i> @(isArabic ? "إضافة شركة جديدة" : "Add Company")
+            </a>
+        </div>
+    </div>
+
+    <!-- Data Table Card -->
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="companiesTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>@(isArabic ? "كود الشركة" : "Code")</th>
+                            <th>@(isArabic ? "اسم الشركة" : "Company Name")</th>
+                            <th>@(isArabic ? "الرقم الضريبي" : "Tax Number")</th>
+                            <th>@(isArabic ? "الهاتف" : "Phone")</th>
+                            <th class="text-center">@(isArabic ? "الحالة" : "Status")</th>
+                            <th class="text-center">@(isArabic ? "العمليات" : "Actions")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <span class="badge dark-badge-code font-monospace px-2 py-1">@item.CompanyCode</span>
+                                    </td>
+                                    <td class="fw-semibold">@(isArabic? item.CompanyNameAr: item.CompanyNameEn)</td>
+                                    <td>@(string.IsNullOrEmpty(item.TaxNumber) ? "-" : item.TaxNumber)</td>
+                                    <td>@(string.IsNullOrEmpty(item.Phone) ? "-" : item.Phone)</td>
+                                    <td class="text-center">
+                                        @if (item.IsActive)
+                                        {
+                                            <span class="badge neon-badge-active px-2 py-1">
+                                                <i class="bi bi-check-circle me-1"></i>@(isArabic ? "نشط" : "Active")
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge neon-badge-inactive px-2 py-1">
+                                                <i class="bi bi-x-circle me-1"></i>@(isArabic ? "غير نشط" : "Inactive")
+                                            </span>
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        <a asp-action="Edit" asp-route-id="@item.CompanyId" class="btn btn-sm btn-action-edit">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // إعداد نمط ترقيم DataTables المخصص
+        $.fn.dataTable.ext.pager.three_numbers = function (page, pages) {
+            let numbers = [];
+            let buttons = 3;
+            let half = Math.floor(buttons / 2);
+
+            let start = page - half;
+            let end = page + half;
+
+            if (start < 0) {
+                start = 0;
+                end = Math.min(pages, buttons);
+            } else if (end > pages) {
+                end = pages;
+                start = Math.max(0, pages - buttons);
+            }
+
+            for (let i = start; i < end; i++) {
+                numbers.push(i);
+            }
+
+            return ['previous', numbers, 'next'];
+        };
+
+        $(document).ready(function () {
+            $('#companiesTable').DataTable({
+                pagingType: 'three_numbers',
+                pageLength: 10,
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        });
+    </script>
+}

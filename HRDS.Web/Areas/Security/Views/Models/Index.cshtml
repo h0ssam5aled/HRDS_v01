@@ -1,0 +1,389 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+@model HRDS.Web.Models.ModelViewModel
+
+@{
+    ViewData["Title"] = Resource.ScreensOverview;
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+<style>
+    /* 1. إجبار الكروت والـ Modal على الخلفية الداكنة */
+    .card.dark-card,
+    .dark-card,
+    .modal-content.dark-card {
+        background-color: #0f172a !important;
+        border: 1px solid #1e293b !important;
+        color: #ffffff !important;
+        border-radius: 10px;
+    }
+
+        .dark-card h4, .dark-card p, .dark-card div, .modal-title {
+            color: #ffffff !important;
+        }
+
+            .dark-card p.text-muted {
+                color: #94a3b8 !important;
+            }
+
+    /* Styling Form Controls for Dark Theme */
+    .form-control.dark-input, .form-select.dark-input {
+        background-color: #1e293b !important;
+        border: 1px solid #334155 !important;
+        color: #ffffff !important;
+        border-radius: 6px;
+    }
+
+        .form-control.dark-input:focus, .form-select.dark-input:focus {
+            border-color: #00ff66 !important;
+            box-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+        }
+
+    /* 2. إلغاء أي خلفيات بيضاء داخل الكارت والجدول */
+    .card-body, .table-responsive, table.dataTable, table.dataTable * {
+        background-color: transparent !important;
+    }
+
+        /* 3. رأس الجدول */
+        table.dataTable thead th {
+            background-color: #1e293b !important;
+            color: #38bdf8 !important;
+            border-bottom: 2px solid #334155 !important;
+            padding: 14px 16px !important;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-align: start !important;
+        }
+
+        /* 4. نصوص الجدول */
+        table.dataTable tbody tr td {
+            color: #ffffff !important;
+            padding: 14px 16px !important;
+            vertical-align: middle;
+            border-bottom: 1px solid #1e293b !important;
+            transition: all 0.2s ease-in-out;
+            text-align: start !important;
+        }
+
+        /* 5. تأثير Hover */
+        table.dataTable tbody tr:hover td {
+            color: #00ff66 !important;
+            text-shadow: 0 0 8px rgba(0, 255, 102, 0.7);
+            background-color: rgba(0, 255, 102, 0.04) !important;
+        }
+
+    /* Flexbox DataTables Wrapper Controls */
+    .dataTables_wrapper .row:first-child,
+    .dataTables_wrapper > div:first-child {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+        color: #ffffff !important;
+        font-weight: 500;
+        float: none !important;
+        width: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+        .dataTables_wrapper .dataTables_filter input,
+        .dataTables_wrapper .dataTables_length select {
+            background-color: #1e293b !important;
+            border: 1px solid #334155 !important;
+            color: #ffffff !important;
+            border-radius: 6px;
+            padding: 6px 12px;
+            outline: none;
+        }
+
+    /* Alignment Fixes for LTR/RTL */
+    [dir="ltr"] .dataTables_wrapper .dataTables_length {
+        order: 1 !important;
+        text-align: left !important;
+    }
+
+    [dir="ltr"] .dataTables_wrapper .dataTables_filter {
+        order: 2 !important;
+        text-align: right !important;
+    }
+
+        [dir="ltr"] .dataTables_wrapper .dataTables_filter input {
+            margin-left: 0.5em !important;
+            margin-right: 0 !important;
+        }
+
+    [dir="rtl"] .dataTables_wrapper .dataTables_length {
+        order: 1 !important;
+        text-align: right !important;
+    }
+
+    [dir="rtl"] .dataTables_wrapper .dataTables_filter {
+        order: 2 !important;
+        text-align: left !important;
+    }
+
+        [dir="rtl"] .dataTables_wrapper .dataTables_filter input {
+            margin-right: 0.5em !important;
+            margin-left: 0 !important;
+        }
+
+    /* Badges */
+    .neon-badge-active {
+        background-color: rgba(0, 212, 255, 0.12) !important;
+        color: #00d4ff !important;
+        border: 1px solid #00d4ff !important;
+        font-weight: 600;
+    }
+
+    .neon-badge-inactive {
+        background-color: rgba(255, 42, 109, 0.12) !important;
+        color: #ff2a6d !important;
+        border: 1px solid #ff2a6d !important;
+        font-weight: 600;
+    }
+
+    .dark-badge-code {
+        background-color: #1e293b !important;
+        color: #38bdf8 !important;
+        border: 1px solid #334155 !important;
+    }
+</style>
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    @Html.AntiForgeryToken()
+
+    <!-- Header Card -->
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-window-stack fs-3 lh-1 flex-shrink-0 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@Resource.ScreensOverview</h4>
+                    <p class="text-muted mb-0 small">@Resource.ViewAndManageModuleScreens</p>
+                </div>
+            </div>
+            <button class="btn btn-outline-info d-flex align-items-center gap-2" onclick="openCreateModal()">
+                <i class="bi bi-plus-lg"></i>
+                <span>@Resource.AddNewScreen</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Data Table Card -->
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="modelsTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.ScreenCode</th>
+                            <th>@Resource.ParentModule</th>
+                            <th>@Resource.ArabicName</th>
+                            <th>@Resource.EnglishName</th>
+                            <th>@Resource.Status</th>
+                            <th class="text-center">@Resource.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Form -->
+<div class="modal fade" id="modelModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content dark-card">
+            <div class="modal-header border-bottom border-secondary">
+                <h5 class="modal-title fw-bold" id="modalTitle">@Resource.AddNewScreen</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="modelForm">
+                <div class="modal-body">
+                    <input type="hidden" id="ModelId" name="ModelId" value="0" />
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label text-light">@Resource.MainModule <span class="text-danger">*</span></label>
+                            <select id="ModuleId" name="ModuleId" class="form-select dark-input" asp-items="ViewBag.Modules" required>
+                                <option value="">-- @Resource.SelectModule --</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-light">@Resource.ScreenCode <span class="text-danger">*</span></label>
+                            <input type="text" id="ModelCode" name="ModelCode" class="form-control dark-input" maxlength="100" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-light">@Resource.ArabicName <span class="text-danger">*</span></label>
+                            <input type="text" id="ModelNameAr" name="ModelNameAr" class="form-control dark-input" maxlength="200" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-light">@Resource.EnglishName<span class="text-danger">*</span></label>
+                            <input type="text" id="ModelNameEn" name="ModelNameEn" class="form-control dark-input" maxlength="200" required />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label text-light">@Resource.Description</label>
+                            <textarea id="Description" name="Description" class="form-control dark-input" rows="2" maxlength="300"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check form-switch mt-2">
+                                <input class="form-check-input" type="checkbox" id="IsActive" name="IsActive" checked>
+                                <label class="form-check-label text-light" for="IsActive">@Resource.ActivateScreen</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-top border-secondary">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resource.Cancel</button>
+                    <button type="submit" class="btn btn-info px-4">@Resource.SaveData</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+        const bsModal = new bootstrap.Modal(document.getElementById('modelModal'));
+
+        $(document).ready(function () {
+            loadDataTable();
+
+            $('#modelForm').on('submit', function (e) {
+                e.preventDefault();
+                saveModel();
+            });
+        });
+
+        function loadDataTable() {
+            const moduleNameField = '@(currentCulture == "ar" ? "moduleNameAr" : "moduleNameEn")';
+
+            table = $('#modelsTable').DataTable({
+                pagingType: 'simple',
+                ajax: {
+                    url: '@Url.Action("GetModelsJson", "Models")',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'modelId', width: '5%' },
+                    {
+                        data: 'modelCode',
+                        render: function (data) {
+                            return `<span class="badge dark-badge-code font-monospace px-2 py-1">${data}</span>`;
+                        }
+                    },
+                    { data: moduleNameField },
+                    { data: 'modelNameAr' },
+                    { data: 'modelNameEn' },
+                    {
+                        data: 'isActive',
+                        render: function (data) {
+                            return data
+                                ? `<span class="badge neon-badge-active px-2 py-1"><i class="bi bi-check-circle me-1"></i>@Resource.Active</span>`
+                                : `<span class="badge neon-badge-inactive px-2 py-1"><i class="bi bi-x-circle me-1"></i>@Resource.Inactive</span>`;
+                        }
+                    },
+                    {
+                        data: 'modelId',
+                        className: 'text-center',
+                        render: function (data, type, row) {
+                            return `
+                                <button class="btn btn-sm btn-outline-warning me-1" onclick="openEditModal(${data})" title="تعديل">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-${row.isActive ? 'danger' : 'success'}" onclick="toggleStatus(${data})" title="تغيير الحالة">
+                                    <i class="bi bi-power"></i>
+                                </button>
+                            `;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        }
+
+        function openCreateModal() {
+            $('#modelForm')[0].reset();
+            $('#ModelId').val(0);
+            $('#IsActive').prop('checked', true);
+            $('#modalTitle').text('@Resource.AddNewScreen');
+            bsModal.show();
+        }
+
+        function openEditModal(id) {
+            $.get('@Url.Action("GetById", "Models")/' + id, function (data) {
+                if (data) {
+                    $('#ModelId').val(data.modelId);
+                    $('#ModuleId').val(data.moduleId);
+                    $('#ModelCode').val(data.modelCode);
+                    $('#ModelNameAr').val(data.modelNameAr);
+                    $('#ModelNameEn').val(data.modelNameEn);
+                    $('#Description').val(data.description);
+                    $('#IsActive').prop('checked', data.isActive);
+
+                    $('#modalTitle').text('@Resource.EditScreen');
+                    bsModal.show();
+                }
+            });
+        }
+
+        function saveModel() {
+            const formData = {
+                ModelId: parseInt($('#ModelId').val()),
+                ModuleId: parseInt($('#ModuleId').val()),
+                ModelCode: $('#ModelCode').val(),
+                ModelNameAr: $('#ModelNameAr').val(),
+                ModelNameEn: $('#ModelNameEn').val(),
+                Description: $('#Description').val(),
+                IsActive: $('#IsActive').is(':checked')
+            };
+
+            const token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '@Url.Action("Save", "Models")',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                headers: {
+                    'RequestVerificationToken': token
+                },
+                success: function (response) {
+                    if (response.success) {
+                        bsModal.hide();
+                        table.ajax.reload(null, false);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert('حدث خطأ غير متوقع أثناء الحفظ');
+                }
+            });
+        }
+
+        function toggleStatus(id) {
+            $.post('@Url.Action("ToggleStatus", "Models")', { id: id }, function (response) {
+                if (response.success) {
+                    table.ajax.reload(null, false);
+                } else {
+                    alert(response.message);
+                }
+            });
+        }
+    </script>
+}

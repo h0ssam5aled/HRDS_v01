@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountsAndAssignedRolesOverview" xml:space="preserve">
+    <value>عرض قائمة الحسابات والأدوار المنسوبة إليها</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>العملية</value>
+  </data>
+  <data name="ActionsOverview" xml:space="preserve">
+    <value>عرض العمليات</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+  <data name="ActiveSystemModulesAndSections" xml:space="preserve">
+    <value>استعراض الموديولات والقطاعات البرمجية المفعلة بالنظام</value>
+  </data>
+  <data name="AddNewCity" xml:space="preserve">
+    <value>إضافة مدينة جديدة</value>
+  </data>
+  <data name="AddNewCountry" xml:space="preserve">
+    <value>إضافة دولة جديدة</value>
+  </data>
+  <data name="AddNewGovernorate" xml:space="preserve">
+    <value>إضافة محافظة جديدة</value>
+  </data>
+  <data name="AddNewMaritalStatus" xml:space="preserve">
+    <value>إضافة حالة اجتماعية جديدة</value>
+  </data>
+  <data name="AddNewUser" xml:space="preserve">
+    <value>إضافة مستخدم جديد</value>
+  </data>
+  <data name="ArabicName" xml:space="preserve">
+    <value>الاسم بالعربية</value>
+  </data>
+  <data name="AssignRoles" xml:space="preserve">
+    <value>تعيين الأدوار</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>العودة للقائمة</value>
+  </data>
+  <data name="BasicData" xml:space="preserve">
+    <value>البيانات الأساسية</value>
+  </data>
+  <data name="BasicInfo" xml:space="preserve">
+    <value>المعلومات الأساسية</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="CitiesManagement" xml:space="preserve">
+    <value>إدارة المدن</value>
+  </data>
+  <data name="CityCode" xml:space="preserve">
+    <value>كود المدينة</value>
+  </data>
+  <data name="Code2" xml:space="preserve">
+    <value>كود (2)</value>
+  </data>
+  <data name="Code3" xml:space="preserve">
+    <value>كود (3)</value>
+  </data>
+  <data name="CodeMaritalStatus" xml:space="preserve">
+    <value>كود الحالة الاجتماعية</value>
+  </data>
+  <data name="ConfiguratinData" xml:space="preserve">
+    <value>بيانات الإعدادات</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>الدولة</value>
+  </data>
+  <data name="CountryManagement" xml:space="preserve">
+    <value>إدارة الدول</value>
+  </data>
+  <data name="EditCity" xml:space="preserve">
+    <value>تعديل المدينة</value>
+  </data>
+  <data name="EditCountry" xml:space="preserve">
+    <value>تعديل الدولة</value>
+  </data>
+  <data name="EditGovernorate" xml:space="preserve">
+    <value>تعديل المحافظة</value>
+  </data>
+  <data name="EditUser" xml:space="preserve">
+    <value>تعديل المستخدم</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+  <data name="EnglishName" xml:space="preserve">
+    <value>الاسم بالإنجليزية</value>
+  </data>
+  <data name="EnterUsername" xml:space="preserve">
+    <value>أدخل اسم المستخدم</value>
+  </data>
+  <data name="Governorate" xml:space="preserve">
+    <value>المحافظة</value>
+  </data>
+  <data name="GovernorateCode" xml:space="preserve">
+    <value>كود المحافظة</value>
+  </data>
+  <data name="GovernoratesManagement" xml:space="preserve">
+    <value>إدارة المحافظات</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>غير نشط</value>
+  </data>
+  <data name="InvalidUsernameOrPassword" xml:space="preserve">
+    <value>اسم المستخدم أو كلمة المرور غير صحيحة</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>دخول</value>
+  </data>
+  <data name="ManageActions" xml:space="preserve">
+    <value>إدارة العمليات</value>
+  </data>
+  <data name="ManagePermissions" xml:space="preserve">
+    <value>إدارة الصلاحيات</value>
+  </data>
+  <data name="MaritalStatusManagement" xml:space="preserve">
+    <value>إدارة الحالة الاجتماعية</value>
+  </data>
+  <data name="ModuleCode" xml:space="preserve">
+    <value>رمز الموديول</value>
+  </data>
+  <data name="ModulesOverview" xml:space="preserve">
+    <value>عرض الموديولات</value>
+  </data>
+  <data name="OperationCode" xml:space="preserve">
+    <value>رمز العملية</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>الترتيب</value>
+  </data>
+  <data name="ParentModule" xml:space="preserve">
+    <value>الموديول التابع له</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>ادخل كلمة المرور</value>
+  </data>
+  <data name="PermissionCode" xml:space="preserve">
+    <value>رمز الصلاحية</value>
+  </data>
+  <data name="PermissionName" xml:space="preserve">
+    <value>اسم الصلاحية</value>
+  </data>
+  <data name="PermissionsManagement" xml:space="preserve">
+    <value>إدارة الصلاحيات</value>
+  </data>
+  <data name="PermissionsOverview" xml:space="preserve">
+    <value>عرض الصلاحيات</value>
+  </data>
+  <data name="PermissionsScreensActionsOverview" xml:space="preserve">
+    <value>عرض قائمة الصلاحيات وعلاقتها بالشاشات والعمليات</value>
+  </data>
+  <data name="PleaseSelectCountry" xml:space="preserve">
+    <value>يرجى اختيار الدولة</value>
+  </data>
+  <data name="PleaseSelectGovernorate" xml:space="preserve">
+    <value>يرجى اختيار المحافظة</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>تذكرني</value>
+  </data>
+  <data name="RoleCode" xml:space="preserve">
+    <value>رمز الدور</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>الأدوار</value>
+  </data>
+  <data name="RolesManagement" xml:space="preserve">
+    <value>إدارة الأدوار</value>
+  </data>
+  <data name="SaveData" xml:space="preserve">
+    <value>حفظ البيانات</value>
+  </data>
+  <data name="Screen" xml:space="preserve">
+    <value>الشاشة</value>
+  </data>
+  <data name="ScreenCode" xml:space="preserve">
+    <value>رمز الشاشة</value>
+  </data>
+  <data name="ScreensOverview" xml:space="preserve">
+    <value>عرض الشاشات</value>
+  </data>
+  <data name="SelectCountry" xml:space="preserve">
+    <value>...اختر الدولة...</value>
+  </data>
+  <data name="SelectGovernorate" xml:space="preserve">
+    <value>اختر المحافظة</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="EditMaritalStatus" xml:space="preserve">
+    <value>تعديل الحالة الاجتماعية</value>
+  </data>
+  <data name="UserManagement" xml:space="preserve">
+    <value>إدارة المستخدمين</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>أسم المستخدم</value>
+  </data>
+  <data name="UsernameRequired" xml:space="preserve">
+    <value>ادخل اسم المستخدم</value>
+  </data>
+  <data name="UsersOverview" xml:space="preserve">
+    <value>عرض المستخدمين</value>
+  </data>
+  <data name="ViewAddEditCities" xml:space="preserve">
+    <value>عرض وإضافة وتعديل بيانات المدن في النظام</value>
+  </data>
+  <data name="ViewAddEditCountries" xml:space="preserve">
+    <value>عرض وإضافة وتعديل بيانات الدول في النظام</value>
+  </data>
+  <data name="ViewAddEditGovernorates" xml:space="preserve">
+    <value>عرض وإضافة وتعديل بيانات المحافظات في النظام</value>
+  </data>
+  <data name="ViewAddEditMaritalStatus" xml:space="preserve">
+    <value>عرض وإضافة وتعديل بيانات الحالة الاجتماعية في النظام</value>
+  </data>
+  <data name="ViewAndAssignRolePermissions" xml:space="preserve">
+    <value>عرض وتحديد الأدوار الوظيفية وتخصيص صلاحياتها</value>
+  </data>
+  <data name="ViewAndManageModuleScreens" xml:space="preserve">
+    <value>عرض وإدارة شاشات النظام التابعة لكل موديول</value>
+  </data>
+  <data name="ViewAndSelectSystemActionsAndOperations" xml:space="preserve">
+    <value>عرض وتحديد الأفعال والعمليات الأساسية المتاحة بالنظام</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>مرحبا</value>
+  </data>
+  <data name="MilitaryStatusManagement" xml:space="preserve">
+    <value>إدارة الحالة العسكرية</value>
+  </data>
+  <data name="ViewAddEditMilitaryStatus" xml:space="preserve">
+    <value>عرض وإضافة وتعديل بيانات الحالة العسكرية في النظام</value>
+  </data>
+  <data name="AddNewMilitaryStatus" xml:space="preserve">
+    <value>إضافة حالة عسكرية جديدة</value>
+  </data>
+  <data name="CodeMilitaryStatus" xml:space="preserve">
+    <value>كود الحالة العسكرية</value>
+  </data>
+  <data name="EditMilitaryStatus" xml:space="preserve">
+    <value>تعديل الحالة العسكرية</value>
+  </data>
+  <data name="ReligionManagement" xml:space="preserve">
+    <value>إدارة الديانات</value>
+  </data>
+  <data name="ViewAddEditReligion" xml:space="preserve">
+    <value>عرض وإضافة وتعديل بيانات الديانات في النظام</value>
+  </data>
+  <data name="AddNewReligion" xml:space="preserve">
+    <value>إضافة ديانة جديدة</value>
+  </data>
+  <data name="CodeReligion" xml:space="preserve">
+    <value>كود الديانة</value>
+  </data>
+  <data name="EditReligion" xml:space="preserve">
+    <value>تعديل الديانة</value>
+  </data>
+  <data name="GendersManagement" xml:space="preserve">
+    <value>إدارة النوع</value>
+  </data>
+  <data name="ViewAddEditGender" xml:space="preserve">
+    <value>عرض وإضافة وتعديل بيانات النوع في النظام</value>
+  </data>
+  <data name="EditGende" xml:space="preserve">
+    <value>تعديل النوع</value>
+  </data>
+  <data name="AddNewGende" xml:space="preserve">
+    <value>إضافة نوع جديد</value>
+  </data>
+  <data name="CodeGender" xml:space="preserve">
+    <value>كود النوع</value>
+  </data>
+  <data name="SecurityData" xml:space="preserve">
+    <value>البيانات الأمنية</value>
+  </data>
+  <data name="NationalitiesManagement" xml:space="preserve">
+    <value>إدارة الجنسيات</value>
+  </data>
+  <data name="ViewAddEditNationality" xml:space="preserve">
+    <value>عرض وإضافة وتعديل بيانات الجنسيات في النظام</value>
+  </data>
+  <data name="AddNewNationality" xml:space="preserve">
+    <value>إضافة جنسية جديدة</value>
+  </data>
+  <data name="CodeNationality" xml:space="preserve">
+    <value>كود الجنسية</value>
+  </data>
+  <data name="EditNationality" xml:space="preserve">
+    <value>تعديل الجنسية</value>
+  </data>
+  <data name="ManageCompanies" xml:space="preserve">
+    <value>إدارة الشركات</value>
+  </data>
+  <data name="CompanyBranches" xml:space="preserve">
+    <value>فروع الشركات</value>
+  </data>
+  <data name="AddNewScreen" xml:space="preserve">
+    <value>إضافة شاشة جديدة</value>
+  </data>
+  <data name="EditScreen" xml:space="preserve">
+    <value>تعديل الشاشة</value>
+  </data>
+  <data name="MainModule" xml:space="preserve">
+    <value>الموديول الرئيسي</value>
+  </data>
+  <data name="SelectModule" xml:space="preserve">
+    <value>اختر الموديول</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
+  <data name="ActivateScreen" xml:space="preserve">
+    <value>تفعيل الشاشة</value>
+  </data>
+  <data name="AddNewPermission" xml:space="preserve">
+    <value>إضافة صلاحية جديدة</value>
+  </data>
+  <data name="SelectScreen" xml:space="preserve">
+    <value>اختر الشاشة</value>
+  </data>
+  <data name="SelectAction" xml:space="preserve">
+    <value>اختر العملية</value>
+  </data>
+  <data name="ToggleStatus" xml:space="preserve">
+    <value>تغيير الحالة</value>
+  </data>
+  <data name="EditPermission" xml:space="preserve">
+    <value>تعديل الصلاحية</value>
+  </data>
+  <data name="AddNewRole" xml:space="preserve">
+    <value>إضافة دور جديد</value>
+  </data>
+  <data name="EditRole" xml:space="preserve">
+    <value>تعديل الدور</value>
+  </data>
+  <data name="Permissions" xml:space="preserve">
+    <value>الصلاحيات</value>
+  </data>
+</root>

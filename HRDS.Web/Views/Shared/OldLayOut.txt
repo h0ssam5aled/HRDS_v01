@@ -1,0 +1,87 @@
+﻿  <!-- Sidebar -->
+            <aside class="erp-sidebar" id="sidebar">
+                <div class="sidebar-scroll-area">
+                    <div class="accordion accordion-flush" id="sidebarMenu">
+
+                        <!-- Section 1: Configuration Data -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m1">
+                                    <i class="bi bi-gear-wide-connected text-info me-2"></i> @Resource.ConfiguratinData
+                                </button>
+                            </h2>
+                            <div id="m1" class="accordion-collapse collapse" data-bs-parent="#sidebarMenu">
+                                <div class="accordion-body">
+                                    <a class="sub-menu-link" href="/Config/Countries/Index"><i class="bi bi-circle"></i>@Resource.CountryManagement</a>
+                                    <a class="sub-menu-link" href="/Config/Governorates/Index"><i class="bi bi-circle"></i>@Resource.GovernoratesManagement</a>
+                                    <a class="sub-menu-link" href="/Config/Cities/Index"><i class="bi bi-circle"></i>@Resource.CitiesManagement</a>
+                                    <a class="sub-menu-link" href="/Config/MaritalStatuses/Index"><i class="bi bi-circle"></i>@Resource.MaritalStatusManagement</a>
+                                    <a class="sub-menu-link" href="/Config/MilitaryStatuses/Index"><i class="bi bi-circle"></i>@Resource.MilitaryStatusManagement</a>
+                                    <a class="sub-menu-link" href="/Config/Religions/Index"><i class="bi bi-circle"></i>@Resource.ReligionManagement</a>
+                                    <a class="sub-menu-link" href="/Config/Genders/Index"><i class="bi bi-circle"></i>@Resource.GendersManagement</a>
+                                    <a class="sub-menu-link" href="/Config/Nationalities/Index"><i class="bi bi-circle"></i>@Resource.NationalitiesManagement</a>
+
+                                    <a class="sub-menu-link" href="/CoreData/Companies/Index"><i class="bi bi-circle"></i>@Resource.ManageCompanies</a>
+                                    <a class="sub-menu-link" href="/CoreData/CompanyBranches/Index"><i class="bi bi-circle"></i>@Resource.CompanyBranches</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 2: Security Data (تم تصحيح الـ ID إلى m2) -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m2">
+                                    <i class="bi bi-shield-lock text-info me-2"></i> @Resource.SecurityData
+                                </button>
+                            </h2>
+                            <div id="m2" class="accordion-collapse collapse" data-bs-parent="#sidebarMenu">
+                                <div class="accordion-body">
+                                    <a class="sub-menu-link" href="/Security/Modules/Index"><i class="bi bi-circle"></i>@Resource.ModulesOverview</a>
+                                    <a class="sub-menu-link" href="/Security/Models/Index"><i class="bi bi-circle"></i>@Resource.ScreensOverview</a>
+                                    <a class="sub-menu-link" href="/Security/Actions/Index"><i class="bi bi-circle"></i>@Resource.ActionsOverview</a>
+                                    <a class="sub-menu-link" href="/Security/Permissions/Index"><i class="bi bi-circle"></i>@Resource.PermissionsOverview</a>
+                                    <a class="sub-menu-link" href="/Security/Roles/Index"><i class="bi bi-circle"></i>@Resource.RolesManagement</a>
+                                    <a class="sub-menu-link" href="/Security/Users/Index"><i class="bi bi-circle"></i>@Resource.UsersOverview</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 3: الإدارة المالية -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m3">
+                                    <i class="bi bi-cash-coin text-success me-2"></i> الإدارة المالية
+                                </button>
+                            </h2>
+                            <div id="m3" class="accordion-collapse collapse" data-bs-parent="#sidebarMenu">
+                                <!-- أضف عناصر القائمة الخاصة بالإدارة المالية هنا -->
+                            </div>
+                        </div>
+
+                        <!-- Section 4: الموارد البشرية -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m4">
+                                    <i class="bi bi-person-bounding-box text-warning me-2"></i> الموارد البشرية
+                                </button>
+                            </h2>
+                            <div id="m4" class="accordion-collapse collapse" data-bs-parent="#sidebarMenu">
+                                <!-- أضف عناصر القائمة الخاصة بالموارد البشرية هنا -->
+                            </div>
+                        </div>
+
+                        <!-- Section 5: إدارة المخازن (تم تصحيح الـ Target والـ ID إلى m5) -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m5">
+                                    <i class="bi bi-boxes text-primary me-2"></i> إدارة المخازن
+                                </button>
+                            </h2>
+                            <div id="m5" class="accordion-collapse collapse" data-bs-parent="#sidebarMenu">
+                                <!-- أضف عناصر القائمة الخاصة بإدارة المخازن هنا -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </aside>

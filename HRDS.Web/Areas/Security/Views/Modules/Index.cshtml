@@ -1,0 +1,320 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+@model HRDS.Web.Models.ModuleViewModel
+
+@{
+    ViewData["Title"] = @Resource.ModulesOverview;
+}
+
+@{
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+<style>
+    /* 1. إجبار الكروت على الخلفية الداكنة وإلغاء خلفية Bootstrap البيضاء */
+    .card.dark-card,
+    .dark-card {
+        background-color: #0f172a !important;
+        border: 1px solid #1e293b !important;
+        color: #ffffff !important;
+        border-radius: 10px;
+    }
+
+        .dark-card h4,
+        .dark-card p,
+        .dark-card div {
+            color: #ffffff !important;
+        }
+
+            .dark-card p.text-muted {
+                color: #94a3b8 !important;
+            }
+
+    /* 2. إلغاء أي خلفيات بيضاء داخل الكارت والجدول */
+    .card-body,
+    .table-responsive,
+    table.dataTable,
+    table.dataTable * {
+        background-color: transparent !important;
+    }
+
+        /* 3. رأس الجدول (thead) مع المحاذاة حسب الاتجاه */
+        table.dataTable thead th {
+            background-color: #1e293b !important;
+            color: #38bdf8 !important;
+            border-bottom: 2px solid #334155 !important;
+            padding: 14px 16px !important;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-align: start !important;
+        }
+
+        /* 4. نصوص الجدول الأساسية مع المحاذاة حسب الاتجاه */
+        table.dataTable tbody tr td {
+            color: #ffffff !important;
+            padding: 14px 16px !important;
+            vertical-align: middle;
+            border-bottom: 1px solid #1e293b !important;
+            transition: all 0.2s ease-in-out;
+            text-align: start !important;
+        }
+
+        /* 5. تأثير التمرير (Hover) باللون الأخضر الفسفوري مع التوهج */
+        table.dataTable tbody tr:hover td {
+            color: #00ff66 !important;
+            text-shadow: 0 0 8px rgba(0, 255, 102, 0.7);
+            background-color: rgba(0, 255, 102, 0.04) !important;
+        }
+
+    /* 6. تحويل الحاوية العليا للجدول لنظام Flexbox لضبط التموضع تلقائياً */
+    .dataTables_wrapper .row:first-child,
+    .dataTables_wrapper > div:first-child {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+        color: #ffffff !important;
+        font-weight: 500;
+        float: none !important;
+        width: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+        .dataTables_wrapper .dataTables_filter input,
+        .dataTables_wrapper .dataTables_length select {
+            background-color: #1e293b !important;
+            border: 1px solid #334155 !important;
+            color: #ffffff !important;
+            border-radius: 6px;
+            padding: 6px 12px;
+            outline: none;
+        }
+
+            .dataTables_wrapper .dataTables_filter input:focus {
+                border-color: #00ff66 !important;
+                box-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+            }
+
+    /* 7. ضبط ترتيب وأماكن عناصر البحث وعدد السجلات في الإنجليزي (LTR) */
+    [dir="ltr"] .dataTables_wrapper .dataTables_length {
+        order: 1 !important;
+        text-align: left !important;
+    }
+
+    [dir="ltr"] .dataTables_wrapper .dataTables_filter {
+        order: 2 !important;
+        text-align: right !important;
+    }
+
+        [dir="ltr"] .dataTables_wrapper .dataTables_filter input {
+            margin-left: 0.5em !important;
+            margin-right: 0 !important;
+        }
+
+    /* 8. ضبط ترتيب وأماكن عناصر البحث وعدد السجلات في العربي (RTL) */
+    [dir="rtl"] .dataTables_wrapper .dataTables_length {
+        order: 1 !important;
+        text-align: right !important;
+    }
+
+    [dir="rtl"] .dataTables_wrapper .dataTables_filter {
+        order: 2 !important;
+        text-align: left !important;
+    }
+
+        [dir="rtl"] .dataTables_wrapper .dataTables_filter input {
+            margin-right: 0.5em !important;
+            margin-left: 0 !important;
+        }
+
+    /* 9. أزرار الترقيم */
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        background: #1e293b !important;
+        border: 1px solid #334155 !important;
+        color: #ffffff !important;
+        border-radius: 6px !important;
+        margin: 0 2px;
+    }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+            background: #2563eb !important;
+            border-color: #2563eb !important;
+            color: #ffffff !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: #334155 !important;
+            color: #00ff66 !important;
+        }
+
+    /* 10. الشارات الفسفورية (Active / Inactive Badges) */
+    .neon-badge-active {
+        background-color: rgba(0, 212, 255, 0.12) !important;
+        color: #00d4ff !important;
+        border: 1px solid #00d4ff !important;
+        font-weight: 600;
+        text-shadow: 0 0 6px rgba(0, 212, 255, 0.8);
+        box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+    }
+
+    .neon-badge-inactive {
+        background-color: rgba(255, 42, 109, 0.12) !important;
+        color: #ff2a6d !important;
+        border: 1px solid #ff2a6d !important;
+        font-weight: 600;
+        text-shadow: 0 0 6px rgba(255, 42, 109, 0.8);
+        box-shadow: 0 0 8px rgba(255, 42, 109, 0.3);
+    }
+</style>
+
+<style>
+
+    /* =========================================================
+       ضبط أسهم الترتيب (Sorting Arrows) لتكون ملاصقة للكلمة
+       ========================================================= */
+
+    /* 1. جعل محتوى الخلية Flexbox لتكون الكلمة والأسهم على نفس السطر تماماً */
+    table.dataTable thead th.sorting,
+    table.dataTable thead th.sorting_asc,
+    table.dataTable thead th.sorting_desc {
+        position: relative !important;
+        padding-right: 12px !important;
+        padding-left: 12px !important;
+        white-space: nowrap !important;
+    }
+
+    /* 2. تحويل الخلية الداخلي لتأخذ النص والأيقونة جنب بعض */
+    table.dataTable thead th.sorting,
+    table.dataTable thead th.sorting_asc,
+    table.dataTable thead th.sorting_desc {
+        background-image: none !important; /* إلغاء أي صور خلفية افتراضية */
+    }
+
+        /* 3. تجميع السهمين (أعلى وأسفل) في كتلة واحدة مدمجة بجانب النص */
+        table.dataTable thead th.sorting::before,
+        table.dataTable thead th.sorting::after,
+        table.dataTable thead th.sorting_asc::before,
+        table.dataTable thead th.sorting_asc::after,
+        table.dataTable thead th.sorting_desc::before,
+        table.dataTable thead th.sorting_desc::after {
+            position: static !important; /* إلغاء التموضع المطلق بالكامل */
+            display: inline-block !important;
+            font-size: 0.75rem !important;
+            line-height: 1 !important;
+            vertical-align: middle !important;
+            opacity: 0.3;
+        }
+
+        /* 4. إظهار السهم النشط فقط عند الضغط */
+        table.dataTable thead th.sorting_asc::before {
+            opacity: 1 !important;
+            color: #00ff66 !important; /* أزرق/أخضر فسفوري */
+        }
+
+        table.dataTable thead th.sorting_desc::after {
+            opacity: 1 !important;
+            color: #00ff66 !important;
+        }
+
+    /* 5. ضبط المسافات في الإنجليزي (LTR): الكلمة ثم السهمين بمسافة 6px */
+    [dir="ltr"] table.dataTable thead th.sorting::before,
+    [dir="ltr"] table.dataTable thead th.sorting_asc::before,
+    [dir="ltr"] table.dataTable thead th.sorting_desc::before {
+        margin-left: 6px !important;
+        margin-right: 1px !important;
+    }
+
+    /* 6. ضبط المسافات في العربي (RTL): الكلمة ثم السهمين بمسافة 6px */
+    [dir="rtl"] table.dataTable thead th.sorting::before,
+    [dir="rtl"] table.dataTable thead th.sorting_asc::before,
+    [dir="rtl"] table.dataTable thead th.sorting_desc::before {
+        margin-right: 6px !important;
+        margin-left: 1px !important;
+    }
+
+</style>
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    <!-- Header Card -->
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center gap-3">
+            <i class="bi bi-grid-3x3-gap-fill fs-3 lh-1 flex-shrink-0"></i>
+            <div class="d-flex flex-column align-items-start text-start">
+                <h4 class="mb-1 fw-bold">@Resource.ModulesOverview</h4>
+                <p class="text-muted mb-0 small">@Resource.ActiveSystemModulesAndSections</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Table Card -->
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="modulesTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.ModuleCode</th>
+                            <th>@Resource.ArabicName</th>
+                            <th>@Resource.EnglishName</th>
+                            <th>@Resource.Status</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+
+        $(document).ready(function () {
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            table = $('#modulesTable').DataTable({
+                ajax: {
+                    url: '@Url.Action("GetModulesJson", "Modules")',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'moduleId', width: '5%' },
+                    {
+                        data: 'moduleCode',
+                        render: function (data) {
+                            return `<span class="badge dark-badge-code font-monospace px-2 py-1">${data}</span>`;
+                        }
+                    },
+                    { data: 'moduleNameAr' },
+                    { data: 'moduleNameEn' },
+                    {
+                        data: 'isActive',
+                        render: function (data) {
+                            return data
+                                ? `<span class="badge neon-badge-active px-2 py-1"><i class="bi bi-check-circle me-1"></i>@Resource.Active</span>`
+                                : `<span class="badge neon-badge-inactive px-2 py-1"><i class="bi bi-x-circle me-1"></i>@Resource.Inactive</span>`;
+                        }
+                    }
+                ],
+                language: {
+                    // تحويل كود الترجمة ديناميكياً بناءً على الثقافة الحالية
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        }
+    </script>
+}

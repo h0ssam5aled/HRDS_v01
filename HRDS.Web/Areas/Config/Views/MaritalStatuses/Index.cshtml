@@ -1,0 +1,450 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+
+@{
+    ViewData["Title"] = Resource.MaritalStatusManagement;
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+<style>
+    .card.dark-card, .dark-card {
+        background-color: #0f172a !important;
+        border: 1px solid #1e293b !important;
+        color: #ffffff !important;
+        border-radius: 10px;
+    }
+
+        .dark-card h4, .dark-card p, .dark-card div {
+            color: #ffffff !important;
+        }
+
+            .dark-card p.text-muted {
+                color: #94a3b8 !important;
+            }
+
+    .card-body, .table-responsive, table.dataTable, table.dataTable * {
+        background-color: transparent !important;
+    }
+
+        table.dataTable thead th {
+            background-color: #1e293b !important;
+            color: #38bdf8 !important;
+            border-bottom: 2px solid #334155 !important;
+            padding: 14px 16px !important;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-align: start !important;
+        }
+
+        table.dataTable tbody tr td {
+            color: #ffffff !important;
+            padding: 14px 16px !important;
+            vertical-align: middle;
+            border-bottom: 1px solid #1e293b !important;
+            transition: all 0.2s ease-in-out;
+            text-align: start !important;
+        }
+
+        table.dataTable tbody tr:hover td {
+            color: #00ff66 !important;
+            text-shadow: 0 0 8px rgba(0, 255, 102, 0.7);
+            background-color: rgba(0, 255, 102, 0.04) !important;
+        }
+
+    .dataTables_wrapper .row:first-child, .dataTables_wrapper > div:first-child {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+        color: #ffffff !important;
+        font-weight: 500;
+        float: none !important;
+        width: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+        .dataTables_wrapper .dataTables_filter input,
+        .dataTables_wrapper .dataTables_length select {
+            background-color: #1e293b !important;
+            border: 1px solid #334155 !important;
+            color: #ffffff !important;
+            border-radius: 6px;
+            padding: 6px 12px;
+            outline: none;
+        }
+
+            .dataTables_wrapper .dataTables_filter input:focus {
+                border-color: #00ff66 !important;
+                box-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+            }
+
+    [dir="ltr"] .dataTables_wrapper .dataTables_length {
+        order: 1 !important;
+        text-align: left !important;
+    }
+
+    [dir="ltr"] .dataTables_wrapper .dataTables_filter {
+        order: 2 !important;
+        text-align: right !important;
+    }
+
+        [dir="ltr"] .dataTables_wrapper .dataTables_filter input {
+            margin-left: 0.5em !important;
+            margin-right: 0 !important;
+        }
+
+    [dir="rtl"] .dataTables_wrapper .dataTables_length {
+        order: 1 !important;
+        text-align: right !important;
+    }
+
+    [dir="rtl"] .dataTables_wrapper .dataTables_filter {
+        order: 2 !important;
+        text-align: left !important;
+    }
+
+        [dir="rtl"] .dataTables_wrapper .dataTables_filter input {
+            margin-right: 0.5em !important;
+            margin-left: 0 !important;
+        }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        background: #1e293b !important;
+        border: 1px solid #334155 !important;
+        color: #ffffff !important;
+        border-radius: 6px !important;
+        margin: 0 2px;
+    }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+            background: #2563eb !important;
+            border-color: #2563eb !important;
+            color: #ffffff !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: #334155 !important;
+            color: #00ff66 !important;
+        }
+
+    .neon-badge-active {
+        background-color: rgba(0, 212, 255, 0.12) !important;
+        color: #00d4ff !important;
+        border: 1px solid #00d4ff !important;
+        font-weight: 600;
+        text-shadow: 0 0 6px rgba(0, 212, 255, 0.8);
+        box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+    }
+
+    .neon-badge-inactive {
+        background-color: rgba(255, 42, 109, 0.12) !important;
+        color: #ff2a6d !important;
+        border: 1px solid #ff2a6d !important;
+        font-weight: 600;
+        text-shadow: 0 0 6px rgba(255, 42, 109, 0.8);
+        box-shadow: 0 0 8px rgba(255, 42, 109, 0.3);
+    }
+
+    .dark-badge-code {
+        background-color: #1e293b !important;
+        color: #38bdf8 !important;
+        border: 1px solid #334155 !important;
+    }
+
+    .btn-edit {
+        background-color: rgba(56, 189, 248, 0.1) !important;
+        color: #38bdf8 !important;
+        border: 1px solid #38bdf8 !important;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .btn-edit:hover {
+            background-color: #38bdf8 !important;
+            color: #0f172a !important;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+    .btn-add {
+        background-color: #2563eb !important;
+        color: #ffffff !important;
+        border: 1px solid #3b82f6 !important;
+        font-weight: 600;
+    }
+
+        .btn-add:hover {
+            background-color: #1d4ed8 !important;
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+        }
+
+    .modal-content.dark-modal {
+        background-color: #0f172a !important;
+        border: 1px solid #334155 !important;
+        color: #ffffff !important;
+    }
+
+        .modal-content.dark-modal .modal-header,
+        .modal-content.dark-modal .modal-footer {
+            border-color: #1e293b !important;
+        }
+
+        .modal-content.dark-modal .form-label,
+        .modal-content.dark-modal label {
+            color: #cbd5e1 !important;
+        }
+
+        .modal-content.dark-modal .form-control {
+            background-color: #1e293b !important;
+            border: 1px solid #334155 !important;
+            color: #ffffff !important;
+        }
+
+            .modal-content.dark-modal .form-control:focus {
+                border-color: #38bdf8 !important;
+                box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+            }
+
+        .modal-content.dark-modal .form-check-input[type="checkbox"] {
+            background-color: #1e293b !important;
+            border: 1px solid #334155 !important;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .modal-content.dark-modal .form-check-input[type="checkbox"]:checked {
+                background-color: #2563eb !important;
+                border-color: #3b82f6 !important;
+                box-shadow: 0 0 10px rgba(37, 99, 235, 0.8) !important;
+            }
+</style>
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between flex-wrap gap-3">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-heart fs-3 lh-1 flex-shrink-0 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@Resource.MaritalStatusManagement</h4>
+                    <p class="text-muted mb-0 small">@Resource.ViewAddEditMaritalStatus</p>
+                </div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-add px-4 py-2" onclick="openAddModal()">
+                    <i class="bi bi-plus-lg me-1"></i> @Resource.AddNewMaritalStatus
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="maritalStatusesTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.CodeMaritalStatus</th>
+                            <th>@Resource.ArabicName</th>
+                            <th>@Resource.EnglishName</th>
+                            <th>@Resource.Order</th>
+                            <th>@Resource.Status</th>
+                            <th class="text-center">@Resource.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Form -->
+<div class="modal fade" id="maritalStatusModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content dark-modal shadow-lg">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalTitle">@Resource.AddNewMaritalStatus</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="maritalStatusForm">
+                    <input type="hidden" id="maritalStatusId" value="0" />
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label small">@Resource.CodeMaritalStatus</label>
+                            <input type="text" id="maritalStatusCode" class="form-control" maxlength="20" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small">@Resource.Order</label>
+                            <input type="number" id="sortOrder" class="form-control" value="1" required />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label small">@Resource.ArabicName</label>
+                            <input type="text" id="maritalStatusNameAr" class="form-control" required />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label small">@Resource.EnglishName</label>
+                            <input type="text" id="maritalStatusNameEn" class="form-control" required />
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check form-switch d-flex align-items-center gap-2 mt-2">
+                                <input class="form-check-input" type="checkbox" id="isActive" checked>
+                                <label class="form-check-label text-white" for="isActive">@Resource.Status</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">@Resource.Cancel</button>
+                <button type="button" class="btn btn-add px-4" onclick="saveMaritalStatus()">@Resource.SaveData</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+
+        $.fn.dataTable.ext.pager.three_numbers = function (page, pages) {
+            let numbers = [];
+            let buttons = 3;
+            let half = Math.floor(buttons / 2);
+
+            let start = page - half;
+            let end = page + half;
+
+            if (start < 0) {
+                start = 0;
+                end = Math.min(pages, buttons);
+            } else if (end > pages) {
+                end = pages;
+                start = Math.max(0, pages - buttons);
+            }
+
+            for (let i = start; i < end; i++) {
+                numbers.push(i);
+            }
+
+            return ['previous', numbers, 'next'];
+        };
+
+        $(document).ready(function () {
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            table = $('#maritalStatusesTable').DataTable({
+                pagingType: 'three_numbers',
+                pageLength: 10,
+                ajax: {
+                    url: '@Url.Action("GetMaritalStatusesJson", "MaritalStatuses", new { area = "Config" })',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'maritalStatusId', width: '5%' },
+                    {
+                        data: 'maritalStatusCode',
+                        render: function (data) {
+                            return `<span class="badge dark-badge-code font-monospace px-2 py-1">${data}</span>`;
+                        }
+                    },
+                    { data: 'maritalStatusNameAr' },
+                    { data: 'maritalStatusNameEn' },
+                    { data: 'sortOrder' },
+                    {
+                        data: 'isActive',
+                        render: function (data) {
+                            return data
+                                ? `<span class="badge neon-badge-active px-2 py-1"><i class="bi bi-check-circle me-1"></i>@Resource.Active</span>`
+                                : `<span class="badge neon-badge-inactive px-2 py-1"><i class="bi bi-x-circle me-1"></i>@Resource.Inactive</span>`;
+                        }
+                    },
+                    {
+                        data: 'maritalStatusId',
+                        className: 'text-center',
+                        render: function (data) {
+                            return `<button onclick="openEditModal(${data})" class="btn btn-sm btn-edit px-3">
+                                        <i class="bi bi-pencil-square me-1"></i> @Resource.EditMaritalStatus
+                                    </button>`;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        }
+
+        function openAddModal() {
+            $('#maritalStatusId').val(0);
+            $('#maritalStatusCode').val('');
+            $('#maritalStatusNameAr').val('');
+            $('#maritalStatusNameEn').val('');
+            $('#sortOrder').val(1);
+            $('#isActive').prop('checked', true);
+
+            $('#modalTitle').text('@Html.Raw(Resource.AddNewMaritalStatus)');
+            $('#maritalStatusModal').modal('show');
+        }
+
+        function openEditModal(id) {
+            $.get(`@Url.Action("GetById", "MaritalStatuses", new { area = "Config" })/${id}`, function (res) {
+                if (res.success) {
+                    let d = res.data;
+                    $('#maritalStatusId').val(d.maritalStatusId);
+                    $('#maritalStatusCode').val(d.maritalStatusCode);
+                    $('#maritalStatusNameAr').val(d.maritalStatusNameAr);
+                    $('#maritalStatusNameEn').val(d.maritalStatusNameEn);
+                    $('#sortOrder').val(d.sortOrder);
+                    $('#isActive').prop('checked', d.isActive);
+
+                    $('#modalTitle').text('@Html.Raw(Resource.EditMaritalStatus)');
+                    $('#maritalStatusModal').modal('show');
+                } else {
+                    alert(res.message);
+                }
+            });
+        }
+
+        function saveMaritalStatus() {
+            let model = {
+                maritalStatusId: parseInt($('#maritalStatusId').val()),
+                maritalStatusCode: $('#maritalStatusCode').val(),
+                maritalStatusNameAr: $('#maritalStatusNameAr').val(),
+                maritalStatusNameEn: $('#maritalStatusNameEn').val(),
+                sortOrder: parseInt($('#sortOrder').val()),
+                isActive: $('#isActive').is(':checked')
+            };
+
+            $.ajax({
+                url: '@Url.Action("Save", "MaritalStatuses", new { area = "Config" })',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(model),
+                success: function (res) {
+                    if (res.success) {
+                        $('#maritalStatusModal').modal('hide');
+                        table.ajax.reload();
+                    } else {
+                        alert(res.message);
+                    }
+                },
+                error: function () {
+                    alert('حدث خطأ أثناء الاتصال بالسيرفر.');
+                }
+            });
+        }
+    </script>
+}

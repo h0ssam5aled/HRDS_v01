@@ -1,0 +1,223 @@
+﻿@model HRDS.Web.Models.Entities.CompanyBranch
+
+@{
+    var isArabic = System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar";
+    ViewData["Title"] = isArabic ? "تعديل بيانات الفرع" : "Edit Branch";
+    var currentDir = isArabic ? "rtl" : "ltr";
+}
+
+<style>
+    .dark-card {
+        background-color: #0f172a !important;
+        border: 1px solid #1e293b !important;
+        color: #ffffff !important;
+        border-radius: 10px;
+    }
+
+    .form-control-dark, .form-select-dark {
+        background-color: #1e293b !important;
+        border: 1px solid #334155 !important;
+        color: #ffffff !important;
+        border-radius: 6px;
+        padding: 8px 12px;
+    }
+
+        .form-control-dark:focus, .form-select-dark:focus {
+            border-color: #38bdf8 !important;
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
+            color: #ffffff !important;
+        }
+
+    .form-label-dark {
+        color: #cbd5e1;
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+
+    .btn-neon-save {
+        background-color: #38bdf8 !important;
+        color: #0f172a !important;
+        font-weight: bold;
+        border: none;
+        box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    }
+
+        .btn-neon-save:hover {
+            background-color: #0284c7 !important;
+            color: #ffffff !important;
+        }
+
+    .btn-dark-cancel {
+        background-color: #334155 !important;
+        color: #ffffff !important;
+        border: none;
+    }
+
+        .btn-dark-cancel:hover {
+            background-color: #475569 !important;
+            color: #ffffff !important;
+        }
+
+    .text-subtitle-dark {
+        color: #94a3b8 !important;
+    }
+</style>
+
+<div class="container-fluid py-3" dir="@currentDir">
+    <!-- Header Card -->
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between py-3">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-pencil-square fs-3 text-info"></i>
+                <div>
+                    <h4 class="mb-0 fw-bold">@(isArabic ? "تعديل بيانات الفرع" : "Edit Branch")</h4>
+                    <p class="text-subtitle-dark mb-0 small">@(isArabic ? "تحديث بيانات وقيم الفرع المسجل" : "Update registered branch information")</p>
+                </div>
+            </div>
+            <a asp-action="Index" class="btn btn-outline-light btn-sm px-3">
+                <i class="bi bi-arrow-left me-1"></i> @(isArabic ? "الرجوع للقائمة" : "Back to List")
+            </a>
+        </div>
+    </div>
+
+    <!-- Form Card -->
+    <div class="card dark-card shadow-sm">
+        <div class="card-body p-4">
+            <form asp-action="Edit" method="post">
+                <input type="hidden" asp-for="CompanyBranchId" />
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="row g-3">
+                    <!-- Company Dropdown -->
+                    <div class="col-md-6">
+                        <label asp-for="CompanyId" class="form-label form-label-dark">@(isArabic ? "الشركة" : "Company") <span class="text-danger">*</span></label>
+                        <select asp-for="CompanyId" class="form-select form-select-dark" asp-items="ViewBag.Companies">
+                            <option value="">@(isArabic ? "-- اختر الشركة --" : "-- Select Company --")</option>
+                        </select>
+                        <span asp-validation-for="CompanyId" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Branch Code -->
+                    <div class="col-md-6">
+                        <label asp-for="BranchCode" class="form-label form-label-dark">@(isArabic ? "كود الفرع" : "Branch Code") <span class="text-danger">*</span></label>
+                        <input asp-for="BranchCode" class="form-control form-control-dark" />
+                        <span asp-validation-for="BranchCode" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Branch Names -->
+                    <div class="col-md-6">
+                        <label asp-for="BranchNameAr" class="form-label form-label-dark">@(isArabic ? "اسم الفرع (عربي)" : "Branch Name (Arabic)") <span class="text-danger">*</span></label>
+                        <input asp-for="BranchNameAr" class="form-control form-control-dark" />
+                        <span asp-validation-for="BranchNameAr" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="BranchNameEn" class="form-label form-label-dark">@(isArabic ? "اسم الفرع (إنجليزي)" : "Branch Name (English)") <span class="text-danger">*</span></label>
+                        <input asp-for="BranchNameEn" class="form-control form-control-dark" />
+                        <span asp-validation-for="BranchNameEn" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Country / Governorate / City -->
+                    <div class="col-md-4">
+                        <label class="form-label form-label-dark">@(isArabic ? "الدولة" : "Country") <span class="text-danger">*</span></label>
+                        <select id="CountryId" name="CountryId" class="form-select form-select-dark" asp-items="ViewBag.Countries">
+                            <option value="">@(isArabic ? "-- اختر الدولة --" : "-- Select Country --")</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="GovernorateId" class="form-label form-label-dark">@(isArabic ? "المحافظة" : "Governorate") <span class="text-danger">*</span></label>
+                        <select asp-for="GovernorateId" id="GovernorateId" class="form-select form-select-dark" asp-items="ViewBag.Governorates">
+                            <option value="">@(isArabic ? "-- اختر المحافظة --" : "-- Select Governorate --")</option>
+                        </select>
+                        <span asp-validation-for="GovernorateId" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label asp-for="CityId" class="form-label form-label-dark">@(isArabic ? "المدينة" : "City") <span class="text-danger">*</span></label>
+                        <select asp-for="CityId" id="CityId" class="form-select form-select-dark" asp-items="ViewBag.Cities">
+                            <option value="">@(isArabic ? "-- اختر المدينة --" : "-- Select City --")</option>
+                        </select>
+                        <span asp-validation-for="CityId" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Address, Phone, Email -->
+                    <div class="col-md-12">
+                        <label asp-for="Address" class="form-label form-label-dark">@(isArabic ? "العنوان" : "Address")</label>
+                        <input asp-for="Address" class="form-control form-control-dark" />
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Phone" class="form-label form-label-dark">@(isArabic ? "الهاتف" : "Phone")</label>
+                        <input asp-for="Phone" class="form-control form-control-dark" />
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="form-label form-label-dark">@(isArabic ? "البريد الإلكتروني" : "Email")</label>
+                        <input asp-for="Email" type="email" class="form-control form-control-dark" />
+                    </div>
+
+                    <!-- Switches: Main Branch & Active -->
+                    <div class="col-md-6 my-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" asp-for="IsMainBranch">
+                            <label class="form-check-label text-white ms-2" asp-for="IsMainBranch">@(isArabic ? "فرع رئيسي" : "Is Main Branch")</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 my-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" asp-for="IsActive">
+                            <label class="form-check-label text-white ms-2" asp-for="IsActive">@(isArabic ? "نشط" : "Active")</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Action Buttons -->
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <a asp-action="Index" class="btn btn-dark-cancel px-4">@(isArabic ? "إلغاء" : "Cancel")</a>
+                    <button type="submit" class="btn btn-neon-save px-4">
+                        <i class="bi bi-check-lg me-1"></i> @(isArabic ? "حفظ التعديلات" : "Save Changes")
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Cascading Dropdowns: Country -> Governorate
+            $('#CountryId').change(function () {
+                var countryId = $(this).val();
+                var $gov = $('#GovernorateId').empty().append('<option value="">-- @(isArabic ? "اختر المحافظة" : "Select Governorate") --</option>');
+                var $city = $('#CityId').empty().append('<option value="">-- @(isArabic ? "اختر المدينة" : "Select City") --</option>');
+
+                if (countryId) {
+                    $.getJSON('@Url.Action("GetGovernorates", "Companies", new { area = "CoreData" })', { countryId: countryId }, function (data) {
+                        if (data && data.length > 0) {
+                            $.each(data, function (i, item) {
+                                var val = item.value || item.id;
+                                var txt = item.text || item.name;
+                                $gov.append($('<option>', { value: val, text: txt }));
+                            });
+                        }
+                    });
+                }
+            });
+
+            // Cascading Dropdowns: Governorate -> City
+            $('#GovernorateId').change(function () {
+                var govId = $(this).val();
+                var $city = $('#CityId').empty().append('<option value="">-- @(isArabic ? "اختر المدينة" : "Select City") --</option>');
+
+                if (govId) {
+                    $.getJSON('@Url.Action("GetCities", "Companies", new { area = "CoreData" })', { governorateId: govId }, function (data) {
+                        if (data && data.length > 0) {
+                            $.each(data, function (i, item) {
+                                var val = item.value || item.id;
+                                var txt = item.text || item.name;
+                                $city.append($('<option>', { value: val, text: txt }));
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

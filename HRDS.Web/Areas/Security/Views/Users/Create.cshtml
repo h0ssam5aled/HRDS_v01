@@ -1,0 +1,137 @@
+﻿@model HRDS.Web.Models.CreateUserViewModel
+@using HRDS.Web.Models.Entities
+@using HRDS.Web.Resources
+
+@{
+    ViewData["Title"] = Resource.AddNewUser;
+    var roles = ViewBag.Roles as List<Role> ?? new List<Role>();
+    var currentDir = System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "ltr";
+}
+
+<style>
+    .dark-card {
+        background-color: #0f172a !important;
+        border: 1px solid #1e293b !important;
+        color: #ffffff !important;
+        border-radius: 10px;
+    }
+
+    .form-control-dark, .form-select-dark {
+        background-color: #1e293b !important;
+        border: 1px solid #334155 !important;
+        color: #ffffff !important;
+        border-radius: 8px;
+    }
+
+        .form-control-dark:focus, .form-select-dark:focus {
+            border-color: #00ff66 !important;
+            box-shadow: 0 0 8px rgba(0, 255, 102, 0.4) !important;
+        }
+
+    .role-box {
+        background-color: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        padding: 10px 14px;
+        transition: all 0.2s;
+    }
+
+        .role-box:hover {
+            border-color: #00ff66;
+        }
+
+    .btn-neon-save {
+        background-color: #00ff66 !important;
+        color: #0f172a !important;
+        font-weight: bold;
+        border: none;
+        box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+    }
+
+        .btn-neon-save:hover {
+            background-color: #00cc52 !important;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.7);
+        }
+</style>
+
+<div class="container-fluid py-3" dir="@currentDir">
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-person-plus-fill fs-3 text-info"></i>
+                <h4 class="mb-0 fw-bold">@Resource.AddNewUser</h4>
+            </div>
+            <a asp-action="Index" class="btn btn-outline-light btn-sm">
+                <i class="bi bi-arrow-right me-1"></i> @Resource.BackToList
+            </a>
+        </div>
+    </div>
+
+    <form asp-action="Create" method="post" dir="@currentDir">
+        @Html.AntiForgeryToken()
+        <div class="card dark-card shadow-sm">
+            <div class="card-body">
+                <div class="row g-3">
+
+                    <!-- حقول وهمية مخفية لمنع المتصفح من الإكمال التلقائي -->
+                    <input type="text" name="fake_username" style="display:none;" tabindex="-1" aria-hidden="true" />
+                    <input type="password" name="fake_password" style="display:none;" tabindex="-1" aria-hidden="true" />
+
+                    <!-- Username -->
+                    <div class="col-md-6">
+                        <label asp-for="Username" class="form-label text-light">@Resource.Username <span class="text-danger">*</span></label>
+                        <input asp-for="Username" class="form-control form-control-dark" placeholder="@Resource.EnterUsername" autocomplete="new-password" />
+                        <span asp-validation-for="Username" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="form-label text-light">@Resource.EmailAddress</label>
+                        <input asp-for="Email" type="email" class="form-control form-control-dark" placeholder="example@domain.com" autocomplete="off" />
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="col-md-6">
+                        <label asp-for="Password" class="form-label text-light">@Resource.Password <span class="text-danger">*</span></label>
+                        <input asp-for="Password" type="password" class="form-control form-control-dark" placeholder="••••••••" autocomplete="new-password" />
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
+
+                    <!-- IsActive -->
+                    <div class="col-md-6 d-flex align-items-end">
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" asp-for="IsActive" id="IsActiveSwitch" checked>
+                            <label class="form-check-label text-light ms-2" for="IsActiveSwitch">@Resource.Active</label>
+                        </div>
+                    </div>
+
+                    <hr class="border-secondary my-4" />
+
+                    <!-- Roles Selection -->
+                    <div class="col-12">
+                        <h5 class="text-info mb-3"><i class="bi bi-shield-lock me-2"></i>@Resource.AssignRoles</h5>
+                        <div class="row g-3">
+                            @foreach (var role in roles)
+                            {
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="role-box d-flex align-items-center justify-content-between">
+                                        <label class="form-check-label text-light cursor-pointer" for="role-@role.RoleId">
+                                            @(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar" ? role.RoleNameAr : role.RoleNameEn)
+                                        </label>
+                                        <input class="form-check-input" type="checkbox" name="SelectedRoleIds" value="@role.RoleId" id="role-@role.RoleId" />
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <a asp-action="Index" class="btn btn-secondary px-4">@Resource.Cancel</a>
+                    <button type="submit" class="btn btn-neon-save px-4"><i class="bi bi-check2-circle me-1"></i>@Resource.SaveData</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
