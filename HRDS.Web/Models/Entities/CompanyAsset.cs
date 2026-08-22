@@ -29,5 +29,5 @@ public partial class CompanyAsset
 
     public virtual AssetType AssetType { get; set; } = null!;
 
-    public virtual ICollection<EmployeeAssetAssignment> EmployeeAssetAssignments { get; set; } = new List<EmployeeAssetAssignment>();
+    public virtual EmployeeAssetAssignment? EmployeeAssetAssignment { get; set; }
 }

@@ -17,9 +17,9 @@ public partial class EmployeeQualification
 
     public int? MajorId { get; set; }
 
-    public DateOnly? GraduationYear { get; set; }
+    public short? GraduationYear { get; set; }
 
-    public int? GradeOrGpa { get; set; }
+    public decimal? GradeOrGpa { get; set; }
 
     public string? Notes { get; set; }
 

@@ -63,7 +63,7 @@ public partial class Employee
 
     public virtual ICollection<Document> Documents { get; set; } = new List<Document>();
 
-    public virtual ICollection<EmergencyContact> EmergencyContacts { get; set; } = new List<EmergencyContact>();
+    public virtual EmergencyContact? EmergencyContact { get; set; }
 
     public virtual ICollection<EmployeeAllowance> EmployeeAllowances { get; set; } = new List<EmployeeAllowance>();
 
@@ -81,7 +81,7 @@ public partial class Employee
 
     public virtual ICollection<EmployeePenalty> EmployeePenalties { get; set; } = new List<EmployeePenalty>();
 
-    public virtual ICollection<EmployeePosition> EmployeePositions { get; set; } = new List<EmployeePosition>();
+    public virtual EmployeePosition? EmployeePosition { get; set; }
 
     public virtual ICollection<EmployeeQualification> EmployeeQualifications { get; set; } = new List<EmployeeQualification>();
 
@@ -89,11 +89,11 @@ public partial class Employee
 
     public virtual ICollection<EmployeeSalaryDetail> EmployeeSalaryDetails { get; set; } = new List<EmployeeSalaryDetail>();
 
-    public virtual ICollection<EmployeeSalaryHistory> EmployeeSalaryHistories { get; set; } = new List<EmployeeSalaryHistory>();
+    public virtual EmployeeSalaryHistory? EmployeeSalaryHistory { get; set; }
 
     public virtual ICollection<EmployeeWorkSchedule> EmployeeWorkSchedules { get; set; } = new List<EmployeeWorkSchedule>();
 
-    public virtual ICollection<EmployeesDatum> EmployeesData { get; set; } = new List<EmployeesDatum>();
+    public virtual EmployeesDatum? EmployeesDatum { get; set; }
 
     public virtual ICollection<EmploymentHistory> EmploymentHistoryDirectManagers { get; set; } = new List<EmploymentHistory>();
 
@@ -109,7 +109,9 @@ public partial class Employee
 
     public virtual ICollection<PermissionRequest> PermissionRequests { get; set; } = new List<PermissionRequest>();
 
-    public virtual ICollection<ProbationPeriod> ProbationPeriods { get; set; } = new List<ProbationPeriod>();
+    public virtual ProbationPeriod? ProbationPeriod { get; set; }
 
     public virtual ICollection<SafetyIncident> SafetyIncidents { get; set; } = new List<SafetyIncident>();
+
+    public virtual ICollection<WorkflowStepsConfig> WorkflowStepsConfigs { get; set; } = new List<WorkflowStepsConfig>();
 }

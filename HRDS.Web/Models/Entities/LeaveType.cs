@@ -83,5 +83,7 @@ public partial class LeaveType
 
     public virtual ICollection<EmployeeLeaveBalance> EmployeeLeaveBalances { get; set; } = new List<EmployeeLeaveBalance>();
 
+    public virtual LeaveCategory? LeaveCategory { get; set; }
+
     public virtual ICollection<LeaveRequest> LeaveRequests { get; set; } = new List<LeaveRequest>();
 }

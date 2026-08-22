@@ -25,6 +25,8 @@ public partial class WorkflowStepsConfig
 
     public virtual ApproverType ApproverType { get; set; } = null!;
 
+    public virtual Employee? SpecificEmployee { get; set; }
+
     public virtual Position? SpecificPosition { get; set; }
 
     public virtual WorkflowTemplate WorkflowTemplate { get; set; } = null!;
