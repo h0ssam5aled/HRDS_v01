@@ -1,0 +1,209 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+
+@{
+    ViewData["Title"] = Resource.EducationalInstitutions;
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    <!-- Header Card -->
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-bank2 fs-3 lh-1 flex-shrink-0 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@Resource.EducationalInstitutions</h4>
+                    <p class="text-muted mb-0 small">@Resource.EducationalInstitutionsDescription</p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary px-3 py-2" onclick="openAddModal()">
+                <i class="bi bi-plus-lg me-1"></i> @Resource.AddNewEducationalInstitution
+            </button>
+        </div>
+    </div>
+
+    <!-- Data Table Card -->
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="institutionsTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.InstitutionCode</th>
+                            <th>@Resource.ArabicName</th>
+                            <th>@Resource.EnglishName</th>
+                            <th>@Resource.InstitutionType</th>
+                            <th>@Resource.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal الإضافة والتعديل الداكن -->
+<div class="modal fade" id="institutionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content dark-modal">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalTitle">@Resource.AddNewEducationalInstitution</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="institutionForm">
+                    <input type="hidden" id="institutionId" value="0" />
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.InstitutionType <span class="text-danger">*</span></label>
+                        <select id="institutionTypeId" class="form-select" asp-items="ViewBag.InstitutionTypes" required>
+                            <option value="">-- @Resource.SelectInstitutionType --</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.InstitutionCode <span class="text-danger">*</span></label>
+                        <input type="text" id="institutionCode" class="form-control" placeholder="e.g. CAIRO-UNIV" required />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.ArabicName <span class="text-danger">*</span></label>
+                        <input type="text" id="institutionNameAr" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.EnglishName</label>
+                        <input type="text" id="institutionNameEn" class="form-control" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resource.Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveInstitution()">
+                    <i class="bi bi-save me-1"></i> @Resource.SaveData
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+        let institutionModal;
+
+        // تحويل الموارد والنصوص إلى JSON صريح لمنع مشكلة الـ HTML Encoding
+        const localizedStrings = {
+            addTitle: @Html.Raw(Json.Serialize(Resource.AddNewEducationalInstitution)),
+            editTitle: @Html.Raw(Json.Serialize(Resource.EditEducationalInstitution)),
+            editBtn: @Html.Raw(Json.Serialize(Resource.EditEducationalInstitution)),
+            requiredError: @Html.Raw(Json.Serialize(Resource.RequiredFieldsErrorMessage)),
+            saveError: @Html.Raw(Json.Serialize(Resource.SaveErrorMessage))
+        };
+
+        $(document).ready(function () {
+            institutionModal = new bootstrap.Modal(document.getElementById('institutionModal'));
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            table = $('#institutionsTable').DataTable({
+                pagingType: 'simple',
+                ajax: {
+                    url: '@Url.Action("GetJson", "EducationalInstitutions")',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'institutionId', width: '5%' },
+                    {
+                        data: 'institutionCode',
+                        render: function (data) {
+                            return `<span class="badge dark-badge-code font-monospace px-2 py-1">${data || ''}</span>`;
+                        }
+                    },
+                    { data: 'institutionNameAr' },
+                    { data: 'institutionNameEn' },
+                    {
+                        data: '@(isRtl ? "institutionTypeNameAr" : "institutionTypeNameEn")',
+                        defaultContent: ''
+                    },
+                    {
+                        data: 'institutionId',
+                        render: function (data) {
+                            return `<button class="btn btn-sm btn-action-edit" onclick="editInstitution(${data})">
+                                        <i class="bi bi-pencil-square me-1"></i>${localizedStrings.editBtn}
+                                    </button>`;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        }
+
+        function openAddModal() {
+            $('#institutionId').val(0);
+            $('#institutionForm')[0].reset();
+            $('#modalTitle').html(localizedStrings.addTitle);
+            institutionModal.show();
+        }
+
+        function editInstitution(id) {
+            $.get('@Url.Action("GetById", "EducationalInstitutions")/' + id, function (data) {
+                if (data) {
+                    $('#institutionId').val(data.institutionId);
+                    $('#institutionTypeId').val(data.institutionTypeId);
+                    $('#institutionCode').val(data.institutionCode);
+                    $('#institutionNameAr').val(data.institutionNameAr);
+                    $('#institutionNameEn').val(data.institutionNameEn);
+
+                    $('#modalTitle').html(localizedStrings.editTitle);
+                    institutionModal.show();
+                }
+            });
+        }
+
+        function saveInstitution() {
+            let model = {
+                InstitutionId: parseInt($('#institutionId').val()) || 0,
+                InstitutionTypeId: parseInt($('#institutionTypeId').val()) || 0,
+                InstitutionCode: $('#institutionCode').val(),
+                InstitutionNameAr: $('#institutionNameAr').val(),
+                InstitutionNameEn: $('#institutionNameEn').val()
+            };
+
+            if (!model.InstitutionTypeId || !model.InstitutionCode || !model.InstitutionNameAr) {
+                alert(localizedStrings.requiredError);
+                return;
+            }
+
+            let token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '@Url.Action("Save", "EducationalInstitutions")',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: { "RequestVerificationToken": token },
+                data: JSON.stringify(model),
+                success: function (response) {
+                    if (response.success) {
+                        institutionModal.hide();
+                        table.ajax.reload(null, false);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert(localizedStrings.saveError);
+                }
+            });
+        }
+    </script>
+}

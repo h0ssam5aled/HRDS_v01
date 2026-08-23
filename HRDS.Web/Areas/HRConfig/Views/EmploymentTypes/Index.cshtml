@@ -1,0 +1,257 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+
+@{
+    ViewData["Title"] = Resource.EmploymentTypes;
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    <!-- Header Card -->
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-person-badge fs-3 lh-1 flex-shrink-0 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@Resource.EmploymentTypes</h4>
+                    <p class="text-muted mb-0 small">@Resource.EmploymentTypesDescription</p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary px-3 py-2" onclick="openAddModal()">
+                <i class="bi bi-plus-lg me-1"></i> @Resource.AddNewEmploymentType
+            </button>
+        </div>
+    </div>
+
+    <!-- Data Table Card -->
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="employmentTypesTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.EmploymentTypeCode</th>
+                            <th>@Resource.ArabicName</th>
+                            <th>@Resource.EnglishName</th>
+                            <th>@Resource.DefaultWorkingHours</th>
+                            <th>@Resource.IsOvertimeAllowed</th>
+                            <th>@Resource.IsLeaveEligible</th>
+                            <th>@Resource.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal الإضافة والتعديل -->
+<div class="modal fade" id="employmentTypeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content dark-modal">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalTitle">@Resource.AddNewEmploymentType</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="employmentTypeForm">
+                    <input type="hidden" id="employmentTypeId" value="0" />
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3 text-start">
+                            <label class="form-label text-white">@Resource.EmploymentTypeCode <span class="text-danger">*</span></label>
+                            <input type="text" id="employmentTypeCode" class="form-control" placeholder="e.g. FULL_TIME" required />
+                        </div>
+                        <div class="col-md-6 mb-3 text-start">
+                            <label class="form-label text-white">@Resource.DefaultWorkingHours</label>
+                            <input type="number" step="0.5" id="defaultWorkingHours" class="form-control" placeholder="8.0" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3 text-start">
+                            <label class="form-label text-white">@Resource.ArabicName <span class="text-danger">*</span></label>
+                            <input type="text" id="employmentTypeNameAr" class="form-control" required />
+                        </div>
+                        <div class="col-md-6 mb-3 text-start">
+                            <label class="form-label text-white">@Resource.EnglishName</label>
+                            <input type="text" id="employmentTypeNameEn" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.Description</label>
+                        <textarea id="description" class="form-control" rows="2"></textarea>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-6 text-start">
+                            <div class="form-check form-switch mt-2">
+                                <input class="form-check-input" type="checkbox" id="isOvertimeAllowed">
+                                <label class="form-check-input-label text-white ms-2" for="isOvertimeAllowed">@Resource.IsOvertimeAllowed</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-start">
+                            <div class="form-check form-switch mt-2">
+                                <input class="form-check-input" type="checkbox" id="isLeaveEligible">
+                                <label class="form-check-input-label text-white ms-2" for="isLeaveEligible">@Resource.IsLeaveEligible</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resource.Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveEmploymentType()">
+                    <i class="bi bi-save me-1"></i> @Resource.SaveData
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+        let employmentTypeModal;
+
+        // تحويل الموارد والنصوص إلى JSON صريح لمنع مشكلة الـ HTML Encoding
+        const localizedStrings = {
+            addTitle: @Html.Raw(Json.Serialize(Resource.AddNewEmploymentType)),
+            editTitle: @Html.Raw(Json.Serialize(Resource.EditEmploymentType)),
+            editBtn: @Html.Raw(Json.Serialize(Resource.EditEmploymentType)),
+            yes: @Html.Raw(Json.Serialize(Resource.Yes)),
+            no: @Html.Raw(Json.Serialize(Resource.No)),
+            hours: @Html.Raw(Json.Serialize(Resource.Hours)),
+            requiredError: @Html.Raw(Json.Serialize(Resource.RequiredFieldsErrorMessage)),
+            saveError: @Html.Raw(Json.Serialize(Resource.SaveErrorMessage))
+        };
+
+        $(document).ready(function () {
+            employmentTypeModal = new bootstrap.Modal(document.getElementById('employmentTypeModal'));
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            table = $('#employmentTypesTable').DataTable({
+                pagingType: 'simple',
+                ajax: {
+                    url: '@Url.Action("GetJson", "EmploymentTypes")',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'employmentTypeId', width: '5%' },
+                    {
+                        data: 'employmentTypeCode',
+                        render: function (data) {
+                            return `<span class="badge dark-badge-code font-monospace px-2 py-1">${data || ''}</span>`;
+                        }
+                    },
+                    { data: 'employmentTypeNameAr' },
+                    { data: 'employmentTypeNameEn' },
+                    {
+                        data: 'defaultWorkingHours',
+                        render: function (data) {
+                            if (!data) return '-';
+                            return `${data} ${localizedStrings.hours}`;
+                        }
+                    },
+                    {
+                        data: 'isOvertimeAllowed',
+                        render: function (data) {
+                            return data ? `<span class="badge neon-badge-warning"><i class="bi bi-clock me-1"></i>${localizedStrings.yes}</span>`
+                                        : `<span class="badge neon-badge-muted">${localizedStrings.no}</span>`;
+                        }
+                    },
+                    {
+                        data: 'isLeaveEligible',
+                        render: function (data) {
+                            return data ? `<span class="badge neon-badge-info">${localizedStrings.yes}</span>`
+                                        : `<span class="badge neon-badge-muted">${localizedStrings.no}</span>`;
+                        }
+                    },
+                    {
+                        data: 'employmentTypeId',
+                        render: function (data) {
+                            return `<button class="btn btn-sm btn-action-edit" onclick="editEmploymentType(${data})">
+                                        <i class="bi bi-pencil-square me-1"></i>${localizedStrings.editBtn}
+                                    </button>`;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        }
+
+        function openAddModal() {
+            $('#employmentTypeId').val(0);
+            $('#employmentTypeForm')[0].reset();
+            $('#modalTitle').html(localizedStrings.addTitle);
+            employmentTypeModal.show();
+        }
+
+        function editEmploymentType(id) {
+            $.get('@Url.Action("GetById", "EmploymentTypes")/' + id, function (data) {
+                if (data) {
+                    $('#employmentTypeId').val(data.employmentTypeId);
+                    $('#employmentTypeCode').val(data.employmentTypeCode);
+                    $('#employmentTypeNameAr').val(data.employmentTypeNameAr);
+                    $('#employmentTypeNameEn').val(data.employmentTypeNameEn);
+                    $('#description').val(data.description);
+                    $('#defaultWorkingHours').val(data.defaultWorkingHours);
+                    $('#isOvertimeAllowed').prop('checked', data.isOvertimeAllowed);
+                    $('#isLeaveEligible').prop('checked', data.isLeaveEligible);
+
+                    $('#modalTitle').html(localizedStrings.editTitle);
+                    employmentTypeModal.show();
+                }
+            });
+        }
+
+        function saveEmploymentType() {
+            let model = {
+                EmploymentTypeId: parseInt($('#employmentTypeId').val()) || 0,
+                EmploymentTypeCode: $('#employmentTypeCode').val(),
+                EmploymentTypeNameAr: $('#employmentTypeNameAr').val(),
+                EmploymentTypeNameEn: $('#employmentTypeNameEn').val(),
+                Description: $('#description').val(),
+                DefaultWorkingHours: $('#defaultWorkingHours').val() ? parseFloat($('#defaultWorkingHours').val()) : null,
+                IsOvertimeAllowed: $('#isOvertimeAllowed').is(':checked'),
+                IsLeaveEligible: $('#isLeaveEligible').is(':checked')
+            };
+
+            if (!model.EmploymentTypeCode || !model.EmploymentTypeNameAr) {
+                alert(localizedStrings.requiredError);
+                return;
+            }
+
+            let token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '@Url.Action("Save", "EmploymentTypes")',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: { "RequestVerificationToken": token },
+                data: JSON.stringify(model),
+                success: function (response) {
+                    if (response.success) {
+                        employmentTypeModal.hide();
+                        table.ajax.reload(null, false);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert(localizedStrings.saveError);
+                }
+            });
+        }
+    </script>
+}

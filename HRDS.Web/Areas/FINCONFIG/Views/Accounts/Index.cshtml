@@ -1,0 +1,336 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+
+@{
+    ViewData["Title"] = Resource.Accounts;
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+@Html.AntiForgeryToken()
+
+<style>
+    /* Neon Badges for Account Nature */
+    .neon-badge-debit {
+        color: #00ff88 !important;
+        background-color: rgba(0, 255, 136, 0.1) !important;
+        border: 1px solid rgba(0, 255, 136, 0.3);
+        box-shadow: 0 0 8px rgba(0, 255, 136, 0.3);
+        font-weight: 600;
+        padding: 0.35em 0.65em;
+    }
+
+    .neon-badge-credit {
+        color: #ff3366 !important;
+        background-color: rgba(255, 51, 102, 0.1) !important;
+        border: 1px solid rgba(255, 51, 102, 0.3);
+        box-shadow: 0 0 8px rgba(255, 51, 102, 0.3);
+        font-weight: 600;
+        padding: 0.35em 0.65em;
+    }
+</style>
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-diagram-2 fs-3 lh-1 flex-shrink-0 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@Resource.Accounts</h4>
+                    <p class="text-muted mb-0 small">@Resource.AccountsDescription</p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary px-3 py-2" onclick="openAddModal()">
+                <i class="bi bi-plus-lg me-1"></i> @Resource.AddNewAccount
+            </button>
+        </div>
+    </div>
+
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="accountsTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.AccountCode</th>
+                            <th>@Resource.ArabicName</th>
+                            <th>@Resource.EnglishName</th>
+                            <th>@Resource.AccountType</th>
+                            <th>@Resource.AccountNature</th>
+                            <th>@Resource.Level</th>
+                            <th>@Resource.Status</th>
+                            <th>@Resource.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="accountModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content dark-modal">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalTitle">@Resource.AddNewAccount</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="accountForm">
+                    <input type="hidden" id="accountId" value="0" />
+
+                    <div class="row mb-3 text-start">
+                        <div class="col-md-6">
+                            <label class="form-label text-white">@Resource.AccountCode <span class="text-danger">*</span></label>
+                            <input type="text" id="accountCode" class="form-control" placeholder="e.g. 10101" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-white">@Resource.ParentAccount</label>
+                            <select id="parentAccountId" class="form-select dark-select">
+                                <option value="">@Resource.SelectParentAccount</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3 text-start">
+                        <div class="col-md-6">
+                            <label class="form-label text-white">@Resource.ArabicName <span class="text-danger">*</span></label>
+                            <input type="text" id="accountNameAr" class="form-control" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-white">@Resource.EnglishName</label>
+                            <input type="text" id="accountNameEn" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3 text-start">
+                        <div class="col-md-6">
+                            <label class="form-label text-white">@Resource.AccountType <span class="text-danger">*</span></label>
+                            <select id="accountTypeId" class="form-select dark-select" required>
+                                <option value="">@Resource.SelectAccountType</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-white">@Resource.AccountNature <span class="text-danger">*</span></label>
+                            <select id="accountNature" class="form-select dark-select" required>
+                                <option value="Debit">@Resource.Debit</option>
+                                <option value="Credit">@Resource.Credit</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.Currency</label>
+                        <select id="currencyId" class="form-select dark-select">
+                            <option value="">@Resource.SelectCurrency</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.Description</label>
+                        <textarea id="description" class="form-control" rows="2"></textarea>
+                    </div>
+
+                    <div class="row text-start mb-2">
+                        <div class="col-md-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="isLeaf" checked>
+                                <label class="form-check-label text-white ms-2" for="isLeaf">@Resource.IsSubAccount</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="isActive" checked>
+                                <label class="form-check-label text-white ms-2" for="isActive">@Resource.IsActive</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resource.Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveAccount()">
+                    <i class="bi bi-save me-1"></i> @Resource.SaveData
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+        let accountModal;
+
+        const localizedStrings = {
+            addTitle: @Html.Raw(Json.Serialize(Resource.AddNewAccount)),
+            editTitle: @Html.Raw(Json.Serialize(Resource.EditAccount)),
+            editBtn: @Html.Raw(Json.Serialize(Resource.EditAccount)),
+            active: @Html.Raw(Json.Serialize(Resource.Active)),
+            inactive: @Html.Raw(Json.Serialize(Resource.Inactive)),
+            requiredError: @Html.Raw(Json.Serialize(Resource.RequiredFieldsErrorMessage)),
+            saveError: @Html.Raw(Json.Serialize(Resource.SaveErrorMessage))
+        };
+
+        $(document).ready(function () {
+            accountModal = new bootstrap.Modal(document.getElementById('accountModal'));
+            loadDropdowns();
+            loadDataTable();
+        });
+
+        function loadDropdowns() {
+            $.get('@Url.Action("GetAccountTypesDropdown", "Accounts")', function (data) {
+                let $select = $('#accountTypeId');
+                $select.find('option:gt(0)').remove();
+                $.each(data, function (i, item) {
+                    $select.append($('<option>', { value: item.id, text: item.text }));
+                });
+            });
+
+            $.get('@Url.Action("GetParentAccountsDropdown", "Accounts")', function (data) {
+                let $select = $('#parentAccountId');
+                $select.find('option:gt(0)').remove();
+                $.each(data, function (i, item) {
+                    $select.append($('<option>', { value: item.id, text: item.text }));
+                });
+            });
+
+            $.get('/FINCONFIG/CurrencyRates/GetCurrenciesDropdown', function (data) {
+                let $select = $('#currencyId');
+                $select.find('option:gt(0)').remove();
+                $.each(data, function (i, item) {
+                    $select.append($('<option>', { value: item.id, text: item.text }));
+                });
+            });
+        }
+
+        function loadDataTable() {
+            table = $('#accountsTable').DataTable({
+                pagingType: 'simple',
+                ajax: {
+                    url: '@Url.Action("GetJson", "Accounts")',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'accountId', width: '5%' },
+                    {
+                        data: 'accountCode',
+                        render: function (data) {
+                            return `<span class="badge dark-badge-code font-monospace px-2 py-1">${data || ''}</span>`;
+                        }
+                    },
+                    { data: 'accountNameAr' },
+                    { data: 'accountNameEn', render: data => data || '-' },
+                    { data: 'accountTypeName', render: data => data || '-' },
+                    {
+                        data: 'accountNature',
+                        render: function (data) {
+                            return data === 'Debit'
+                                ? '<span class="badge neon-badge-debit font-monospace">Debit</span>'
+                                : '<span class="badge neon-badge-credit font-monospace">Credit</span>';
+                        }
+                    },
+                    {
+                        data: 'accountLevel',
+                        render: function (data) {
+                            return `<span class="badge bg-secondary font-monospace">L${data}</span>`;
+                        }
+                    },
+                    {
+                        data: 'isActive',
+                        render: function (data) {
+                            return data ? `<span class="badge neon-badge-info">${localizedStrings.active}</span>`
+                                        : `<span class="badge neon-badge-muted">${localizedStrings.inactive}</span>`;
+                        }
+                    },
+                    {
+                        data: 'accountId',
+                        render: function (data) {
+                            return `<button class="btn btn-sm btn-action-edit" onclick="editAccount(${data})">
+                                        <i class="bi bi-pencil-square me-1"></i>${localizedStrings.editBtn}
+                                    </button>`;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        }
+
+        function openAddModal() {
+            $('#accountId').val(0);
+            $('#accountForm')[0].reset();
+            $('#isActive').prop('checked', true);
+            $('#isLeaf').prop('checked', true);
+            $('#modalTitle').html(localizedStrings.addTitle);
+            accountModal.show();
+        }
+
+        function editAccount(id) {
+            $.get('@Url.Action("GetById", "Accounts")/' + id, function (response) {
+                if (response && response.success) {
+                    let data = response.data;
+                    $('#accountId').val(data.accountId);
+                    $('#accountCode').val(data.accountCode);
+                    $('#parentAccountId').val(data.parentAccountId || '');
+                    $('#accountNameAr').val(data.accountNameAr);
+                    $('#accountNameEn').val(data.accountNameEn);
+                    $('#accountTypeId').val(data.accountTypeId);
+                    $('#accountNature').val(data.accountNature);
+                    $('#currencyId').val(data.currencyId || '');
+                    $('#description').val(data.description);
+                    $('#isLeaf').prop('checked', data.isLeaf);
+                    $('#isActive').prop('checked', data.isActive);
+
+                    $('#modalTitle').html(localizedStrings.editTitle);
+                    accountModal.show();
+                }
+            });
+        }
+
+        function saveAccount() {
+            let model = {
+                AccountId: parseInt($('#accountId').val()) || 0,
+                AccountCode: $('#accountCode').val(),
+                ParentAccountId: parseInt($('#parentAccountId').val()) || null,
+                AccountNameAr: $('#accountNameAr').val(),
+                AccountNameEn: $('#accountNameEn').val(),
+                AccountTypeId: parseInt($('#accountTypeId').val()) || 0,
+                AccountNature: $('#accountNature').val(),
+                CurrencyId: parseInt($('#currencyId').val()) || null,
+                Description: $('#description').val(),
+                IsLeaf: $('#isLeaf').is(':checked'),
+                IsActive: $('#isActive').is(':checked')
+            };
+
+            if (!model.AccountCode || !model.AccountNameAr || !model.AccountTypeId || !model.AccountNature) {
+                alert(localizedStrings.requiredError);
+                return;
+            }
+
+            let token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '@Url.Action("Save", "Accounts")',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: { "RequestVerificationToken": token },
+                data: JSON.stringify(model),
+                success: function (response) {
+                    if (response.success) {
+                        accountModal.hide();
+                        table.ajax.reload(null, false);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert(localizedStrings.saveError);
+                }
+            });
+        }
+    </script>
+}

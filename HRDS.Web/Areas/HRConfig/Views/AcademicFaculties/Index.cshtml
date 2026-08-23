@@ -1,0 +1,209 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+
+@{
+    ViewData["Title"] = Resource.AcademicFaculties;
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    <!-- Header Card -->
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-building-fill fs-3 lh-1 flex-shrink-0 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@Resource.AcademicFaculties</h4>
+                    <p class="text-muted mb-0 small">@Resource.AcademicFacultiesDescription</p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary px-3 py-2" onclick="openAddModal()">
+                <i class="bi bi-plus-lg me-1"></i> @Resource.AddNewAcademicFaculty
+            </button>
+        </div>
+    </div>
+
+    <!-- Data Table Card -->
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="facultiesTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.FacultyCode</th>
+                            <th>@Resource.ArabicName</th>
+                            <th>@Resource.EnglishName</th>
+                            <th>@Resource.EducationalInstitution</th>
+                            <th>@Resource.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal الإضافة والتعديل الداكن -->
+<div class="modal fade" id="facultyModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content dark-modal">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalTitle">@Resource.AddNewAcademicFaculty</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="facultyForm">
+                    <input type="hidden" id="facultyId" value="0" />
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.EducationalInstitution <span class="text-danger">*</span></label>
+                        <select id="institutionId" class="form-select" asp-items="ViewBag.Institutions" required>
+                            <option value="">-- @Resource.SelectEducationalInstitution --</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.FacultyCode <span class="text-danger">*</span></label>
+                        <input type="text" id="facultyCode" class="form-control" placeholder="e.g. ENG-01" required />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.ArabicName <span class="text-danger">*</span></label>
+                        <input type="text" id="facultyNameAr" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.EnglishName</label>
+                        <input type="text" id="facultyNameEn" class="form-control" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resource.Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveFaculty()">
+                    <i class="bi bi-save me-1"></i> @Resource.SaveData
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+        let facultyModal;
+
+        // تحويل الموارد والنصوص إلى JSON صريح لمنع مشكلة الـ HTML Encoding
+        const localizedStrings = {
+            addTitle: @Html.Raw(Json.Serialize(Resource.AddNewAcademicFaculty)),
+            editTitle: @Html.Raw(Json.Serialize(Resource.EditAcademicFaculty)),
+            editBtn: @Html.Raw(Json.Serialize(Resource.EditAcademicFaculty)),
+            requiredError: @Html.Raw(Json.Serialize(Resource.RequiredFieldsErrorMessage)),
+            saveError: @Html.Raw(Json.Serialize(Resource.SaveErrorMessage))
+        };
+
+        $(document).ready(function () {
+            facultyModal = new bootstrap.Modal(document.getElementById('facultyModal'));
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            table = $('#facultiesTable').DataTable({
+                pagingType: 'simple',
+                ajax: {
+                    url: '@Url.Action("GetJson", "AcademicFaculties")',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'facultyId', width: '5%' },
+                    {
+                        data: 'facultyCode',
+                        render: function (data) {
+                            return `<span class="badge dark-badge-code font-monospace px-2 py-1">${data || ''}</span>`;
+                        }
+                    },
+                    { data: 'facultyNameAr' },
+                    { data: 'facultyNameEn' },
+                    {
+                        data: '@(isRtl ? "institutionNameAr" : "institutionNameEn")',
+                        defaultContent: ''
+                    },
+                    {
+                        data: 'facultyId',
+                        render: function (data) {
+                            return `<button class="btn btn-sm btn-outline-info" onclick="editFaculty(${data})">
+                                        <i class="bi bi-pencil-square me-1"></i>${localizedStrings.editBtn}
+                                    </button>`;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        }
+
+        function openAddModal() {
+            $('#facultyId').val(0);
+            $('#facultyForm')[0].reset();
+            $('#modalTitle').html(localizedStrings.addTitle);
+            facultyModal.show();
+        }
+
+        function editFaculty(id) {
+            $.get('@Url.Action("GetById", "AcademicFaculties")/' + id, function (data) {
+                if (data) {
+                    $('#facultyId').val(data.facultyId);
+                    $('#institutionId').val(data.institutionId);
+                    $('#facultyCode').val(data.facultyCode);
+                    $('#facultyNameAr').val(data.facultyNameAr);
+                    $('#facultyNameEn').val(data.facultyNameEn);
+
+                    $('#modalTitle').html(localizedStrings.editTitle);
+                    facultyModal.show();
+                }
+            });
+        }
+
+        function saveFaculty() {
+            let model = {
+                FacultyId: parseInt($('#facultyId').val()) || 0,
+                InstitutionId: parseInt($('#institutionId').val()),
+                FacultyCode: $('#facultyCode').val(),
+                FacultyNameAr: $('#facultyNameAr').val(),
+                FacultyNameEn: $('#facultyNameEn').val()
+            };
+
+            if (!model.InstitutionId || !model.FacultyCode || !model.FacultyNameAr) {
+                alert(localizedStrings.requiredError);
+                return;
+            }
+
+            let token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '@Url.Action("Save", "AcademicFaculties")',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: { "RequestVerificationToken": token },
+                data: JSON.stringify(model),
+                success: function (response) {
+                    if (response.success) {
+                        facultyModal.hide();
+                        table.ajax.reload(null, false);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert(localizedStrings.saveError);
+                }
+            });
+        }
+    </script>
+}

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace HRDS.Web.Areas.CoreData.Controllers
 {
     [Area("CoreData")]
-    [HasModuleAccess("Core")]
+    [HasModuleAccess("CoreData")]
     public class CompaniesController : Controller
     {
         private readonly HRDSContext _context;

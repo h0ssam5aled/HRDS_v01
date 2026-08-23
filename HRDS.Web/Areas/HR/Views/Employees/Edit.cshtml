@@ -1,0 +1,1043 @@
+﻿@model HRDS.Web.Areas.HR.ViewModels.EmployeeViewModel
+
+@{
+    var isArabic = System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar";
+    ViewData["Title"] = isArabic ? "تعديل بيانات الموظف" : "Edit Employee";
+    var currentDir = isArabic ? "rtl" : "ltr";
+}
+
+<style>
+    /* تنسيق الـ Tabs للثيم الداكن */
+    .dark-card .nav-tabs {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+        .dark-card .nav-tabs .nav-link {
+            background-color: transparent !important;
+            border: none !important;
+            color: #94a3b8 !important;
+            padding: 0.75rem 1.25rem;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+        }
+
+            .dark-card .nav-tabs .nav-link:hover {
+                color: #38bdf8 !important;
+            }
+
+            .dark-card .nav-tabs .nav-link.active {
+                background-color: transparent !important;
+                color: #38bdf8 !important;
+                border: none !important;
+                border-bottom: 3px solid #38bdf8 !important;
+                box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
+            }
+</style>
+
+<div class="container-fluid py-3" dir="@currentDir">
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        
+        <!-- Primary Key Hidden Field -->
+        <input type="hidden" asp-for="EmployeeId" />
+
+        <!-- Header Bar -->
+        <div class="card dark-card shadow-sm mb-4">
+            <div class="card-body d-flex align-items-center justify-content-between py-3">
+                <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-pencil-square fs-3 text-warning"></i>
+                    <div class="d-flex flex-column align-items-start text-start">
+                        <h4 class="mb-0 fw-bold">@(isArabic ? "تعديل بيانات الموظف" : "Edit Employee Details")</h4>
+                        <p class="text-muted mb-0 small">@(isArabic ? "تحديث وتعديل كافة تفاصيل الموظف المسجلة" : "Update registered employee details")</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2">
+                    <a asp-action="Index" class="btn btn-dark-cancel px-3">
+                        <i class="bi bi-arrow-right me-1"></i> @(isArabic ? "إلغاء" : "Cancel")
+                    </a>
+                    <button type="submit" class="btn btn-warning px-3 fw-bold">
+                        <i class="bi bi-check-lg me-1"></i> @(isArabic ? "حفظ التعديل" : "Save Changes")
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Card with Nav Tabs -->
+        <div class="card dark-card shadow-sm">
+            <ul class="nav nav-tabs card-header-tabs" id="employeeTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal" type="button" role="tab">
+                        <i class="bi bi-person me-1"></i> @(isArabic ? "البيانات الأساسية والشخصية" : "Basic & Personal Info")
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab">
+                        <i class="bi bi-telephone me-1"></i> @(isArabic ? "بيانات الاتصال والعنوان" : "Contact & Address Info")
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="emergency-tab" data-bs-toggle="tab" data-bs-target="#emergency" type="button" role="tab">
+                        <i class="bi bi-shield-exclamation me-1"></i> @(isArabic ? "جهة اتصال الطوارئ" : "Emergency Contact")
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="employment-tab" data-bs-toggle="tab" data-bs-target="#employment" type="button" role="tab">
+                        <i class="bi bi-briefcase me-1"></i> @(isArabic ? "البيانات الوظيفية" : "Employment History")
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="position-tab" data-bs-toggle="tab" data-bs-target="#position" type="button" role="tab">
+                        <i class="bi bi-diagram-3 me-1"></i> @(isArabic ? "المنصب الوظيفي" : "Employee Position")
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="qualification-tab" data-bs-toggle="tab" data-bs-target="#qualification" type="button" role="tab">
+                        <i class="bi bi-mortarboard me-1"></i> @(isArabic ? "المؤهلات العلمية" : "Qualifications")
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="bank-tab" data-bs-toggle="tab" data-bs-target="#bank" type="button" role="tab">
+                        <i class="bi bi-bank me-1"></i> @(isArabic ? "الحساب البنكي" : "Bank Account")
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule" type="button" role="tab">
+                        <i class="bi bi-calendar-week me-1"></i> @(isArabic ? "مواعيد العمل والوردية" : "Work Schedule")
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="document-tab" data-bs-toggle="tab" data-bs-target="#document" type="button" role="tab">
+                        <i class="bi bi-file-earmark-text me-1"></i> @(isArabic ? "المستندات والأوراق" : "Documents")
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="probation-tab" data-bs-toggle="tab" data-bs-target="#probation" type="button" role="tab">
+                        <i class="bi bi-hourglass-split me-1"></i> @(isArabic ? "فترة التجربة" : "Probation Period")
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="salary-tab" data-bs-toggle="tab" data-bs-target="#salary" type="button" role="tab">
+                        <i class="bi bi-cash-stack me-1"></i> @(isArabic ? "تفاصيل الراتب" : "Salary Details")
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="allowance-deduction-tab" data-bs-toggle="tab" data-bs-target="#allowance-deduction" type="button" role="tab">
+                        <i class="bi bi-wallet2 me-1"></i> @(isArabic ? "البدلات والاستقطاعات" : "Allowances & Deductions")
+                    </button>
+                </li>
+            </ul>
+
+            <div class="card-body p-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="tab-content" id="employeeTabsContent">
+
+                    <!-- TAB 1: البيانات الأساسية والشخصية -->
+                    <div class="tab-pane fade show active" id="personal" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-md-6 text-start">
+                                <label asp-for="EmployeeCode" class="form-label form-label-dark">@(isArabic ? "كود الموظف" : "Employee Code")</label>
+                                <input asp-for="EmployeeCode" class="form-control form-control-dark font-monospace text-info fw-bold" readonly />
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="EmployeeOldCode" class="form-label form-label-dark">@(isArabic ? "الكود القديم" : "Old Code")</label>
+                                <input asp-for="EmployeeOldCode" class="form-control form-control-dark" />
+                            </div>
+
+                            <div class="col-md-4 text-start">
+                                <label asp-for="FirstNameAr" class="form-label form-label-dark">@(isArabic ? "الاسم الأول (عربي)" : "First Name (Arabic)") <span class="text-danger">*</span></label>
+                                <input asp-for="FirstNameAr" class="form-control form-control-dark" required />
+                                <span asp-validation-for="FirstNameAr" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-4 text-start">
+                                <label asp-for="MiddleNameAr" class="form-label form-label-dark">@(isArabic ? "الاسم الأوسط (عربي)" : "Middle Name (Arabic)")</label>
+                                <input asp-for="MiddleNameAr" class="form-control form-control-dark" />
+                            </div>
+                            <div class="col-md-4 text-start">
+                                <label asp-for="LastNameAr" class="form-label form-label-dark">@(isArabic ? "اسم العائلة (عربي)" : "Last Name (Arabic)") <span class="text-danger">*</span></label>
+                                <input asp-for="LastNameAr" class="form-control form-control-dark" required />
+                                <span asp-validation-for="LastNameAr" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-4 text-start">
+                                <label asp-for="FirstNameEn" class="form-label form-label-dark">@(isArabic ? "الاسم الأول (إنجليزي)" : "First Name (English)")</label>
+                                <input asp-for="FirstNameEn" class="form-control form-control-dark" />
+                            </div>
+                            <div class="col-md-4 text-start">
+                                <label asp-for="MiddleNameEn" class="form-label form-label-dark">@(isArabic ? "الاسم الأوسط (إنجليزي)" : "Middle Name (English)")</label>
+                                <input asp-for="MiddleNameEn" class="form-control form-control-dark" />
+                            </div>
+                            <div class="col-md-4 text-start">
+                                <label asp-for="LastNameEn" class="form-label form-label-dark">@(isArabic ? "اسم العائلة (إنجليزي)" : "Last Name (English)")</label>
+                                <input asp-for="LastNameEn" class="form-control form-control-dark" />
+                            </div>
+
+                            <div class="col-md-4 text-start">
+                                <label asp-for="GenderId" class="form-label form-label-dark">@(isArabic ? "النوع" : "Gender")</label>
+                                <select asp-for="GenderId" class="form-select form-select-dark" asp-items="ViewBag.Genders">
+                                    <option value="">@(isArabic ? "-- اختر النوع --" : "-- Select Gender --")</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 text-start">
+                                <label asp-for="ReligionId" class="form-label form-label-dark">@(isArabic ? "الديانة" : "Religion")</label>
+                                <select asp-for="ReligionId" class="form-select form-select-dark" asp-items="ViewBag.Religions">
+                                    <option value="">@(isArabic ? "-- اختر الديانة --" : "-- Select Religion --")</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 text-start">
+                                <label asp-for="MaritalStatusId" class="form-label form-label-dark">@(isArabic ? "الحالة الاجتماعية" : "Marital Status")</label>
+                                <select asp-for="MaritalStatusId" class="form-select form-select-dark" asp-items="ViewBag.MaritalStatuses">
+                                    <option value="">@(isArabic ? "-- اختر الحالة --" : "-- Select Status --")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 text-start">
+                                <label asp-for="NationalityId" class="form-label form-label-dark">@(isArabic ? "الجنسية" : "Nationality")</label>
+                                <select asp-for="NationalityId" class="form-select form-select-dark" asp-items="ViewBag.Nationalities">
+                                    <option value="">@(isArabic ? "-- اختر الجنسية --" : "-- Select Nationality --")</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 text-start">
+                                <label asp-for="MilitaryStatusId" class="form-label form-label-dark">@(isArabic ? "الموقف من التجنيد" : "Military Status")</label>
+                                <select asp-for="MilitaryStatusId" class="form-select form-select-dark" asp-items="ViewBag.MilitaryStatuses">
+                                    <option value="">@(isArabic ? "-- اختر الموقف --" : "-- Select Military Status --")</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 text-start">
+                                <label asp-for="DateOfBirth" class="form-label form-label-dark">@(isArabic ? "تاريخ الميلاد" : "Date of Birth")</label>
+                                <input asp-for="DateOfBirth" type="date" class="form-control form-control-dark" />
+                            </div>
+
+                            <div class="col-md-4 text-start">
+                                <label asp-for="NationalIdNo" class="form-label form-label-dark">@(isArabic ? "الرقم القومي" : "National ID")</label>
+                                <input asp-for="NationalIdNo" class="form-control form-control-dark" maxlength="14" />
+                            </div>
+                            <div class="col-md-4 text-start">
+                                <label asp-for="PassportNumber" class="form-label form-label-dark">@(isArabic ? "رقم الجواز" : "Passport Number")</label>
+                                <input asp-for="PassportNumber" class="form-control form-control-dark" />
+                            </div>
+                            <div class="col-md-4 text-start">
+                                <label asp-for="DriverLicenseNumber" class="form-label form-label-dark">@(isArabic ? "رقم رخصة القيادة" : "Driver License Number")</label>
+                                <input asp-for="DriverLicenseNumber" class="form-control form-control-dark" />
+                            </div>
+
+                            <div class="col-md-12 text-start my-2">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" asp-for="IsActive">
+                                    <label class="form-check-label text-white ms-2" asp-for="IsActive">@(isArabic ? "نشط" : "Active")</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: بيانات الاتصال والعنوان -->
+                    <div class="tab-pane fade" id="contact" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-md-4 text-start">
+                                <label asp-for="CountryId" class="form-label form-label-dark">@(isArabic ? "الدولة" : "Country")</label>
+                                <select asp-for="CountryId" id="CountryId" class="form-select form-select-dark" asp-items="ViewBag.Countries">
+                                    <option value="">@(isArabic ? "-- اختر الدولة --" : "-- Select Country --")</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 text-start">
+                                <label asp-for="GovernorateId" class="form-label form-label-dark">@(isArabic ? "المحافظة" : "Governorate")</label>
+                                <select asp-for="GovernorateId" id="GovernorateId" class="form-select form-select-dark" asp-items="ViewBag.Governorates">
+                                    <option value="">@(isArabic ? "-- اختر المحافظة --" : "-- Select Governorate --")</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 text-start">
+                                <label asp-for="CityId" class="form-label form-label-dark">@(isArabic ? "المدينة" : "City")</label>
+                                <select asp-for="CityId" id="CityId" class="form-select form-select-dark" asp-items="ViewBag.Cities">
+                                    <option value="">@(isArabic ? "-- اختر المدينة --" : "-- Select City --")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12 text-start">
+                                <label asp-for="EmployeeAddress" class="form-label form-label-dark">@(isArabic ? "العنوان بالتفصيل" : "Address Detail")</label>
+                                <input asp-for="EmployeeAddress" class="form-control form-control-dark" />
+                            </div>
+
+                            <div class="col-md-12 text-start">
+                                <label asp-for="Email" class="form-label form-label-dark">@(isArabic ? "البريد الإلكتروني" : "Email")</label>
+                                <input asp-for="Email" type="email" class="form-control form-control-dark" />
+                                <span asp-validation-for="Email" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6 text-start">
+                                <label asp-for="FirstMobileNo" class="form-label form-label-dark">@(isArabic ? "الموبايل الأول" : "First Mobile No")</label>
+                                <input asp-for="FirstMobileNo" class="form-control form-control-dark" />
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="SecondMobileNo" class="form-label form-label-dark">@(isArabic ? "الموبايل الثاني" : "Second Mobile No")</label>
+                                <input asp-for="SecondMobileNo" class="form-control form-control-dark" />
+                            </div>
+
+                            <div class="col-md-6 text-start">
+                                <label asp-for="FirstPhoneNo" class="form-label form-label-dark">@(isArabic ? "التليفون الأول" : "First Phone No")</label>
+                                <input asp-for="FirstPhoneNo" class="form-control form-control-dark" />
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="SecondPhoneNo" class="form-label form-label-dark">@(isArabic ? "التليفون الثاني" : "Second Phone No")</label>
+                                <input asp-for="SecondPhoneNo" class="form-control form-control-dark" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: جهات الاتصال للطوارئ -->
+                    <div class="tab-pane fade" id="emergency" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-md-6 text-start">
+                                <label asp-for="ContactName" class="form-label form-label-dark">@(isArabic ? "اسم جهة الاتصال" : "Contact Name")</label>
+                                <input asp-for="ContactName" class="form-control form-control-dark" />
+                                <span asp-validation-for="ContactName" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="Relationship" class="form-label form-label-dark">@(isArabic ? "صلة القرابة" : "Relationship")</label>
+                                <input asp-for="Relationship" class="form-control form-control-dark" />
+                                <span asp-validation-for="Relationship" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6 text-start">
+                                <label asp-for="EmergencyMobileNumber" class="form-label form-label-dark">@(isArabic ? "رقم الموبايل" : "Mobile Number")</label>
+                                <input asp-for="EmergencyMobileNumber" class="form-control form-control-dark" />
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="EmergencyAlternativeMobileNo" class="form-label form-label-dark">@(isArabic ? "موبايل بديل" : "Alt Mobile Number")</label>
+                                <input asp-for="EmergencyAlternativeMobileNo" class="form-control form-control-dark" />
+                            </div>
+
+                            <div class="col-md-6 text-start">
+                                <label asp-for="EmergencyPhoneNumber" class="form-label form-label-dark">@(isArabic ? "رقم الهاتف (أرضي)" : "Phone Number")</label>
+                                <input asp-for="EmergencyPhoneNumber" class="form-control form-control-dark" />
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="EmergencyAlternativePhone" class="form-label form-label-dark">@(isArabic ? "هاتف بديل" : "Alt Phone Number")</label>
+                                <input asp-for="EmergencyAlternativePhone" class="form-control form-control-dark" />
+                            </div>
+
+                            <div class="col-md-12 text-start">
+                                <div class="form-check form-switch mt-2">
+                                    <input class="form-check-input" type="checkbox" asp-for="IsPrimaryContact" id="IsPrimaryContact">
+                                    <label class="form-check-label form-label-dark ms-2" for="IsPrimaryContact">
+                                        @(isArabic ? "جهة الاتصال الرئيسية" : "Is Primary Contact")
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 text-start">
+                                <label asp-for="EmergencyNotes" class="form-label form-label-dark">@(isArabic ? "ملاحظات" : "Notes")</label>
+                                <textarea asp-for="EmergencyNotes" class="form-control form-control-dark" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 4: البيانات الوظيفية -->
+                    <div class="tab-pane fade" id="employment" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-md-6 text-start">
+                                <label asp-for="HireDate" class="form-label form-label-dark">@(isArabic ? "تاريخ التعيين" : "Hire Date")</label>
+                                <input asp-for="HireDate" type="date" class="form-control form-control-dark" />
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="EmploymentTypeId" class="form-label form-label-dark">@(isArabic ? "نوع التوظيف" : "Employment Type")</label>
+                                <select asp-for="EmploymentTypeId" class="form-select form-select-dark" asp-items="ViewBag.EmploymentTypes">
+                                    <option value="">@(isArabic ? "-- اختر نوع التوظيف --" : "-- Select Employment Type --")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 text-start">
+                                <label asp-for="DepartmentId" class="form-label form-label-dark">@(isArabic ? "الإدارة" : "Department")</label>
+                                <select asp-for="DepartmentId" class="form-select form-select-dark" asp-items="ViewBag.Departments">
+                                    <option value="">@(isArabic ? "-- اختر الإدارة --" : "-- Select Department --")</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="JobTitleId" class="form-label form-label-dark">@(isArabic ? "المسمى الوظيفي" : "Job Title")</label>
+                                <select asp-for="JobTitleId" class="form-select form-select-dark" asp-items="ViewBag.JobTitles">
+                                    <option value="">@(isArabic ? "-- اختر المسمى الوظيفي --" : "-- Select Job Title --")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 text-start">
+                                <label asp-for="JobLevelId" class="form-label form-label-dark">@(isArabic ? "المستوى الوظيفي" : "Job Level")</label>
+                                <select asp-for="JobLevelId" class="form-select form-select-dark" asp-items="ViewBag.JobLevels">
+                                    <option value="">@(isArabic ? "-- اختر المستوى الوظيفي --" : "-- Select Job Level --")</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="EmployeeStatusId" class="form-label form-label-dark">@(isArabic ? "حالة الموظف" : "Employee Status")</label>
+                                <select asp-for="EmployeeStatusId" class="form-select form-select-dark" asp-items="ViewBag.EmployeeStatuses">
+                                    <option value="">@(isArabic ? "-- اختر الحالة --" : "-- Select Status --")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12 text-start">
+                                <label asp-for="DirectManagerId" class="form-label form-label-dark">@(isArabic ? "المدير المباشر" : "Direct Manager")</label>
+                                <select asp-for="DirectManagerId" class="form-select form-select-dark" asp-items="ViewBag.DirectManagers">
+                                    <option value="">@(isArabic ? "-- اختر المدير المباشر --" : "-- Select Direct Manager --")</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 5: المنصب الوظيفي -->
+                    <div class="tab-pane fade" id="position" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-md-6 text-start">
+                                <label asp-for="PositionId" class="form-label form-label-dark">@(isArabic ? "المنصب الوظيفي" : "Position")</label>
+                                <select asp-for="PositionId" class="form-select form-select-dark" asp-items="ViewBag.Positions">
+                                    <option value="">@(isArabic ? "-- اختر المنصب --" : "-- Select Position --")</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="AssignmentReasonId" class="form-label form-label-dark">@(isArabic ? "سبب التكليف / التكليف" : "Assignment Reason")</label>
+                                <select asp-for="AssignmentReasonId" class="form-select form-select-dark" asp-items="ViewBag.AssignmentReasons">
+                                    <option value="">@(isArabic ? "-- اختر سبب التكليف --" : "-- Select Assignment Reason --")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 text-start">
+                                <label asp-for="PositionFromDate" class="form-label form-label-dark">@(isArabic ? "من تاريخ" : "From Date")</label>
+                                <input asp-for="PositionFromDate" type="date" class="form-control form-control-dark" />
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="PositionToDate" class="form-label form-label-dark">@(isArabic ? "إلى تاريخ" : "To Date")</label>
+                                <input asp-for="PositionToDate" type="date" class="form-control form-control-dark" />
+                            </div>
+
+                            <div class="col-md-12 text-start">
+                                <div class="form-check form-switch mt-2">
+                                    <input class="form-check-input" type="checkbox" asp-for="PrimaryPosition" id="PrimaryPosition">
+                                    <label class="form-check-label form-label-dark ms-2" for="PrimaryPosition">
+                                        @(isArabic ? "المنصب الرئيسي" : "Primary Position")
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 6: المؤهلات العلمية -->
+                    <div class="tab-pane fade" id="qualification" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-md-6 text-start">
+                                <label asp-for="QualificationId" class="form-label form-label-dark">@(isArabic ? "المؤهل العلمي" : "Qualification")</label>
+                                <select asp-for="QualificationId" class="form-select form-select-dark" asp-items="ViewBag.Qualifications">
+                                    <option value="">@(isArabic ? "-- اختر المؤهل العلمي --" : "-- Select Qualification --")</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="EducationalInstitutionId" class="form-label form-label-dark">@(isArabic ? "الجهة التعليمية / الجامعة" : "Institution / University")</label>
+                                <select asp-for="EducationalInstitutionId" class="form-select form-select-dark" asp-items="ViewBag.EducationalInstitutions">
+                                    <option value="">@(isArabic ? "-- اختر الجامعة / الجهة --" : "-- Select Institution --")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 text-start">
+                                <label asp-for="FacultyId" class="form-label form-label-dark">@(isArabic ? "الكلية" : "Faculty")</label>
+                                <select asp-for="FacultyId" class="form-select form-select-dark" asp-items="ViewBag.Faculties">
+                                    <option value="">@(isArabic ? "-- اختر الكلية --" : "-- Select Faculty --")</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="MajorId" class="form-label form-label-dark">@(isArabic ? "التخصص" : "Major")</label>
+                                <select asp-for="MajorId" class="form-select form-select-dark" asp-items="ViewBag.Majors">
+                                    <option value="">@(isArabic ? "-- اختر التخصص --" : "-- Select Major --")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 text-start">
+                                <label asp-for="GraduationYear" class="form-label form-label-dark">@(isArabic ? "سنة التخرج" : "Graduation Year")</label>
+                                <input asp-for="GraduationYear" type="number" min="1950" max="2100" class="form-control form-control-dark" />
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="GradeOrGpaId" class="form-label form-label-dark">@(isArabic ? "التقدير / التقدير العام" : "Grade / GPA")</label>
+                                <select asp-for="GradeOrGpaId" class="form-select form-select-dark" asp-items="ViewBag.EducationGrades">
+                                    <option value="">@(isArabic ? "-- اختر التقدير --" : "-- Select Grade --")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12 text-start">
+                                <label asp-for="QualificationNotes" class="form-label form-label-dark">@(isArabic ? "ملاحظات" : "Notes")</label>
+                                <textarea asp-for="QualificationNotes" class="form-control form-control-dark" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 7: الحساب البنكي -->
+                    <div class="tab-pane fade" id="bank" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-md-6 text-start">
+                                <label asp-for="BankId" class="form-label form-label-dark">@(isArabic ? "البنك" : "Bank")</label>
+                                <select asp-for="BankId" class="form-select form-select-dark" asp-items="ViewBag.Banks">
+                                    <option value="">@(isArabic ? "-- اختر البنك --" : "-- Select Bank --")</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="BankBranchId" class="form-label form-label-dark">@(isArabic ? "الفرع" : "Branch")</label>
+                                <select asp-for="BankBranchId" class="form-select form-select-dark" asp-items="ViewBag.BankBranches">
+                                    <option value="">@(isArabic ? "-- اختر الفرع --" : "-- Select Branch --")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 text-start">
+                                <label asp-for="AccountNumber" class="form-label form-label-dark">@(isArabic ? "رقم الحساب" : "Account Number")</label>
+                                <input asp-for="AccountNumber" class="form-control form-control-dark font-monospace" />
+                                <span asp-validation-for="AccountNumber" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="EmployeeBankAccountTypeId" class="form-label form-label-dark">@(isArabic ? "نوع الحساب" : "Account Type")</label>
+                                <select asp-for="EmployeeBankAccountTypeId" class="form-select form-select-dark" asp-items="ViewBag.BankAccountTypes">
+                                    <option value="">@(isArabic ? "-- اختر نوع الحساب --" : "-- Select Account Type --")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 text-start">
+                                <label asp-for="Iban" class="form-label form-label-dark">@(isArabic ? "رقم الآيبان (IBAN)" : "IBAN")</label>
+                                <input asp-for="Iban" class="form-control form-control-dark font-monospace" />
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="CurrencyId" class="form-label form-label-dark">@(isArabic ? "العملة" : "Currency")</label>
+                                <select asp-for="CurrencyId" class="form-select form-select-dark" asp-items="ViewBag.Currencies">
+                                    <option value="">@(isArabic ? "-- اختر العملة --" : "-- Select Currency --")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12 text-start">
+                                <div class="form-check form-switch mt-2">
+                                    <input class="form-check-input" type="checkbox" asp-for="IsPrimaryBankAccount" id="IsPrimaryBankAccount">
+                                    <label class="form-check-label form-label-dark ms-2" for="IsPrimaryBankAccount">
+                                        @(isArabic ? "الحساب البنكي الرئيسي تحول عليه المرتبات" : "Primary Bank Account for Payroll")
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 8: مواعيد العمل والوردية -->
+                    <div class="tab-pane fade" id="schedule" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-md-4 text-start">
+                                <label asp-for="ScheduleType" class="form-label form-label-dark">@(isArabic ? "نوع الجدول" : "Schedule Type")</label>
+                                <select asp-for="ScheduleType" class="form-select form-select-dark">
+                                    <option value="1">@(isArabic ? "وردية ثابتة (Fixed Shift)" : "Fixed Shift")</option>
+                                    <option value="2">@(isArabic ? "نمط / وردية متغيره (Pattern / Rotation)" : "Shift Pattern")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 text-start">
+                                <label asp-for="ShiftId" class="form-label form-label-dark">@(isArabic ? "الوردية" : "Shift")</label>
+                                <select asp-for="ShiftId" class="form-select form-select-dark" asp-items="ViewBag.Shifts">
+                                    <option value="">@(isArabic ? "-- اختر الوردية --" : "-- Select Shift --")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 text-start">
+                                <label asp-for="ShiftPatternId" class="form-label form-label-dark">@(isArabic ? "نمط الوردية (Pattern)" : "Shift Pattern")</label>
+                                <select asp-for="ShiftPatternId" class="form-select form-select-dark" asp-items="ViewBag.ShiftPatterns">
+                                    <option value="">@(isArabic ? "-- اختر النمط --" : "-- Select Pattern --")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 text-start">
+                                <label asp-for="ScheduleEffectiveFrom" class="form-label form-label-dark">@(isArabic ? "تاريخ السريان من" : "Effective From")</label>
+                                <input asp-for="ScheduleEffectiveFrom" type="date" class="form-control form-control-dark" />
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="ScheduleEffectiveTo" class="form-label form-label-dark">@(isArabic ? "تاريخ السريان إلى" : "Effective To")</label>
+                                <input asp-for="ScheduleEffectiveTo" type="date" class="form-control form-control-dark" />
+                            </div>
+
+                            <div class="col-md-4 text-start">
+                                <label asp-for="SchedulePriority" class="form-label form-label-dark">@(isArabic ? "الأولوية" : "Priority")</label>
+                                <input asp-for="SchedulePriority" type="number" min="1" max="255" class="form-control form-control-dark" />
+                            </div>
+                            <div class="col-md-8 text-start">
+                                <label asp-for="ScheduleRemarks" class="form-label form-label-dark">@(isArabic ? "ملاحظات" : "Remarks")</label>
+                                <input asp-for="ScheduleRemarks" class="form-control form-control-dark" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 9: المستندات والأوراق الثبوتية -->
+                    <div class="tab-pane fade" id="document" role="tabpanel">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="mb-0 text-light">@(isArabic ? "قائمة المستندات المرفقة" : "Attached Documents List")</h6>
+                            <button type="button" class="btn btn-outline-success btn-sm" onclick="addDocumentRow()">
+                                <i class="bi bi-plus-lg me-1"></i> @(isArabic ? "إضافة مستند آخر" : "Add Another Document")
+                            </button>
+                        </div>
+
+                        <div id="documents-container">
+                            @if (Model.Documents != null && Model.Documents.Any())
+                            {
+                                for (int i = 0; i < Model.Documents.Count; i++)
+                                {
+                                    <div class="card bg-dark border-secondary mb-3 document-item" data-index="@i">
+                                        <div class="card-body">
+                                            <input type="hidden" name="Documents[@i].DocumentId" value="@Model.Documents[i].DocumentId" />
+                                            <input type="hidden" name="Documents[@i].ExistingFilePath" value="@Model.Documents[i].ExistingFilePath" />
+
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <span class="badge bg-secondary">#@(i + 1)</span>
+                                                <button type="button" class="btn btn-outline-danger btn-sm remove-doc-btn" onclick="removeDocumentRow(this)">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </div>
+                                            <div class="row g-3">
+                                                <div class="col-md-6 text-start">
+                                                    <label class="form-label form-label-dark">@(isArabic ? "نوع المستند" : "Document Type")</label>
+                                                    <select name="Documents[@i].DocumentTypeId" class="form-select form-select-dark" asp-items="ViewBag.DocumentTypes">
+                                                        <option value="">@(isArabic ? "-- اختر نوع المستند --" : "-- Select Document Type --")</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 text-start">
+                                                    <label class="form-label form-label-dark">@(isArabic ? "رقم المستند" : "Document Number")</label>
+                                                    <input name="Documents[@i].DocumentNumber" value="@Model.Documents[i].DocumentNumber" class="form-control form-control-dark" />
+                                                </div>
+                                                <div class="col-md-6 text-start">
+                                                    <label class="form-label form-label-dark">@(isArabic ? "تاريخ الإصدار" : "Issue Date")</label>
+                                                    <input name="Documents[@i].DocumentIssueDate" value="@(Model.Documents[i].DocumentIssueDate?.ToString("yyyy-MM-dd"))" type="date" class="form-control form-control-dark" />
+                                                </div>
+                                                <div class="col-md-6 text-start">
+                                                    <label class="form-label form-label-dark">@(isArabic ? "تاريخ الانتهاء" : "Expiry Date")</label>
+                                                    <input name="Documents[@i].DocumentExpiryDate" value="@(Model.Documents[i].DocumentExpiryDate?.ToString("yyyy-MM-dd"))" type="date" class="form-control form-control-dark" />
+                                                </div>
+                                                <div class="col-md-6 text-start">
+                                                    <label class="form-label form-label-dark">@(isArabic ? "ملف المستند (رفع جديد للتغيير)" : "Document File")</label>
+                                                    <input name="Documents[@i].DocumentFile" type="file" class="form-control form-control-dark" accept=".pdf,.png,.jpg,.jpeg" />
+                                                    @if (!string.IsNullOrEmpty(Model.Documents[i].ExistingFilePath))
+                                                    {
+                                                        <a href="@Model.Documents[i].ExistingFilePath" target="_blank" class="small text-info mt-1 d-inline-block">
+                                                            <i class="bi bi-file-earmark-arrow-down me-1"></i>@(isArabic ? "عرض الملف الحالي" : "View Current File")
+                                                        </a>
+                                                    }
+                                                </div>
+                                                <div class="col-md-6 text-start d-flex align-items-center pt-4">
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" name="Documents[@i].IsDocumentMandatory" value="true" @(Model.Documents[i].IsDocumentMandatory ? "checked" : "") id="isMandatory_@i">
+                                                        <input type="hidden" name="Documents[@i].IsDocumentMandatory" value="false" />
+                                                        <label class="form-check-label form-label-dark ms-2" for="isMandatory_@i">
+                                                            @(isArabic ? "مستند إجباري" : "Mandatory Document")
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 text-start">
+                                                    <label class="form-label form-label-dark">@(isArabic ? "ملاحظات" : "Notes")</label>
+                                                    <textarea name="Documents[@i].DocumentNotes" class="form-control form-control-dark" rows="2">@Model.Documents[i].DocumentNotes</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+
+                    <!-- TAB 10: فترة التجربة -->
+                    <div class="tab-pane fade" id="probation" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-md-6 text-start">
+                                <label asp-for="ProbationStartDate" class="form-label form-label-dark">@(isArabic ? "تاريخ بداية فترة التجربة" : "Start Date")</label>
+                                <input asp-for="ProbationStartDate" type="date" class="form-control form-control-dark" />
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="ProbationEndDate" class="form-label form-label-dark">@(isArabic ? "تاريخ نهاية فترة التجربة" : "End Date")</label>
+                                <input asp-for="ProbationEndDate" type="date" class="form-control form-control-dark" />
+                            </div>
+
+                            <div class="col-md-6 text-start d-flex align-items-center pt-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" asp-for="IsProbationConfirmed" id="IsProbationConfirmed">
+                                    <label class="form-check-label form-label-dark ms-2" for="IsProbationConfirmed">
+                                        @(isArabic ? "تم التثبيت / التأكيد" : "Is Confirmed")
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 text-start">
+                                <label asp-for="ProbationConfirmationDate" class="form-label form-label-dark">@(isArabic ? "تاريخ التثبيت" : "Confirmation Date")</label>
+                                <input asp-for="ProbationConfirmationDate" type="date" class="form-control form-control-dark" />
+                            </div>
+
+                            <div class="col-md-12 text-start">
+                                <label asp-for="ProbationDecisionBy" class="form-label form-label-dark">@(isArabic ? "متخذ القرار" : "Decision By")</label>
+                                <select asp-for="ProbationDecisionBy" class="form-select form-select-dark" asp-items="ViewBag.DecisionMakers">
+                                    <option value="">@(isArabic ? "-- اختر متخذ القرار --" : "-- Select Decision Maker --")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-12 text-start">
+                                <label asp-for="ProbationNotes" class="form-label form-label-dark">@(isArabic ? "ملاحظات" : "Notes")</label>
+                                <textarea asp-for="ProbationNotes" class="form-control form-control-dark" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 11: تفاصيل الراتب -->
+                    <div class="tab-pane fade" id="salary" role="tabpanel">
+                        <div class="row g-3">
+                            <div class="col-md-4 text-start">
+                                <label asp-for="BasicSalary" class="form-label form-label-dark">@(isArabic ? "الراتب الأساسي" : "Basic Salary")</label>
+                                <input asp-for="BasicSalary" type="number" step="0.01" class="form-control form-control-dark" />
+                                <span asp-validation-for="BasicSalary" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-4 text-start">
+                                <label asp-for="NetSalary" class="form-label form-label-dark">@(isArabic ? "الراتب الصافي" : "Net Salary")</label>
+                                <input asp-for="NetSalary" type="number" step="0.01" class="form-control form-control-dark" />
+                                <span asp-validation-for="NetSalary" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-4 text-start">
+                                <label asp-for="SalaryCurrencyId" class="form-label form-label-dark">@(isArabic ? "العملة" : "Currency")</label>
+                                <select asp-for="SalaryCurrencyId" class="form-select form-select-dark" asp-items="ViewBag.SalaryCurrencies">
+                                    <option value="">@(isArabic ? "-- اختر العملة --" : "-- Select Currency --")</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 text-start">
+                                <label asp-for="SalaryFromDate" class="form-label form-label-dark">@(isArabic ? "من تاريخ" : "From Date")</label>
+                                <input asp-for="SalaryFromDate" type="date" class="form-control form-control-dark" />
+                            </div>
+                            <div class="col-md-6 text-start">
+                                <label asp-for="SalaryToDate" class="form-label form-label-dark">@(isArabic ? "إلى تاريخ" : "To Date")</label>
+                                <input asp-for="SalaryToDate" type="date" class="form-control form-control-dark" />
+                            </div>
+
+                            <div class="col-md-12 text-start">
+                                <label asp-for="SalaryNotes" class="form-label form-label-dark">@(isArabic ? "ملاحظات" : "Notes")</label>
+                                <textarea asp-for="SalaryNotes" class="form-control form-control-dark" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 12: البدلات والاستقطاعات -->
+                    <div class="tab-pane fade" id="allowance-deduction" role="tabpanel">
+
+                        <!-- البدلات -->
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="mb-0 text-success"><i class="bi bi-plus-circle me-1"></i> @(isArabic ? "البدلات (Allowances)" : "Allowances")</h6>
+                            <button type="button" class="btn btn-outline-success btn-sm" onclick="addAllowanceRow()">
+                                <i class="bi bi-plus-lg me-1"></i> @(isArabic ? "إضافة بدل" : "Add Allowance")
+                            </button>
+                        </div>
+
+                        <div id="allowances-container" class="mb-4">
+                            @if (Model.Allowances != null && Model.Allowances.Any())
+                            {
+                                for (int i = 0; i < Model.Allowances.Count; i++)
+                                {
+                                    <div class="card bg-dark border-secondary mb-3 allowance-item" data-index="@i">
+                                        <div class="card-body">
+                                            <!-- استبدال Id بـ AllowanceId -->
+                                            <input type="hidden" name="Allowances[@i].AllowanceId" value="@Model.Allowances[i].AllowanceId" />                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <span class="badge bg-success">#@(i + 1)</span>
+                                                <button type="button" class="btn btn-outline-danger btn-sm remove-allowance-btn" onclick="removeAllowanceRow(this)">
+                                                    <i class="bi bi-trash me-1"></i> @(isArabic ? "حذف" : "Remove")
+                                                </button>
+                                            </div>
+                                            <div class="row g-3">
+                                                <div class="col-md-4 text-start">
+                                                    <label class="form-label form-label-dark">@(isArabic ? "نوع البدل" : "Allowance Type")</label>
+                                                    <select name="Allowances[@i].AllowanceTypeId" class="form-select form-select-dark" asp-items="ViewBag.AllowanceTypes">
+                                                        <option value="">@(isArabic ? "-- اختر نوع البدل --" : "-- Select Allowance --")</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4 text-start">
+                                                    <label class="form-label form-label-dark">@(isArabic ? "المبلغ" : "Amount")</label>
+                                                    <input name="Allowances[@i].Amount" value="@Model.Allowances[i].Amount" type="number" step="0.01" class="form-control form-control-dark" />
+                                                </div>
+                                                <div class="col-md-2 text-start">
+                                                    <label class="form-label form-label-dark">@(isArabic ? "من تاريخ" : "From Date")</label>
+                                                    <input name="Allowances[@i].FromDate" value="@(Model.Allowances[i].FromDate?.ToString("yyyy-MM-dd"))" type="date" class="form-control form-control-dark" />
+                                                </div>
+                                                <div class="col-md-2 text-start">
+                                                    <label class="form-label form-label-dark">@(isArabic ? "إلى تاريخ" : "To Date")</label>
+                                                    <input name="Allowances[@i].ToDate" value="@(Model.Allowances[i].ToDate?.ToString("yyyy-MM-dd"))" type="date" class="form-control form-control-dark" />
+                                                </div>
+                                                <div class="col-md-12 text-start">
+                                                    <input name="Allowances[@i].Notes" value="@Model.Allowances[i].Notes" class="form-control form-control-dark" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                        <hr class="border-secondary my-4" />
+
+                        <!-- الاستقطاعات -->
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="mb-0 text-danger"><i class="bi bi-dash-circle me-1"></i> @(isArabic ? "الاستقطاعات (Deductions)" : "Deductions")</h6>
+                            <button type="button" class="btn btn-outline-danger btn-sm" onclick="addDeductionRow()">
+                                <i class="bi bi-plus-lg me-1"></i> @(isArabic ? "إضافة استقطاع" : "Add Deduction")
+                            </button>
+                        </div>
+
+                        <div id="deductions-container">
+                            @if (Model.Deductions != null && Model.Deductions.Any())
+                            {
+                                for (int i = 0; i < Model.Deductions.Count; i++)
+                                {
+                                    <div class="card bg-dark border-secondary mb-3 deduction-item" data-index="@i">
+                                        <div class="card-body">
+                                            <!-- استبدال Id بـ DeductionId -->
+                                            <input type="hidden" name="Deductions[@i].DeductionId" value="@Model.Deductions[i].DeductionId" />                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <span class="badge bg-danger">#@(i + 1)</span>
+                                                <button type="button" class="btn btn-outline-danger btn-sm remove-deduction-btn" onclick="removeDeductionRow(this)">
+                                                    <i class="bi bi-trash me-1"></i> @(isArabic ? "حذف" : "Remove")
+                                                </button>
+                                            </div>
+                                            <div class="row g-3">
+                                                <div class="col-md-4 text-start">
+                                                    <label class="form-label form-label-dark">@(isArabic ? "نوع الاستقطاع" : "Deduction Type")</label>
+                                                    <select name="Deductions[@i].DeductionTypeId" class="form-select form-select-dark" asp-items="ViewBag.DeductionTypes">
+                                                        <option value="">@(isArabic ? "-- اختر نوع الاستقطاع --" : "-- Select Deduction --")</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4 text-start">
+                                                    <label class="form-label form-label-dark">@(isArabic ? "المبلغ" : "Amount")</label>
+                                                    <input name="Deductions[@i].Amount" value="@Model.Deductions[i].Amount" type="number" step="0.01" class="form-control form-control-dark" />
+                                                </div>
+                                                <div class="col-md-2 text-start">
+                                                    <label class="form-label form-label-dark">@(isArabic ? "من تاريخ" : "From Date")</label>
+                                                    <input name="Deductions[@i].FromDate" value="@(Model.Deductions[i].FromDate?.ToString("yyyy-MM-dd"))" type="date" class="form-control form-control-dark" />
+                                                </div>
+                                                <div class="col-md-2 text-start">
+                                                    <label class="form-label form-label-dark">@(isArabic ? "إلى تاريخ" : "To Date")</label>
+                                                    <input name="Deductions[@i].ToDate" value="@(Model.Deductions[i].ToDate?.ToString("yyyy-MM-dd"))" type="date" class="form-control form-control-dark" />
+                                                </div>
+                                                <div class="col-md-12 text-start">
+                                                    <input name="Deductions[@i].Notes" value="@Model.Deductions[i].Notes" class="form-control form-control-dark" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        let docIndex = @(Model.Documents != null ? Model.Documents.Count : 0);
+        let allowanceIndex = @(Model.Allowances != null ? Model.Allowances.Count : 0);
+        let deductionIndex = @(Model.Deductions != null ? Model.Deductions.Count : 0);
+
+        function addDocumentRow() {
+            const container = document.getElementById('documents-container');
+            const documentTypesOptions = `@Html.Raw(string.Join("", ((SelectList)ViewBag.DocumentTypes).Select(i => $"<option value='{i.Value}'>{i.Text}</option>")))`;
+
+            const card = document.createElement('div');
+            card.className = 'card bg-dark border-secondary mb-3 document-item';
+            card.setAttribute('data-index', docIndex);
+
+            card.innerHTML = `
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="badge bg-secondary">#${container.children.length + 1}</span>
+                        <button type="button" class="btn btn-outline-danger btn-sm remove-doc-btn" onclick="removeDocumentRow(this)">
+                            <i class="bi bi-trash me-1"></i> @(isArabic ? "حذف" : "Remove")
+                        </button>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6 text-start">
+                            <label class="form-label form-label-dark">@(isArabic ? "نوع المستند" : "Document Type")</label>
+                            <select name="Documents[${docIndex}].DocumentTypeId" class="form-select form-select-dark">
+                                <option value="">@(isArabic ? "-- اختر نوع المستند --" : "-- Select Document Type --")</option>
+                                ${documentTypesOptions}
+                            </select>
+                        </div>
+                        <div class="col-md-6 text-start">
+                            <label class="form-label form-label-dark">@(isArabic ? "رقم المستند" : "Document Number")</label>
+                            <input name="Documents[${docIndex}].DocumentNumber" class="form-control form-control-dark" placeholder="..." />
+                        </div>
+                        <div class="col-md-6 text-start">
+                            <label class="form-label form-label-dark">@(isArabic ? "تاريخ الإصدار" : "Issue Date")</label>
+                            <input name="Documents[${docIndex}].DocumentIssueDate" type="date" class="form-control form-control-dark" />
+                        </div>
+                        <div class="col-md-6 text-start">
+                            <label class="form-label form-label-dark">@(isArabic ? "تاريخ الانتهاء" : "Expiry Date")</label>
+                            <input name="Documents[${docIndex}].DocumentExpiryDate" type="date" class="form-control form-control-dark" />
+                        </div>
+                        <div class="col-md-6 text-start">
+                            <label class="form-label form-label-dark">@(isArabic ? "ملف المستند (PDF / Image)" : "Document File")</label>
+                            <input name="Documents[${docIndex}].DocumentFile" type="file" class="form-control form-control-dark" accept=".pdf,.png,.jpg,.jpeg" />
+                        </div>
+                        <div class="col-md-6 text-start d-flex align-items-center pt-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="Documents[${docIndex}].IsDocumentMandatory" value="true" id="isMandatory_${docIndex}">
+                                <input type="hidden" name="Documents[${docIndex}].IsDocumentMandatory" value="false" />
+                                <label class="form-check-label form-label-dark ms-2" for="isMandatory_${docIndex}">
+                                    @(isArabic ? "مستند إجباري" : "Mandatory Document")
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-start">
+                            <label class="form-label form-label-dark">@(isArabic ? "ملاحظات" : "Notes")</label>
+                            <textarea name="Documents[${docIndex}].DocumentNotes" class="form-control form-control-dark" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.appendChild(card);
+            docIndex++;
+            reindexContainer('.document-item', '.bg-secondary');
+        }
+
+        function removeDocumentRow(button) {
+            button.closest('.document-item').remove();
+            reindexContainer('.document-item', '.bg-secondary');
+        }
+
+        function addAllowanceRow() {
+            const container = document.getElementById('allowances-container');
+            const allowanceTypesOptions = `@Html.Raw(string.Join("", ((SelectList)ViewBag.AllowanceTypes).Select(i => $"<option value='{i.Value}'>{i.Text}</option>")))`;
+
+            const card = document.createElement('div');
+            card.className = 'card bg-dark border-secondary mb-3 allowance-item';
+            card.innerHTML = `
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="badge bg-success">#${container.children.length + 1}</span>
+                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeAllowanceRow(this)">
+                            <i class="bi bi-trash me-1"></i> @(isArabic ? "حذف" : "Remove")
+                        </button>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-4 text-start">
+                            <label class="form-label form-label-dark">@(isArabic ? "نوع البدل" : "Allowance Type")</label>
+                            <select name="Allowances[${allowanceIndex}].AllowanceTypeId" class="form-select form-select-dark">
+                                <option value="">@(isArabic ? "-- اختر نوع البدل --" : "-- Select Allowance --")</option>
+                                ${allowanceTypesOptions}
+                            </select>
+                        </div>
+                        <div class="col-md-4 text-start">
+                            <label class="form-label form-label-dark">@(isArabic ? "المبلغ" : "Amount")</label>
+                            <input name="Allowances[${allowanceIndex}].Amount" type="number" step="0.01" class="form-control form-control-dark" placeholder="0.00" />
+                        </div>
+                        <div class="col-md-2 text-start">
+                            <label class="form-label form-label-dark">@(isArabic ? "من تاريخ" : "From Date")</label>
+                            <input name="Allowances[${allowanceIndex}].FromDate" type="date" class="form-control form-control-dark" />
+                        </div>
+                        <div class="col-md-2 text-start">
+                            <label class="form-label form-label-dark">@(isArabic ? "إلى تاريخ" : "To Date")</label>
+                            <input name="Allowances[${allowanceIndex}].ToDate" type="date" class="form-control form-control-dark" />
+                        </div>
+                        <div class="col-md-12 text-start">
+                            <input name="Allowances[${allowanceIndex}].Notes" class="form-control form-control-dark" placeholder="@(isArabic ? "ملاحظات البدل..." : "Notes...")" />
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+            allowanceIndex++;
+            reindexContainer('.allowance-item', '.bg-success');
+        }
+
+        function removeAllowanceRow(btn) {
+            btn.closest('.allowance-item').remove();
+            reindexContainer('.allowance-item', '.bg-success');
+        }
+
+        function addDeductionRow() {
+            const container = document.getElementById('deductions-container');
+            const deductionTypesOptions = `@Html.Raw(string.Join("", ((SelectList)ViewBag.DeductionTypes).Select(i => $"<option value='{i.Value}'>{i.Text}</option>")))`;
+
+            const card = document.createElement('div');
+            card.className = 'card bg-dark border-secondary mb-3 deduction-item';
+            card.innerHTML = `
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="badge bg-danger">#${container.children.length + 1}</span>
+                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeDeductionRow(this)">
+                            <i class="bi bi-trash me-1"></i> @(isArabic ? "حذف" : "Remove")
+                        </button>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-4 text-start">
+                            <label class="form-label form-label-dark">@(isArabic ? "نوع الاستقطاع" : "Deduction Type")</label>
+                            <select name="Deductions[${deductionIndex}].DeductionTypeId" class="form-select form-select-dark">
+                                <option value="">@(isArabic ? "-- اختر نوع الاستقطاع --" : "-- Select Deduction --")</option>
+                                ${deductionTypesOptions}
+                            </select>
+                        </div>
+                        <div class="col-md-4 text-start">
+                            <label class="form-label form-label-dark">@(isArabic ? "المبلغ" : "Amount")</label>
+                            <input name="Deductions[${deductionIndex}].Amount" type="number" step="0.01" class="form-control form-control-dark" placeholder="0.00" />
+                        </div>
+                        <div class="col-md-2 text-start">
+                            <label class="form-label form-label-dark">@(isArabic ? "من تاريخ" : "From Date")</label>
+                            <input name="Deductions[${deductionIndex}].FromDate" type="date" class="form-control form-control-dark" />
+                        </div>
+                        <div class="col-md-2 text-start">
+                            <label class="form-label form-label-dark">@(isArabic ? "إلى تاريخ" : "To Date")</label>
+                            <input name="Deductions[${deductionIndex}].ToDate" type="date" class="form-control form-control-dark" />
+                        </div>
+                        <div class="col-md-12 text-start">
+                            <input name="Deductions[${deductionIndex}].Notes" class="form-control form-control-dark" placeholder="@(isArabic ? "ملاحظات الاستقطاع..." : "Notes...")" />
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+            deductionIndex++;
+            reindexContainer('.deduction-item', '.bg-danger');
+        }
+
+        function removeDeductionRow(btn) {
+            btn.closest('.deduction-item').remove();
+            reindexContainer('.deduction-item', '.bg-danger');
+        }
+
+        function reindexContainer(itemSelector, badgeSelector) {
+            const items = document.querySelectorAll(itemSelector);
+            items.forEach((item, index) => {
+                const badge = item.querySelector(badgeSelector);
+                if (badge) badge.innerText = `#${index + 1}`;
+            });
+        }
+
+        $(document).ready(function () {
+            $('#CountryId').change(function () {
+                var countryId = $(this).val();
+                var $gov = $('#GovernorateId').empty().append('<option value="">-- @(isArabic ? "اختر المحافظة" : "Select Governorate") --</option>');
+                var $city = $('#CityId').empty().append('<option value="">-- @(isArabic ? "اختر المدينة" : "Select City") --</option>');
+
+                if (countryId) {
+                    $.getJSON('@Url.Action("GetGovernorates", "Employees", new { area = "HR" })', { countryId: countryId }, function (data) {
+                        if (data && data.length > 0) {
+                            $.each(data, function (i, item) {
+                                $gov.append($('<option>', { value: item.id, text: item.name }));
+                            });
+                        }
+                    });
+                }
+            });
+
+            $('#GovernorateId').change(function () {
+                var govId = $(this).val();
+                var $city = $('#CityId').empty().append('<option value="">-- @(isArabic ? "اختر المدينة" : "Select City") --</option>');
+
+                if (govId) {
+                    $.getJSON('@Url.Action("GetCities", "Employees", new { area = "HR" })', { governorateId: govId }, function (data) {
+                        if (data && data.length > 0) {
+                            $.each(data, function (i, item) {
+                                $city.append($('<option>', { value: item.id, text: item.name }));
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

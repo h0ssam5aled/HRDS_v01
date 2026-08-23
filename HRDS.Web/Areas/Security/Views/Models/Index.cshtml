@@ -8,156 +8,6 @@
     var isRtl = currentCulture == "ar";
 }
 
-<style>
-    /* 1. إجبار الكروت والـ Modal على الخلفية الداكنة */
-    .card.dark-card,
-    .dark-card,
-    .modal-content.dark-card {
-        background-color: #0f172a !important;
-        border: 1px solid #1e293b !important;
-        color: #ffffff !important;
-        border-radius: 10px;
-    }
-
-        .dark-card h4, .dark-card p, .dark-card div, .modal-title {
-            color: #ffffff !important;
-        }
-
-            .dark-card p.text-muted {
-                color: #94a3b8 !important;
-            }
-
-    /* Styling Form Controls for Dark Theme */
-    .form-control.dark-input, .form-select.dark-input {
-        background-color: #1e293b !important;
-        border: 1px solid #334155 !important;
-        color: #ffffff !important;
-        border-radius: 6px;
-    }
-
-        .form-control.dark-input:focus, .form-select.dark-input:focus {
-            border-color: #00ff66 !important;
-            box-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
-        }
-
-    /* 2. إلغاء أي خلفيات بيضاء داخل الكارت والجدول */
-    .card-body, .table-responsive, table.dataTable, table.dataTable * {
-        background-color: transparent !important;
-    }
-
-        /* 3. رأس الجدول */
-        table.dataTable thead th {
-            background-color: #1e293b !important;
-            color: #38bdf8 !important;
-            border-bottom: 2px solid #334155 !important;
-            padding: 14px 16px !important;
-            font-size: 0.95rem;
-            font-weight: 700;
-            text-align: start !important;
-        }
-
-        /* 4. نصوص الجدول */
-        table.dataTable tbody tr td {
-            color: #ffffff !important;
-            padding: 14px 16px !important;
-            vertical-align: middle;
-            border-bottom: 1px solid #1e293b !important;
-            transition: all 0.2s ease-in-out;
-            text-align: start !important;
-        }
-
-        /* 5. تأثير Hover */
-        table.dataTable tbody tr:hover td {
-            color: #00ff66 !important;
-            text-shadow: 0 0 8px rgba(0, 255, 102, 0.7);
-            background-color: rgba(0, 255, 102, 0.04) !important;
-        }
-
-    /* Flexbox DataTables Wrapper Controls */
-    .dataTables_wrapper .row:first-child,
-    .dataTables_wrapper > div:first-child {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        flex-wrap: wrap !important;
-        margin-bottom: 1rem !important;
-    }
-
-    .dataTables_wrapper .dataTables_length,
-    .dataTables_wrapper .dataTables_filter,
-    .dataTables_wrapper .dataTables_info,
-    .dataTables_wrapper .dataTables_paginate {
-        color: #ffffff !important;
-        font-weight: 500;
-        float: none !important;
-        width: auto !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-        .dataTables_wrapper .dataTables_filter input,
-        .dataTables_wrapper .dataTables_length select {
-            background-color: #1e293b !important;
-            border: 1px solid #334155 !important;
-            color: #ffffff !important;
-            border-radius: 6px;
-            padding: 6px 12px;
-            outline: none;
-        }
-
-    /* Alignment Fixes for LTR/RTL */
-    [dir="ltr"] .dataTables_wrapper .dataTables_length {
-        order: 1 !important;
-        text-align: left !important;
-    }
-
-    [dir="ltr"] .dataTables_wrapper .dataTables_filter {
-        order: 2 !important;
-        text-align: right !important;
-    }
-
-        [dir="ltr"] .dataTables_wrapper .dataTables_filter input {
-            margin-left: 0.5em !important;
-            margin-right: 0 !important;
-        }
-
-    [dir="rtl"] .dataTables_wrapper .dataTables_length {
-        order: 1 !important;
-        text-align: right !important;
-    }
-
-    [dir="rtl"] .dataTables_wrapper .dataTables_filter {
-        order: 2 !important;
-        text-align: left !important;
-    }
-
-        [dir="rtl"] .dataTables_wrapper .dataTables_filter input {
-            margin-right: 0.5em !important;
-            margin-left: 0 !important;
-        }
-
-    /* Badges */
-    .neon-badge-active {
-        background-color: rgba(0, 212, 255, 0.12) !important;
-        color: #00d4ff !important;
-        border: 1px solid #00d4ff !important;
-        font-weight: 600;
-    }
-
-    .neon-badge-inactive {
-        background-color: rgba(255, 42, 109, 0.12) !important;
-        color: #ff2a6d !important;
-        border: 1px solid #ff2a6d !important;
-        font-weight: 600;
-    }
-
-    .dark-badge-code {
-        background-color: #1e293b !important;
-        color: #38bdf8 !important;
-        border: 1px solid #334155 !important;
-    }
-</style>
-
 <div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
     @Html.AntiForgeryToken()
 
@@ -258,6 +108,17 @@
         let table;
         const bsModal = new bootstrap.Modal(document.getElementById('modelModal'));
 
+        // تحويل الموارد والنصوص إلى JSON صريح لمنع مشكلة الـ HTML Encoding
+        const localizedStrings = {
+            addTitle: @Html.Raw(Json.Serialize(Resource.AddNewScreen)),
+            editTitle: @Html.Raw(Json.Serialize(Resource.EditScreen)),
+            editTooltip: @Html.Raw(Json.Serialize(Resource.EditModel)),
+            toggleStatusTooltip: @Html.Raw(Json.Serialize(Resource.ToggleStatus)),
+            saveError: @Html.Raw(Json.Serialize(Resource.SaveErrorMessage)),
+            active: @Html.Raw(Json.Serialize(Resource.Active)),
+            inactive: @Html.Raw(Json.Serialize(Resource.Inactive))
+        };
+
         $(document).ready(function () {
             loadDataTable();
 
@@ -291,8 +152,8 @@
                         data: 'isActive',
                         render: function (data) {
                             return data
-                                ? `<span class="badge neon-badge-active px-2 py-1"><i class="bi bi-check-circle me-1"></i>@Resource.Active</span>`
-                                : `<span class="badge neon-badge-inactive px-2 py-1"><i class="bi bi-x-circle me-1"></i>@Resource.Inactive</span>`;
+                                ? `<span class="badge neon-badge-active px-2 py-1"><i class="bi bi-check-circle me-1"></i>${localizedStrings.active}</span>`
+                                : `<span class="badge neon-badge-inactive px-2 py-1"><i class="bi bi-x-circle me-1"></i>${localizedStrings.inactive}</span>`;
                         }
                     },
                     {
@@ -300,10 +161,10 @@
                         className: 'text-center',
                         render: function (data, type, row) {
                             return `
-                                <button class="btn btn-sm btn-outline-warning me-1" onclick="openEditModal(${data})" title="تعديل">
+                                <button class="btn btn-sm btn-outline-warning me-1" onclick="openEditModal(${data})" title="${localizedStrings.editTooltip}">
                                     <i class="bi bi-pencil"></i>
                                 </button>
-                                <button class="btn btn-sm btn-outline-${row.isActive ? 'danger' : 'success'}" onclick="toggleStatus(${data})" title="تغيير الحالة">
+                                <button class="btn btn-sm btn-outline-${row.isActive ? 'danger' : 'success'}" onclick="toggleStatus(${data})" title="${localizedStrings.toggleStatusTooltip}">
                                     <i class="bi bi-power"></i>
                                 </button>
                             `;
@@ -320,7 +181,7 @@
             $('#modelForm')[0].reset();
             $('#ModelId').val(0);
             $('#IsActive').prop('checked', true);
-            $('#modalTitle').text('@Resource.AddNewScreen');
+            $('#modalTitle').html(localizedStrings.addTitle);
             bsModal.show();
         }
 
@@ -335,7 +196,7 @@
                     $('#Description').val(data.description);
                     $('#IsActive').prop('checked', data.isActive);
 
-                    $('#modalTitle').text('@Resource.EditScreen');
+                    $('#modalTitle').html(localizedStrings.editTitle);
                     bsModal.show();
                 }
             });
@@ -371,7 +232,7 @@
                     }
                 },
                 error: function () {
-                    alert('حدث خطأ غير متوقع أثناء الحفظ');
+                    alert(localizedStrings.saveError);
                 }
             });
         }

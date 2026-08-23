@@ -1,0 +1,209 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+
+@{
+    ViewData["Title"] = Resource.ProbationStatuses;
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    <!-- Header Card -->
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-hourglass-split fs-3 lh-1 flex-shrink-0 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@Resource.ProbationStatuses</h4>
+                    <p class="text-muted mb-0 small">@Resource.ProbationStatusesDescription</p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary px-3 py-2" onclick="openAddModal()">
+                <i class="bi bi-plus-lg me-1"></i> @Resource.AddNewProbationStatus
+            </button>
+        </div>
+    </div>
+
+    <!-- Data Table Card -->
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="probationStatusTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.StatusCode</th>
+                            <th>@Resource.ArabicName</th>
+                            <th>@Resource.EnglishName</th>
+                            <th>@Resource.Description</th>
+                            <th>@Resource.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal الإضافة والتعديل -->
+<div class="modal fade" id="probationStatusModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content dark-modal">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalTitle">@Resource.AddNewProbationStatus</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="probationStatusForm">
+                    <input type="hidden" id="probationStatusId" value="0" />
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.StatusCode <span class="text-danger">*</span></label>
+                        <input type="text" id="statusCode" class="form-control" placeholder="e.g. IN_PROBATION" required />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.ArabicName <span class="text-danger">*</span></label>
+                        <input type="text" id="statusNameAr" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.EnglishName</label>
+                        <input type="text" id="statusNameEn" class="form-control" />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.Description</label>
+                        <textarea id="description" class="form-control" rows="2"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resource.Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveProbationStatus()">
+                    <i class="bi bi-save me-1"></i> @Resource.SaveData
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+        let probationStatusModal;
+
+        // تحويل الموارد والنصوص إلى JSON صريح لمنع مشكلة الـ HTML Encoding
+        const localizedStrings = {
+            addTitle: @Html.Raw(Json.Serialize(Resource.AddNewProbationStatus)),
+            editTitle: @Html.Raw(Json.Serialize(Resource.EditProbationStatus)),
+            editBtn: @Html.Raw(Json.Serialize(Resource.EditProbationStatus)),
+            requiredError: @Html.Raw(Json.Serialize(Resource.RequiredFieldsErrorMessage)),
+            saveError: @Html.Raw(Json.Serialize(Resource.SaveErrorMessage))
+        };
+
+        $(document).ready(function () {
+            probationStatusModal = new bootstrap.Modal(document.getElementById('probationStatusModal'));
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            table = $('#probationStatusTable').DataTable({
+                pagingType: 'simple',
+                ajax: {
+                    url: '@Url.Action("GetJson", "ProbationStatuses")',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'probationStatusId', width: '5%' },
+                    {
+                        data: 'statusCode',
+                        render: function (data) {
+                            return `<span class="badge dark-badge-code font-monospace px-2 py-1">${data || ''}</span>`;
+                        }
+                    },
+                    { data: 'statusNameAr' },
+                    { data: 'statusNameEn' },
+                    {
+                        data: 'description',
+                        render: function (data) {
+                            return data ? data : '-';
+                        }
+                    },
+                    {
+                        data: 'probationStatusId',
+                        render: function (data) {
+                            return `<button class="btn btn-sm btn-action-edit" onclick="editProbationStatus(${data})">
+                                        <i class="bi bi-pencil-square me-1"></i>${localizedStrings.editBtn}
+                                    </button>`;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        }
+
+        function openAddModal() {
+            $('#probationStatusId').val(0);
+            $('#probationStatusForm')[0].reset();
+            $('#modalTitle').html(localizedStrings.addTitle);
+            probationStatusModal.show();
+        }
+
+        function editProbationStatus(id) {
+            $.get('@Url.Action("GetById", "ProbationStatuses")/' + id, function (data) {
+                if (data) {
+                    $('#probationStatusId').val(data.probationStatusId);
+                    $('#statusCode').val(data.statusCode);
+                    $('#statusNameAr').val(data.statusNameAr);
+                    $('#statusNameEn').val(data.statusNameEn);
+                    $('#description').val(data.description);
+
+                    $('#modalTitle').html(localizedStrings.editTitle);
+                    probationStatusModal.show();
+                }
+            });
+        }
+
+        function saveProbationStatus() {
+            let model = {
+                ProbationStatusId: parseInt($('#probationStatusId').val()) || 0,
+                StatusCode: $('#statusCode').val(),
+                StatusNameAr: $('#statusNameAr').val(),
+                StatusNameEn: $('#statusNameEn').val(),
+                Description: $('#description').val()
+            };
+
+            if (!model.StatusCode || !model.StatusNameAr) {
+                alert(localizedStrings.requiredError);
+                return;
+            }
+
+            let token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '@Url.Action("Save", "ProbationStatuses")',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: { "RequestVerificationToken": token },
+                data: JSON.stringify(model),
+                success: function (response) {
+                    if (response.success) {
+                        probationStatusModal.hide();
+                        table.ajax.reload(null, false);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert(localizedStrings.saveError);
+                }
+            });
+        }
+    </script>
+}

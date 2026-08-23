@@ -285,9 +285,6 @@
   <data name="RoleCode" xml:space="preserve">
     <value>رمز الدور</value>
   </data>
-  <data name="Roles" xml:space="preserve">
-    <value>الأدوار</value>
-  </data>
   <data name="RolesManagement" xml:space="preserve">
     <value>إدارة الأدوار</value>
   </data>
@@ -304,7 +301,7 @@
     <value>عرض الشاشات</value>
   </data>
   <data name="SelectCountry" xml:space="preserve">
-    <value>...اختر الدولة...</value>
+    <value>اختر الدولة</value>
   </data>
   <data name="SelectGovernorate" xml:space="preserve">
     <value>اختر المحافظة</value>
@@ -461,5 +458,1079 @@
   </data>
   <data name="Permissions" xml:space="preserve">
     <value>الصلاحيات</value>
+  </data>
+  <data name="AcademicMajors" xml:space="preserve">
+    <value>التخصصات الأكاديمية</value>
+  </data>
+  <data name="AcademicMajorsDescription" xml:space="preserve">
+    <value>وصف التخصصات الأكاديمية</value>
+  </data>
+  <data name="AddNewMajor" xml:space="preserve">
+    <value>إضافة تخصص أكاديمي جديد</value>
+  </data>
+  <data name="MajorCode" xml:space="preserve">
+    <value>كود التخصص</value>
+  </data>
+  <data name="Faculty" xml:space="preserve">
+    <value>الكلية</value>
+  </data>
+  <data name="EditAcademicMajors" xml:space="preserve">
+    <value>تعديل التخصص الأكاديمي</value>
+  </data>
+  <data name="AddNewAcademicMajor" xml:space="preserve">
+    <value>إضافة تخصص أكاديمي جديد</value>
+  </data>
+  <data name="EditAcademicMajor" xml:space="preserve">
+    <value>تعديل التخصص الأكاديمي</value>
+  </data>
+  <data name="SelectFaculty" xml:space="preserve">
+    <value>اختر الكلية</value>
+  </data>
+  <data name="AcademicFaculties" xml:space="preserve">
+    <value>الكليات الأكاديمية</value>
+  </data>
+  <data name="AcademicFacultiesDescription" xml:space="preserve">
+    <value>وصف الكليات الأكاديمية</value>
+  </data>
+  <data name="AddNewAcademicFaculty" xml:space="preserve">
+    <value>إضافة كلية أكاديمية جديدة</value>
+  </data>
+  <data name="FacultyCode" xml:space="preserve">
+    <value>كود الكلية</value>
+  </data>
+  <data name="EducationalInstitution" xml:space="preserve">
+    <value>المؤسسة التعليمية</value>
+  </data>
+  <data name="SelectEducationalInstitution" xml:space="preserve">
+    <value>اختر المؤسسة التعليمية</value>
+  </data>
+  <data name="EditAcademicFaculty" xml:space="preserve">
+    <value>تعديل الكلية الأكاديمية</value>
+  </data>
+  <data name="EducationalInstitutions" xml:space="preserve">
+    <value>المؤسسات التعليمية</value>
+  </data>
+  <data name="EducationalInstitutionsDescription" xml:space="preserve">
+    <value>وصف المؤسسات التعليمية</value>
+  </data>
+  <data name="AddNewEducationalInstitution" xml:space="preserve">
+    <value>إضافة مؤسسة تعليمية جديدة</value>
+  </data>
+  <data name="InstitutionCode" xml:space="preserve">
+    <value>كود المؤسسة</value>
+  </data>
+  <data name="InstitutionType" xml:space="preserve">
+    <value>نوع المؤسسة</value>
+  </data>
+  <data name="SelectInstitutionType" xml:space="preserve">
+    <value>اختر نوع المؤسسة</value>
+  </data>
+  <data name="EditEducationalInstitution" xml:space="preserve">
+    <value>تعديل المؤسسة التعليمية</value>
+  </data>
+  <data name="EducationalInstitutionTypes" xml:space="preserve">
+    <value>أنواع المؤسسات التعليمية</value>
+  </data>
+  <data name="EducationalInstitutionTypesDescription" xml:space="preserve">
+    <value>وصف أنواع المؤسسات التعليمية</value>
+  </data>
+  <data name="AddNewEducationalInstitutionType" xml:space="preserve">
+    <value>إضافة نوع مؤسسة تعليمية جديد</value>
+  </data>
+  <data name="TypeCode" xml:space="preserve">
+    <value>كود النوع</value>
+  </data>
+  <data name="EditEducationalInstitutionType" xml:space="preserve">
+    <value>تعديل نوع المؤسسة التعليمية</value>
+  </data>
+  <data name="EducationQualifications" xml:space="preserve">
+    <value>المؤهلات التعليمية</value>
+  </data>
+  <data name="EducationQualificationsDescription" xml:space="preserve">
+    <value>وصف المؤهلات التعليمية</value>
+  </data>
+  <data name="AddNewQualification" xml:space="preserve">
+    <value>إضافة مؤهل تعليمي جديد</value>
+  </data>
+  <data name="QualificationCode" xml:space="preserve">
+    <value>كود المؤهل</value>
+  </data>
+  <data name="EditQualification" xml:space="preserve">
+    <value>تعديل المؤهل</value>
+  </data>
+  <data name="EducationGrades" xml:space="preserve">
+    <value>الدرجات التعليمية</value>
+  </data>
+  <data name="EducationGradesDescription" xml:space="preserve">
+    <value>وصف الدرجات التعليمية</value>
+  </data>
+  <data name="AddNewGrade" xml:space="preserve">
+    <value>إضافة درجة تعليمية جديدة</value>
+  </data>
+  <data name="GradeCode" xml:space="preserve">
+    <value>كود الدرجة</value>
+  </data>
+  <data name="EditGrade" xml:space="preserve">
+    <value>تعديل الدرجة التعليمية</value>
+  </data>
+  <data name="DocumentTypes" xml:space="preserve">
+    <value>أنواع المستندات</value>
+  </data>
+  <data name="DocumentTypesDescription" xml:space="preserve">
+    <value>وصف أنواع المستندات</value>
+  </data>
+  <data name="AddNewDocumentType" xml:space="preserve">
+    <value>إضافة نوع مستند جديد</value>
+  </data>
+  <data name="IsExpiryRequired" xml:space="preserve">
+    <value>هل تاريخ الانتهاء مطلوب؟</value>
+  </data>
+  <data name="ExpiryAlertDays" xml:space="preserve">
+    <value>عدد أيام التنبيه قبل انتهاء الصلاحية</value>
+  </data>
+  <data name="IsMandatory" xml:space="preserve">
+    <value>إلزامي</value>
+  </data>
+  <data name="EditDocumentType" xml:space="preserve">
+    <value>تعديل نوع المستند</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>نعم</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>الأدوار</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>لا</value>
+  </data>
+  <data name="Mandatory" xml:space="preserve">
+    <value>إلزامي</value>
+  </data>
+  <data name="Optional" xml:space="preserve">
+    <value>اختياري</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>يوم</value>
+  </data>
+  <data name="EmploymentTypes" xml:space="preserve">
+    <value>أنواع التوظيف</value>
+  </data>
+  <data name="EmploymentTypesDescription" xml:space="preserve">
+    <value>وصف أنواع التوظيف</value>
+  </data>
+  <data name="AddNewEmploymentType" xml:space="preserve">
+    <value>إضافة نوع توظيف جديد</value>
+  </data>
+  <data name="EmploymentTypeCode" xml:space="preserve">
+    <value>كود نوع التوظيف</value>
+  </data>
+  <data name="DefaultWorkingHours" xml:space="preserve">
+    <value>ساعات العمل الافتراضية</value>
+  </data>
+  <data name="IsOvertimeAllowed" xml:space="preserve">
+    <value>السماح بالعمل الإضافي</value>
+  </data>
+  <data name="IsLeaveEligible" xml:space="preserve">
+    <value>مستحق للإجازات</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>ساعة</value>
+  </data>
+  <data name="EditEmploymentType" xml:space="preserve">
+    <value>تعديل نوع التوظيف</value>
+  </data>
+  <data name="EmployeeStatus" xml:space="preserve">
+    <value>حالة الموظف</value>
+  </data>
+  <data name="EmployeeStatusDescription" xml:space="preserve">
+    <value>وصف حالة الموظف</value>
+  </data>
+  <data name="AddNewEmployeeStatus" xml:space="preserve">
+    <value>إضافة حالة موظف جديدة</value>
+  </data>
+  <data name="EmployeeStatusCode" xml:space="preserve">
+    <value>كود حالة الموظف</value>
+  </data>
+  <data name="EditEmployeeStatus" xml:space="preserve">
+    <value>تعديل حالة الموظف</value>
+  </data>
+  <data name="ProbationStatuses" xml:space="preserve">
+    <value>حالات فترة الاختبار</value>
+  </data>
+  <data name="ProbationStatusesDescription" xml:space="preserve">
+    <value>وصف حالات فترة الاختبار</value>
+  </data>
+  <data name="AddNewProbationStatus" xml:space="preserve">
+    <value>إضافة حالة فترة اختبار جديدة</value>
+  </data>
+  <data name="StatusCode" xml:space="preserve">
+    <value>كود الحالة</value>
+  </data>
+  <data name="EditProbationStatus" xml:space="preserve">
+    <value>تعديل حالة فترة الاختبار</value>
+  </data>
+  <data name="AllowanceTypes" xml:space="preserve">
+    <value>أنواع البدلات</value>
+  </data>
+  <data name="AllowanceTypesDescription" xml:space="preserve">
+    <value>وصف أنواع البدلات</value>
+  </data>
+  <data name="AddNewAllowanceType" xml:space="preserve">
+    <value>إضافة نوع بدل جديد</value>
+  </data>
+  <data name="AllowanceTypeCode" xml:space="preserve">
+    <value>كود نوع البدل</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>نشط</value>
+  </data>
+  <data name="EditAllowanceType" xml:space="preserve">
+    <value>تعديل نوع البدل</value>
+  </data>
+  <data name="DeductionTypes" xml:space="preserve">
+    <value>أنواع الخصومات</value>
+  </data>
+  <data name="DeductionTypesDescription" xml:space="preserve">
+    <value>وصف أنواع الخصومات</value>
+  </data>
+  <data name="AddNewDeductionType" xml:space="preserve">
+    <value>إضافة نوع خصم جديد</value>
+  </data>
+  <data name="DeductionTypeCode" xml:space="preserve">
+    <value>كود نوع الخصم</value>
+  </data>
+  <data name="EditDeductionType" xml:space="preserve">
+    <value>تعديل نوع الخصم</value>
+  </data>
+  <data name="ShiftTypes" xml:space="preserve">
+    <value>أنواع الورديات</value>
+  </data>
+  <data name="ShiftTypesDescription" xml:space="preserve">
+    <value>وصف أنواع الورديات</value>
+  </data>
+  <data name="AddNewShiftType" xml:space="preserve">
+    <value>إضافة نوع وردية جديد</value>
+  </data>
+  <data name="ShiftTypeCode" xml:space="preserve">
+    <value>كود نوع الوردية</value>
+  </data>
+  <data name="EditShiftType" xml:space="preserve">
+    <value>تعديل نوع الوردية</value>
+  </data>
+  <data name="Shifts" xml:space="preserve">
+    <value>الورديات</value>
+  </data>
+  <data name="ShiftsDescription" xml:space="preserve">
+    <value>وصف الورديات</value>
+  </data>
+  <data name="AddNewShift" xml:space="preserve">
+    <value>إضافة وردية جديدة</value>
+  </data>
+  <data name="ShiftCode" xml:space="preserve">
+    <value>كود الوردية</value>
+  </data>
+  <data name="ShiftType" xml:space="preserve">
+    <value>نوع الوردية</value>
+  </data>
+  <data name="Timing" xml:space="preserve">
+    <value>التوقيت</value>
+  </data>
+  <data name="StandardHours" xml:space="preserve">
+    <value>ساعات العمل القياسية</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>اختر</value>
+  </data>
+  <data name="StartTime" xml:space="preserve">
+    <value>وقت البدء</value>
+  </data>
+  <data name="EndTime" xml:space="preserve">
+    <value>وقت الانتهاء</value>
+  </data>
+  <data name="GraceInMinutes" xml:space="preserve">
+    <value>فترة السماح (بالدقائق)</value>
+  </data>
+  <data name="GraceOutMinutes" xml:space="preserve">
+    <value>فترة السماح للانصراف (بالدقائق)</value>
+  </data>
+  <data name="MinimumOvertimeMinutes" xml:space="preserve">
+    <value>الحد الأدنى لدقائق العمل الإضافي</value>
+  </data>
+  <data name="CrossMidnight" xml:space="preserve">
+    <value>يمتد إلى اليوم التالي</value>
+  </data>
+  <data name="AllowOvertime" xml:space="preserve">
+    <value>السماح بالعمل الإضافي</value>
+  </data>
+  <data name="AllowLateDeduction" xml:space="preserve">
+    <value>السماح بخصم التأخير</value>
+  </data>
+  <data name="AutoCloseAttendance" xml:space="preserve">
+    <value>الإغلاق التلقائي للحضور</value>
+  </data>
+  <data name="EditShift" xml:space="preserve">
+    <value>تعديل الوردية</value>
+  </data>
+  <data name="ShiftBreaks" xml:space="preserve">
+    <value>فترات استراحة الوردية</value>
+  </data>
+  <data name="ShiftBreaksDescription" xml:space="preserve">
+    <value>وصف فترات استراحة الوردية</value>
+  </data>
+  <data name="AddNewBreak" xml:space="preserve">
+    <value>إضافة فترة استراحة جديدة</value>
+  </data>
+  <data name="Shift" xml:space="preserve">
+    <value>الوردية</value>
+  </data>
+  <data name="BreakCode" xml:space="preserve">
+    <value>كود الاستراحة</value>
+  </data>
+  <data name="IsPaidBreak" xml:space="preserve">
+    <value>استراحة مدفوعة الأجر</value>
+  </data>
+  <data name="FromTime" xml:space="preserve">
+    <value>من وقت</value>
+  </data>
+  <data name="ToTime" xml:space="preserve">
+    <value>إلى وقت</value>
+  </data>
+  <data name="EditBreak" xml:space="preserve">
+    <value>تعديل الاستراحة</value>
+  </data>
+  <data name="BonusTypes" xml:space="preserve">
+    <value>أنواع المكافآت</value>
+  </data>
+  <data name="BonusTypesDescription" xml:space="preserve">
+    <value>وصف أنواع المكافآت</value>
+  </data>
+  <data name="AddNewBonusType" xml:space="preserve">
+    <value>إضافة نوع مكافأة جديد</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>الكود</value>
+  </data>
+  <data name="IsTaxable" xml:space="preserve">
+    <value>خاضع للضريبة</value>
+  </data>
+  <data name="EditBonusType" xml:space="preserve">
+    <value>تعديل نوع المكافأة</value>
+  </data>
+  <data name="PaymentMethods" xml:space="preserve">
+    <value>طرق الدفع</value>
+  </data>
+  <data name="PaymentMethodsDescription" xml:space="preserve">
+    <value>وصف طرق الدفع</value>
+  </data>
+  <data name="AddNewPaymentMethod" xml:space="preserve">
+    <value>إضافة طريقة دفع جديدة</value>
+  </data>
+  <data name="EditpaymentMethod" xml:space="preserve">
+    <value>تعديل طريقة الدفع</value>
+  </data>
+  <data name="BusinessMissionTypes" xml:space="preserve">
+    <value>أنواع مأموريات العمل</value>
+  </data>
+  <data name="BusinessMissionTypesDescription" xml:space="preserve">
+    <value>وصف أنواع مأموريات العمل</value>
+  </data>
+  <data name="AddNewBusinessMissionType" xml:space="preserve">
+    <value>إضافة نوع مأمورية عمل جديد</value>
+  </data>
+  <data name="HasAllowance" xml:space="preserve">
+    <value>له بدل</value>
+  </data>
+  <data name="EditBusinessMissionType" xml:space="preserve">
+    <value>تعديل نوع مأمورية العمل</value>
+  </data>
+  <data name="ExpenseTypes" xml:space="preserve">
+    <value>أنواع المصروفات</value>
+  </data>
+  <data name="ExpenseTypesDescription" xml:space="preserve">
+    <value>وصف أنواع المصروفات</value>
+  </data>
+  <data name="MaxLimitAmount" xml:space="preserve">
+    <value>الحد الأقصى للمبلغ</value>
+  </data>
+  <data name="RequiresReceipt" xml:space="preserve">
+    <value>يتطلب إيصالًا</value>
+  </data>
+  <data name="AddNewExpenseType" xml:space="preserve">
+    <value>إضافة نوع مصروف جديد</value>
+  </data>
+  <data name="EditExpenseType" xml:space="preserve">
+    <value>تعديل نوع المصروف</value>
+  </data>
+  <data name="PenaltyTypes" xml:space="preserve">
+    <value>أنواع الجزاءات</value>
+  </data>
+  <data name="PenaltyTypesDescription" xml:space="preserve">
+    <value>وصف أنواع الجزاءات</value>
+  </data>
+  <data name="AddNewPenaltyType" xml:space="preserve">
+    <value>إضافة نوع جزاء جديد</value>
+  </data>
+  <data name="DefaultDeductionAmount" xml:space="preserve">
+    <value>مبلغ الخصم الافتراضي</value>
+  </data>
+  <data name="EditPenaltyType" xml:space="preserve">
+    <value>تعديل نوع الجزاء</value>
+  </data>
+  <data name="PermissionTypes" xml:space="preserve">
+    <value>أنواع الأذونات</value>
+  </data>
+  <data name="PermissionTypesDescription" xml:space="preserve">
+    <value>وصف أنواع الأذونات</value>
+  </data>
+  <data name="AddNewPermissionType" xml:space="preserve">
+    <value>إضافة نوع إذن جديد</value>
+  </data>
+  <data name="MaxHoursPerMonth" xml:space="preserve">
+    <value>الحد الأقصى للساعات شهريًا</value>
+  </data>
+  <data name="MaxCountPerMonth" xml:space="preserve">
+    <value>الحد الأقصى لعدد المرات شهريًا</value>
+  </data>
+  <data name="DeductFromSalary" xml:space="preserve">
+    <value>يُخصم من الراتب</value>
+  </data>
+  <data name="DeductFromLeaveBalance" xml:space="preserve">
+    <value>يُخصم من رصيد الإجازات</value>
+  </data>
+  <data name="RequiresAttachment" xml:space="preserve">
+    <value>يتطلب مرفقًا</value>
+  </data>
+  <data name="EditPermissionType" xml:space="preserve">
+    <value>تعديل نوع الإذن</value>
+  </data>
+  <data name="DefaultDeductionDays" xml:space="preserve">
+    <value>أيام الخصم الافتراضية</value>
+  </data>
+  <data name="ResignationReasons" xml:space="preserve">
+    <value>أسباب الاستقالة</value>
+  </data>
+  <data name="ResignationReasonsDescription" xml:space="preserve">
+    <value>وصف أسباب الاستقالة</value>
+  </data>
+  <data name="AddNewResignationReason" xml:space="preserve">
+    <value>إضافة سبب استقالة جديد</value>
+  </data>
+  <data name="EditResignationReason" xml:space="preserve">
+    <value>تعديل سبب الاستقالة</value>
+  </data>
+  <data name="EditLeaveType" xml:space="preserve">
+    <value>تعديل نوع الإجازة</value>
+  </data>
+  <data name="LeaveTypes" xml:space="preserve">
+    <value>أنواع الإجازات</value>
+  </data>
+  <data name="LeaveTypesDescription" xml:space="preserve">
+    <value>إدارة أنواع الإجازات وسياسات الأرصدة والخصومات</value>
+  </data>
+  <data name="AddNewLeaveType" xml:space="preserve">
+    <value>إضافة نوع إجازة جديد</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>الفئة</value>
+  </data>
+  <data name="IsPaid" xml:space="preserve">
+    <value>مدفوعة</value>
+  </data>
+  <data name="RequiresBalance" xml:space="preserve">
+    <value>تتطلب رصيد</value>
+  </data>
+  <data name="MaxDaysPerYear" xml:space="preserve">
+    <value>الحد الأقصى للأيام بالسنة</value>
+  </data>
+  <data name="AddLeaveType" xml:space="preserve">
+    <value>إضافة نوع إجازة</value>
+  </data>
+  <data name="RulesAndPolicies" xml:space="preserve">
+    <value>القواعد والسياسات</value>
+  </data>
+  <data name="LimitsAndDays" xml:space="preserve">
+    <value>الحدود والأيام</value>
+  </data>
+  <data name="SelectCategory" xml:space="preserve">
+    <value>اختر الفئة</value>
+  </data>
+  <data name="AccentColor" xml:space="preserve">
+    <value>اللون المميز</value>
+  </data>
+  <data name="DisplayOrder" xml:space="preserve">
+    <value>ترتيب العرض</value>
+  </data>
+  <data name="RequiresApproval" xml:space="preserve">
+    <value>يتطلب موافقة</value>
+  </data>
+  <data name="RequiresWorkflow" xml:space="preserve">
+    <value>يتطلب مسار عمل</value>
+  </data>
+  <data name="MaxDaysPerRequest" xml:space="preserve">
+    <value>الحد الأقصى للأيام لكل طلب</value>
+  </data>
+  <data name="AllowCarryForward" xml:space="preserve">
+    <value>السماح بترحيل الرصيد</value>
+  </data>
+  <data name="CarryForwardLimit" xml:space="preserve">
+    <value>حد ترحيل الرصيد</value>
+  </data>
+  <data name="RequiredFieldsMessage" xml:space="preserve">
+    <value>يرجى تعبئة جميع الحقول المطلوبة.</value>
+  </data>
+  <data name="SaveErrorMessage" xml:space="preserve">
+    <value>حدث خطأ أثناء حفظ البيانات.</value>
+  </data>
+  <data name="LeaveCategories" xml:space="preserve">
+    <value>فئات الإجازات</value>
+  </data>
+  <data name="LeaveCategoriesDescription" xml:space="preserve">
+    <value>وصف فئات الإجازات</value>
+  </data>
+  <data name="AddNewLeaveCategory" xml:space="preserve">
+    <value>إضافة فئة إجازة جديدة</value>
+  </data>
+  <data name="EditLeaveCategory" xml:space="preserve">
+    <value>تعديل فئة الإجازة</value>
+  </data>
+  <data name="Departments" xml:space="preserve">
+    <value>الأقسام</value>
+  </data>
+  <data name="DepartmentsDescription" xml:space="preserve">
+    <value>وصف الأقسام</value>
+  </data>
+  <data name="AddNewDepartment" xml:space="preserve">
+    <value>إضافة قسم جديد</value>
+  </data>
+  <data name="EditDepartment" xml:space="preserve">
+    <value>تعديل القسم</value>
+  </data>
+  <data name="RequiredFieldsErrorMessage" xml:space="preserve">
+    <value>يرجى تعبئة جميع الحقول المطلوبة.</value>
+  </data>
+  <data name="AnErrorOccurred" xml:space="preserve">
+    <value>حدث خطأ.</value>
+  </data>
+  <data name="Sections" xml:space="preserve">
+    <value>الأقسام الفرعية</value>
+  </data>
+  <data name="SectionsDescription" xml:space="preserve">
+    <value>وصف الأقسام الفرعية</value>
+  </data>
+  <data name="AddNewSection" xml:space="preserve">
+    <value>إضافة قسم فرعي جديد</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>القسم</value>
+  </data>
+  <data name="SelectDepartment" xml:space="preserve">
+    <value>اختر القسم</value>
+  </data>
+  <data name="EditSection" xml:space="preserve">
+    <value>تعديل القسم الفرعي</value>
+  </data>
+  <data name="Units" xml:space="preserve">
+    <value>الوحدات</value>
+  </data>
+  <data name="UnitsDescription" xml:space="preserve">
+    <value>وصف الوحدات</value>
+  </data>
+  <data name="AddNewUnit" xml:space="preserve">
+    <value>إضافة وحدة جديدة</value>
+  </data>
+  <data name="Section" xml:space="preserve">
+    <value>القسم الفرعي</value>
+  </data>
+  <data name="SelectSection" xml:space="preserve">
+    <value>اختر القسم الفرعي</value>
+  </data>
+  <data name="EditUnit" xml:space="preserve">
+    <value>تعديل الوحدة</value>
+  </data>
+  <data name="EditModel" xml:space="preserve">
+    <value>تعديل النموذج</value>
+  </data>
+  <data name="PositionStatuses" xml:space="preserve">
+    <value>حالات الوظائف</value>
+  </data>
+  <data name="AddNewPositionStatus" xml:space="preserve">
+    <value>إضافة حالة وظيفة جديدة</value>
+  </data>
+  <data name="EditPositionStatus" xml:space="preserve">
+    <value>تعديل حالة الوظيفة</value>
+  </data>
+  <data name="PositionStatusCode" xml:space="preserve">
+    <value>كود حالة الوظيفة</value>
+  </data>
+  <data name="PositionStatusesDescription" xml:space="preserve">
+    <value>وصف حالات الوظائف</value>
+  </data>
+  <data name="AssignmentReasons" xml:space="preserve">
+    <value>أسباب التكليف</value>
+  </data>
+  <data name="AssignmentReasonsDescription" xml:space="preserve">
+    <value>وصف أسباب التكليف</value>
+  </data>
+  <data name="AddNewAssignmentReason" xml:space="preserve">
+    <value>إضافة سبب تكليف جديد</value>
+  </data>
+  <data name="AssignmentReasonCode" xml:space="preserve">
+    <value>كود سبب التكليف</value>
+  </data>
+  <data name="EditAssignmentReason" xml:space="preserve">
+    <value>تعديل سبب التكليف</value>
+  </data>
+  <data name="AssetTypes" xml:space="preserve">
+    <value>أنواع الأصول</value>
+  </data>
+  <data name="AssetTypesDescription" xml:space="preserve">
+    <value>وصف أنواع الأصول</value>
+  </data>
+  <data name="AddNewAssetType" xml:space="preserve">
+    <value>إضافة نوع أصل جديد</value>
+  </data>
+  <data name="AssetTypeCode" xml:space="preserve">
+    <value>كود نوع الأصل</value>
+  </data>
+  <data name="EditAssetType" xml:space="preserve">
+    <value>تعديل نوع الأصل</value>
+  </data>
+  <data name="SafetyTypes" xml:space="preserve">
+    <value>أنواع السلامة</value>
+  </data>
+  <data name="SafetyTypesDescription" xml:space="preserve">
+    <value>وصف أنواع السلامة</value>
+  </data>
+  <data name="AddNewSafetyType" xml:space="preserve">
+    <value>إضافة نوع سلامة جديد</value>
+  </data>
+  <data name="SafetyTypeCode" xml:space="preserve">
+    <value>كود نوع السلامة</value>
+  </data>
+  <data name="SeverityLevel" xml:space="preserve">
+    <value>درجة الخطورة</value>
+  </data>
+  <data name="EditSafetyType" xml:space="preserve">
+    <value>تعديل نوع السلامة</value>
+  </data>
+  <data name="JobGroups" xml:space="preserve">
+    <value>مجموعات الوظائف</value>
+  </data>
+  <data name="JobGroupsDescription" xml:space="preserve">
+    <value>وصف مجموعات الوظائف</value>
+  </data>
+  <data name="JobGroupCode" xml:space="preserve">
+    <value>كود مجموعة الوظائف</value>
+  </data>
+  <data name="AddNewJobGroup" xml:space="preserve">
+    <value>إضافة مجموعة وظائف جديدة</value>
+  </data>
+  <data name="EditJobGroup" xml:space="preserve">
+    <value>تعديل مجموعة الوظائف</value>
+  </data>
+  <data name="JobTitles" xml:space="preserve">
+    <value>المسميات الوظيفية</value>
+  </data>
+  <data name="JobTitlesDescription" xml:space="preserve">
+    <value>وصف المسميات الوظيفية</value>
+  </data>
+  <data name="AddNewJobTitle" xml:space="preserve">
+    <value>إضافة مسمى وظيفي جديد</value>
+  </data>
+  <data name="JobTitleCode" xml:space="preserve">
+    <value>كود المسمى الوظيفي</value>
+  </data>
+  <data name="JobGroup" xml:space="preserve">
+    <value>مجموعة الوظائف</value>
+  </data>
+  <data name="EditJobTitle" xml:space="preserve">
+    <value>تعديل المسمى الوظيفي</value>
+  </data>
+  <data name="JobLevels" xml:space="preserve">
+    <value>المستويات الوظيفية</value>
+  </data>
+  <data name="JobLevelsDescription" xml:space="preserve">
+    <value>وصف المستويات الوظيفية</value>
+  </data>
+  <data name="JobLevelCode" xml:space="preserve">
+    <value>كود المستوى الوظيفي</value>
+  </data>
+  <data name="AddNewJobLevel" xml:space="preserve">
+    <value>إضافة مستوى وظيفي جديد</value>
+  </data>
+  <data name="EditJobLevel" xml:space="preserve">
+    <value>تعديل المستوى الوظيفي</value>
+  </data>
+  <data name="Positions" xml:space="preserve">
+    <value>الوظائف</value>
+  </data>
+  <data name="PositionsDescription" xml:space="preserve">
+    <value>وصف الوظائف</value>
+  </data>
+  <data name="AddNewPosition" xml:space="preserve">
+    <value>إضافة وظيفة جديدة</value>
+  </data>
+  <data name="PositionCode" xml:space="preserve">
+    <value>كود الوظيفة</value>
+  </data>
+  <data name="JobTitle" xml:space="preserve">
+    <value>المسمى الوظيفي</value>
+  </data>
+  <data name="JobLevel" xml:space="preserve">
+    <value>المستوى الوظيفي</value>
+  </data>
+  <data name="ReportsTo" xml:space="preserve">
+    <value>يتبع إداريًا إلى</value>
+  </data>
+  <data name="HeadCount" xml:space="preserve">
+    <value>العدد المقرر للموظفين</value>
+  </data>
+  <data name="PositionStatus" xml:space="preserve">
+    <value>حالة الوظيفة</value>
+  </data>
+  <data name="Unit" xml:space="preserve">
+    <value>الوحدة</value>
+  </data>
+  <data name="EffectiveFrom" xml:space="preserve">
+    <value>ساري من</value>
+  </data>
+  <data name="EffectiveTo" xml:space="preserve">
+    <value>ساري حتى</value>
+  </data>
+  <data name="Remarks" xml:space="preserve">
+    <value>ملاحظات</value>
+  </data>
+  <data name="IsManagerial" xml:space="preserve">
+    <value>وظيفة إدارية</value>
+  </data>
+  <data name="EditPosition" xml:space="preserve">
+    <value>تعديل الوظيفة</value>
+  </data>
+  <data name="PositionName" xml:space="preserve">
+    <value>اسم الوظيفة</value>
+  </data>
+  <data name="RequestStatuses" xml:space="preserve">
+    <value>حالات الطلبات</value>
+  </data>
+  <data name="RequestStatusesDescription" xml:space="preserve">
+    <value>وصف حالات الطلبات</value>
+  </data>
+  <data name="AddNewStatus" xml:space="preserve">
+    <value>إضافة حالة جديدة</value>
+  </data>
+  <data name="BadgeStyle" xml:space="preserve">
+    <value>نمط الشارة</value>
+  </data>
+  <data name="IsFinal" xml:space="preserve">
+    <value>حالة نهائية</value>
+  </data>
+  <data name="BadgeClass" xml:space="preserve">
+    <value>فئة الشارة</value>
+  </data>
+  <data name="EditStatus" xml:space="preserve">
+    <value>تعديل الحالة</value>
+  </data>
+  <data name="ProcessTypes" xml:space="preserve">
+    <value>أنواع الإجراءات</value>
+  </data>
+  <data name="ProcessTypesDescription" xml:space="preserve">
+    <value>وصف أنواع الإجراءات</value>
+  </data>
+  <data name="AddNewProcessType" xml:space="preserve">
+    <value>إضافة نوع إجراء جديد</value>
+  </data>
+  <data name="AddNewProcessTypeAr" xml:space="preserve">
+    <value>كود الإجراء</value>
+  </data>
+  <data name="EditProcessType" xml:space="preserve">
+    <value>تعديل نوع الإجراء</value>
+  </data>
+  <data name="ProcessCode" xml:space="preserve">
+    <value>كود الإجراء</value>
+  </data>
+  <data name="ApproverTypes" xml:space="preserve">
+    <value>أنواع المعتمدين</value>
+  </data>
+  <data name="ApproverTypesDescription" xml:space="preserve">
+    <value>وصف أنواع المعتمدين</value>
+  </data>
+  <data name="AddNewApproverType" xml:space="preserve">
+    <value>إضافة نوع معتمد جديد</value>
+  </data>
+  <data name="ApproverTypeCode" xml:space="preserve">
+    <value>كود نوع المعتمد</value>
+  </data>
+  <data name="RequiresJobTitle" xml:space="preserve">
+    <value>يتطلب مسمى وظيفي</value>
+  </data>
+  <data name="RequiresEmployee" xml:space="preserve">
+    <value>يتطلب موظفًا</value>
+  </data>
+  <data name="EditApproverType" xml:space="preserve">
+    <value>تعديل نوع المعتمد</value>
+  </data>
+  <data name="HolidayCalendar" xml:space="preserve">
+    <value>تقويم العطلات</value>
+  </data>
+  <data name="HolidayCalendarDescription" xml:space="preserve">
+    <value>وصف تقويم العطلات</value>
+  </data>
+  <data name="AddNewHoliday" xml:space="preserve">
+    <value>إضافة عطلة جديدة</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>تاريخ البدء</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>تاريخ الانتهاء</value>
+  </data>
+  <data name="TotalDays" xml:space="preserve">
+    <value>إجمالي الأيام</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>السنة</value>
+  </data>
+  <data name="IsRecurring" xml:space="preserve">
+    <value>متكرر سنويًا</value>
+  </data>
+  <data name="EditHoliday" xml:space="preserve">
+    <value>تعديل العطلة</value>
+  </data>
+  <data name="DateErrorMessage" xml:space="preserve">
+    <value>يجب أن يكون تاريخ الانتهاء أكبر من أو يساوي تاريخ البدء.</value>
+  </data>
+  <data name="Currencies" xml:space="preserve">
+    <value>العملات</value>
+  </data>
+  <data name="CurrenciesDescription" xml:space="preserve">
+    <value>وصف العملات</value>
+  </data>
+  <data name="AddNewCurrency" xml:space="preserve">
+    <value>إضافة عملة جديدة</value>
+  </data>
+  <data name="CurrencyCode" xml:space="preserve">
+    <value>كود العملة</value>
+  </data>
+  <data name="Symbol" xml:space="preserve">
+    <value>الرمز</value>
+  </data>
+  <data name="IsBaseCurrency" xml:space="preserve">
+    <value>العملة الأساسية</value>
+  </data>
+  <data name="EditCurrency" xml:space="preserve">
+    <value>تعديل العملة</value>
+  </data>
+  <data name="AccountTypes" xml:space="preserve">
+    <value>أنواع الحسابات</value>
+  </data>
+  <data name="AccountTypesDescription" xml:space="preserve">
+    <value>وصف أنواع الحسابات</value>
+  </data>
+  <data name="AddNewAccountType" xml:space="preserve">
+    <value>إضافة نوع حساب جديد</value>
+  </data>
+  <data name="EditAccountType" xml:space="preserve">
+    <value>تعديل نوع الحساب</value>
+  </data>
+  <data name="Banks" xml:space="preserve">
+    <value>البنوك</value>
+  </data>
+  <data name="BanksDescription" xml:space="preserve">
+    <value>وصف البنوك</value>
+  </data>
+  <data name="AddNewBank" xml:space="preserve">
+    <value>إضافة بنك جديد</value>
+  </data>
+  <data name="BankCode" xml:space="preserve">
+    <value>كود البنك</value>
+  </data>
+  <data name="SwiftCode" xml:space="preserve">
+    <value>رمز SWIFT</value>
+  </data>
+  <data name="EditBank" xml:space="preserve">
+    <value>تعديل البنك</value>
+  </data>
+  <data name="BankAccountTypes" xml:space="preserve">
+    <value>أنواع الحسابات البنكية</value>
+  </data>
+  <data name="BankAccountTypesDescription" xml:space="preserve">
+    <value>وصف أنواع الحسابات البنكية</value>
+  </data>
+  <data name="AddNewBankAccountType" xml:space="preserve">
+    <value>إضافة نوع حساب بنكي جديد</value>
+  </data>
+  <data name="BankAccountTypeCode" xml:space="preserve">
+    <value>كود نوع الحساب البنكي</value>
+  </data>
+  <data name="EditBankAccountType" xml:space="preserve">
+    <value>تعديل نوع الحساب البنكي</value>
+  </data>
+  <data name="CostCenters" xml:space="preserve">
+    <value>مراكز التكلفة</value>
+  </data>
+  <data name="CostCentersDescription" xml:space="preserve">
+    <value>وصف مراكز التكلفة</value>
+  </data>
+  <data name="AddNewCostCenter" xml:space="preserve">
+    <value>إضافة مركز تكلفة جديد</value>
+  </data>
+  <data name="CostCenterCode" xml:space="preserve">
+    <value>كود مركز التكلفة</value>
+  </data>
+  <data name="ParentCostCenter" xml:space="preserve">
+    <value>مركز التكلفة الرئيسي</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>المستوى</value>
+  </data>
+  <data name="SelectParent" xml:space="preserve">
+    <value>اختر الرئيسي</value>
+  </data>
+  <data name="EditCostCenter" xml:space="preserve">
+    <value>تعديل مركز التكلفة</value>
+  </data>
+  <data name="CurrencyRates" xml:space="preserve">
+    <value>أسعار العملات</value>
+  </data>
+  <data name="CurrencyRatesDescription" xml:space="preserve">
+    <value>وصف أسعار العملات</value>
+  </data>
+  <data name="AddNewCurrencyRate" xml:space="preserve">
+    <value>إضافة سعر عملة جديد</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>العملة</value>
+  </data>
+  <data name="BaseCurrency" xml:space="preserve">
+    <value>العملة الأساسية</value>
+  </data>
+  <data name="ExchangeRate" xml:space="preserve">
+    <value>سعر الصرف</value>
+  </data>
+  <data name="RateDate" xml:space="preserve">
+    <value>تاريخ سعر الصرف</value>
+  </data>
+  <data name="EditCurrencyRate" xml:space="preserve">
+    <value>تعديل سعر العملة</value>
+  </data>
+  <data name="SelectCurrency" xml:space="preserve">
+    <value>اختر العملة</value>
+  </data>
+  <data name="SelectBaseCurrency" xml:space="preserve">
+    <value>اختر العملة الأساسية</value>
+  </data>
+  <data name="BankBranches" xml:space="preserve">
+    <value>فروع البنوك</value>
+  </data>
+  <data name="BankBranchesDescription" xml:space="preserve">
+    <value>وصف فروع البنوك</value>
+  </data>
+  <data name="AddNewBranch" xml:space="preserve">
+    <value>إضافة فرع جديد</value>
+  </data>
+  <data name="Bank" xml:space="preserve">
+    <value>البنك</value>
+  </data>
+  <data name="BranchCode" xml:space="preserve">
+    <value>كود الفرع</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>الهاتف</value>
+  </data>
+  <data name="SelectBank" xml:space="preserve">
+    <value>اختر البنك</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>العنوان</value>
+  </data>
+  <data name="EditBranch" xml:space="preserve">
+    <value>تعديل الفرع</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>الحسابات</value>
+  </data>
+  <data name="AccountsDescription" xml:space="preserve">
+    <value>وصف الحسابات</value>
+  </data>
+  <data name="AddNewAccount" xml:space="preserve">
+    <value>إضافة حساب جديد</value>
+  </data>
+  <data name="AccountCode" xml:space="preserve">
+    <value>كود الحساب</value>
+  </data>
+  <data name="AccountType" xml:space="preserve">
+    <value>نوع الحساب</value>
+  </data>
+  <data name="AccountNature" xml:space="preserve">
+    <value>طبيعة الحساب</value>
+  </data>
+  <data name="ParentAccount" xml:space="preserve">
+    <value>الحساب الرئيسي</value>
+  </data>
+  <data name="SelectParentAccount" xml:space="preserve">
+    <value>اختر الحساب الرئيسي</value>
+  </data>
+  <data name="SelectAccountType" xml:space="preserve">
+    <value>اختر نوع الحساب</value>
+  </data>
+  <data name="Debit" xml:space="preserve">
+    <value>مدين</value>
+  </data>
+  <data name="Credit" xml:space="preserve">
+    <value>دائن</value>
+  </data>
+  <data name="IsSubAccount" xml:space="preserve">
+    <value>حساب فرعي</value>
+  </data>
+  <data name="EditAccount" xml:space="preserve">
+    <value>تعديل الحساب</value>
+  </data>
+  <data name="Employees" xml:space="preserve">
+    <value>الموظفون</value>
+  </data>
+  <data name="EmployeesDescription" xml:space="preserve">
+    <value>وصف الموظفين</value>
+  </data>
+  <data name="AddNewEmployee" xml:space="preserve">
+    <value>إضافة موظف جديد</value>
+  </data>
+  <data name="EmployeeCode" xml:space="preserve">
+    <value>كود الموظف</value>
+  </data>
+  <data name="OldCode" xml:space="preserve">
+    <value>الكود القديم</value>
+  </data>
+  <data name="FirstNameAr" xml:space="preserve">
+    <value>الاسم الأول (بالعربية)</value>
+  </data>
+  <data name="MiddleNameAr" xml:space="preserve">
+    <value>الاسم الأوسط (بالعربية)</value>
+  </data>
+  <data name="LastNameAr" xml:space="preserve">
+    <value>اسم العائلة (بالعربية)</value>
+  </data>
+  <data name="FirstNameEn" xml:space="preserve">
+    <value>الاسم الأول (بالإنجليزية)</value>
+  </data>
+  <data name="MiddleNameEn" xml:space="preserve">
+    <value>الاسم الأوسط (بالإنجليزية)</value>
+  </data>
+  <data name="LastNameEn" xml:space="preserve">
+    <value>اسم العائلة (بالإنجليزية)</value>
+  </data>
+  <data name="NationalId" xml:space="preserve">
+    <value>الرقم القومي</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>تاريخ الميلاد</value>
+  </data>
+  <data name="PassportNumber" xml:space="preserve">
+    <value>رقم جواز السفر</value>
+  </data>
+  <data name="DriverLicenseNumber" xml:space="preserve">
+    <value>رقم رخصة القيادة</value>
+  </data>
+  <data name="EditEmployee" xml:space="preserve">
+    <value>تعديل الموظف</value>
   </data>
 </root>

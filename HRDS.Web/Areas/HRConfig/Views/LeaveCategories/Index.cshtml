@@ -1,0 +1,219 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+
+@{
+    ViewData["Title"] = Resource.LeaveCategories;
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-tags fs-3 lh-1 flex-shrink-0 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@Resource.LeaveCategories</h4>
+                    <p class="text-muted mb-0 small">@Resource.LeaveCategoriesDescription</p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary px-3 py-2" onclick="openAddModal()">
+                <i class="bi bi-plus-lg me-1"></i> @Resource.AddNewLeaveCategory
+            </button>
+        </div>
+    </div>
+
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="leaveCategoriesTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.Code</th>
+                            <th>@Resource.ArabicName</th>
+                            <th>@Resource.EnglishName</th>
+                            <th>@Resource.Description</th>
+                            <th>@Resource.Status</th>
+                            <th>@Resource.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="leaveCategoryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content dark-modal">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalTitle">@Resource.AddNewLeaveCategory</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="leaveCategoryForm">
+                    <input type="hidden" id="leaveCategoryId" value="0" />
+
+                    <div class="row g-3 text-start">
+                        <div class="col-12">
+                            <label class="form-label text-white">@Resource.Code <span class="text-danger">*</span></label>
+                            <input type="text" id="leaveCategoryCode" class="form-control" required />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label text-white">@Resource.ArabicName <span class="text-danger">*</span></label>
+                            <input type="text" id="leaveCategoryNameAr" class="form-control" required />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label text-white">@Resource.EnglishName</label>
+                            <input type="text" id="leaveCategoryNameEn" class="form-control" />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label text-white">@Resource.Description</label>
+                            <textarea id="description" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check form-switch mt-2">
+                                <input class="form-check-input" type="checkbox" id="isActive" checked>
+                                <label class="form-check-label text-white me-2" for="isActive">@Resource.IsActive</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resource.Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveLeaveCategory()">
+                    <i class="bi bi-save me-1"></i> @Resource.SaveData
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+        let leaveCategoryModal;
+
+        // تحويل الموارد إلى JSON صريح لتجنب مشكلة الـ HTML Encoding
+        const localizedStrings = {
+            addTitle: @Html.Raw(Json.Serialize(Resource.AddNewLeaveCategory)),
+            editTitle: @Html.Raw(Json.Serialize(Resource.EditLeaveCategory)),
+            requiredError: @Html.Raw(Json.Serialize(Resource.RequiredFieldsErrorMessage)),
+            saveError: @Html.Raw(Json.Serialize(Resource.SaveErrorMessage)),
+            active: @Html.Raw(Json.Serialize(Resource.Active)),
+            inactive: @Html.Raw(Json.Serialize(Resource.Inactive))
+        };
+
+        $(document).ready(function () {
+            leaveCategoryModal = new bootstrap.Modal(document.getElementById('leaveCategoryModal'));
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            table = $('#leaveCategoriesTable').DataTable({
+                pagingType: 'simple',
+                ajax: {
+                    url: '@Url.Action("GetJson", "LeaveCategories")',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'leaveCategoryId', width: '5%' },
+                    {
+                        data: 'leaveCategoryCode',
+                        render: function (data) {
+                            return `<span class="badge dark-badge-code font-monospace px-2 py-1">${data || ''}</span>`;
+                        }
+                    },
+                    { data: 'leaveCategoryNameAr' },
+                    { data: 'leaveCategoryNameEn', render: function(d) { return d || '-'; } },
+                    { data: 'description', render: function(d) { return d || '-'; } },
+                    {
+                        data: 'isActive',
+                        render: function (data) {
+                            return data ? `<span class="badge neon-badge-info">${localizedStrings.active}</span>`
+                                        : `<span class="badge neon-badge-muted">${localizedStrings.inactive}</span>`;
+                        }
+                    },
+                    {
+                        data: 'leaveCategoryId',
+                        render: function (data) {
+                            return `<button class="btn btn-sm btn-action-edit" onclick="editLeaveCategory(${data})">
+                                        <i class="bi bi-pencil-square me-1"></i>${localizedStrings.editTitle}
+                                    </button>`;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        }
+
+        function openAddModal() {
+            $('#leaveCategoryId').val(0);
+            $('#leaveCategoryForm')[0].reset();
+            $('#isActive').prop('checked', true);
+            $('#modalTitle').html(localizedStrings.addTitle);
+            leaveCategoryModal.show();
+        }
+
+        function editLeaveCategory(id) {
+            $.get('@Url.Action("GetById", "LeaveCategories")/' + id, function (data) {
+                if (data) {
+                    $('#leaveCategoryId').val(data.leaveCategoryId);
+                    $('#leaveCategoryCode').val(data.leaveCategoryCode);
+                    $('#leaveCategoryNameAr').val(data.leaveCategoryNameAr);
+                    $('#leaveCategoryNameEn').val(data.leaveCategoryNameEn);
+                    $('#description').val(data.description);
+                    $('#isActive').prop('checked', data.isActive);
+
+                    $('#modalTitle').html(localizedStrings.editTitle);
+                    leaveCategoryModal.show();
+                }
+            });
+        }
+
+        function saveLeaveCategory() {
+            let model = {
+                LeaveCategoryId: parseInt($('#leaveCategoryId').val()) || 0,
+                LeaveCategoryCode: $('#leaveCategoryCode').val(),
+                LeaveCategoryNameAr: $('#leaveCategoryNameAr').val(),
+                LeaveCategoryNameEn: $('#leaveCategoryNameEn').val(),
+                Description: $('#description').val(),
+                IsActive: $('#isActive').is(':checked')
+            };
+
+            if (!model.LeaveCategoryCode || !model.LeaveCategoryNameAr) {
+                alert(localizedStrings.requiredError);
+                return;
+            }
+
+            let token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '@Url.Action("Save", "LeaveCategories")',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: { "RequestVerificationToken": token },
+                data: JSON.stringify(model),
+                success: function (response) {
+                    if (response.success) {
+                        leaveCategoryModal.hide();
+                        table.ajax.reload(null, false);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert(localizedStrings.saveError);
+                }
+            });
+        }
+    </script>
+}

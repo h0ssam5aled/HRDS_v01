@@ -1,0 +1,244 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+
+@{
+    ViewData["Title"] = Resource.Units;
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-boxes fs-3 lh-1 flex-shrink-0 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@Resource.Units</h4>
+                    <p class="text-muted mb-0 small">@Resource.UnitsDescription</p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary px-3 py-2" onclick="openAddModal()">
+                <i class="bi bi-plus-lg me-1"></i> @Resource.AddNewUnit
+            </button>
+        </div>
+    </div>
+
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="unitsTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.Code</th>
+                            <th>@Resource.ArabicName</th>
+                            <th>@Resource.EnglishName</th>
+                            <th>@Resource.Section</th>
+                            <th>@Resource.DisplayOrder</th>
+                            <th>@Resource.Status</th>
+                            <th>@Resource.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="unitModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content dark-modal">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalTitle">@Resource.AddNewUnit</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="unitForm">
+                    <input type="hidden" id="unitId" value="0" />
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.Section <span class="text-danger">*</span></label>
+                        <select id="sectionId" class="form-select" asp-items="ViewBag.Sections" required>
+                            <option value="">@Resource.SelectSection</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.Code <span class="text-danger">*</span></label>
+                        <input type="text" id="unitCode" class="form-control" placeholder="e.g. UNT-BE" required />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.ArabicName <span class="text-danger">*</span></label>
+                        <input type="text" id="unitNameAr" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.EnglishName</label>
+                        <input type="text" id="unitNameEn" class="form-control" />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.DisplayOrder</label>
+                        <input type="number" id="displayOrder" class="form-control" value="1" />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.Description</label>
+                        <textarea id="description" class="form-control" rows="2"></textarea>
+                    </div>
+
+                    <div class="form-check form-switch text-start">
+                        <input class="form-check-input" type="checkbox" id="isActive" checked>
+                        <label class="form-check-label text-white ms-2" for="isActive">@Resource.IsActive</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resource.Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveUnit()">
+                    <i class="bi bi-save me-1"></i> @Resource.SaveData
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+        let unitModal;
+
+        // تجهيز نصوص الموارد لتفادي مشاكل الـ HTML Encoding في الجافاسكريبت
+        const txtAddNewUnit = @Html.Raw(Json.Serialize(Resource.AddNewUnit));
+        const txtEditUnit = @Html.Raw(Json.Serialize(Resource.EditUnit));
+        const txtRequiredFields = @Html.Raw(Json.Serialize(Resource.RequiredFieldsErrorMessage));
+        const txtAnErrorOccurred = @Html.Raw(Json.Serialize(Resource.AnErrorOccurred));
+        const txtActive = @Html.Raw(Json.Serialize(Resource.Active));
+        const txtInactive = @Html.Raw(Json.Serialize(Resource.Inactive));
+
+        $(document).ready(function () {
+            unitModal = new bootstrap.Modal(document.getElementById('unitModal'));
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            let isArabic = '@currentCulture' === 'ar';
+
+            table = $('#unitsTable').DataTable({
+                pagingType: 'simple',
+                ajax: {
+                    url: '@Url.Action("GetJson", "Units", new { area = "HRConfig" })',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'unitId', width: '5%' },
+                    {
+                        data: 'unitCode',
+                        render: function (data) {
+                            return `<span class="badge dark-badge-code font-monospace px-2 py-1">${data || ''}</span>`;
+                        }
+                    },
+                    { data: 'unitNameAr' },
+                    { data: 'unitNameEn', render: d => d || '-' },
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            return isArabic
+                                ? (row.sectionNameAr || '-')
+                                : (row.sectionNameEn || row.sectionNameAr || '-');
+                        }
+                    },
+                    { data: 'displayOrder', render: d => d || 0 },
+                    {
+                        data: 'isActive',
+                        render: function (data) {
+                            return data ? `<span class="badge neon-badge-info">${txtActive}</span>`
+                                        : `<span class="badge neon-badge-muted">${txtInactive}</span>`;
+                        }
+                    },
+                    {
+                        data: 'unitId',
+                        render: function (data) {
+                            return `<button class="btn btn-sm btn-action-edit" onclick="editUnit(${data})">
+                                        <i class="bi bi-pencil-square me-1"></i>${txtEditUnit}
+                                    </button>`;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        }
+
+        function openAddModal() {
+            $('#unitId').val(0);
+            $('#unitForm')[0].reset();
+            $('#displayOrder').val(1);
+            $('#isActive').prop('checked', true);
+            $('#modalTitle').html(txtAddNewUnit);
+            unitModal.show();
+        }
+
+        function editUnit(id) {
+            $.get('@Url.Action("GetById", "Units", new { area = "HRConfig" })/' + id, function (data) {
+                if (data) {
+                    $('#unitId').val(data.unitId);
+                    $('#sectionId').val(data.sectionId);
+                    $('#unitCode').val(data.unitCode);
+                    $('#unitNameAr').val(data.unitNameAr);
+                    $('#unitNameEn').val(data.unitNameEn);
+                    $('#displayOrder').val(data.displayOrder || 1);
+                    $('#description').val(data.description);
+                    $('#isActive').prop('checked', data.isActive);
+
+                    $('#modalTitle').html(txtEditUnit);
+                    unitModal.show();
+                }
+            });
+        }
+
+        function saveUnit() {
+            let model = {
+                UnitId: parseInt($('#unitId').val()) || 0,
+                SectionId: parseInt($('#sectionId').val()) || 0,
+                UnitCode: $('#unitCode').val(),
+                UnitNameAr: $('#unitNameAr').val(),
+                UnitNameEn: $('#unitNameEn').val(),
+                DisplayOrder: $('#displayOrder').val() ? parseInt($('#displayOrder').val()) : null,
+                Description: $('#description').val(),
+                IsActive: $('#isActive').is(':checked')
+            };
+
+            if (!model.SectionId || !model.UnitCode || !model.UnitNameAr) {
+                alert(txtRequiredFields);
+                return;
+            }
+
+            let token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '@Url.Action("Save", "Units", new { area = "HRConfig" })',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: { "RequestVerificationToken": token },
+                data: JSON.stringify(model),
+                success: function (response) {
+                    if (response.success) {
+                        unitModal.hide();
+                        table.ajax.reload(null, false);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert(txtAnErrorOccurred);
+                }
+            });
+        }
+    </script>
+}

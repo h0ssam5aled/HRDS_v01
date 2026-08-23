@@ -1,0 +1,227 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+
+@{
+    ViewData["Title"] = Resource.Sections;
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-diagram-3 fs-3 lh-1 flex-shrink-0 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@Resource.Sections</h4>
+                    <p class="text-muted mb-0 small">@Resource.SectionsDescription</p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary px-3 py-2" onclick="openAddModal()">
+                <i class="bi bi-plus-lg me-1"></i> @Resource.AddNewSection
+            </button>
+        </div>
+    </div>
+
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="sectionsTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.Code</th>
+                            <th>@Resource.ArabicName</th>
+                            <th>@Resource.EnglishName</th>
+                            <th>@Resource.Department</th>
+                            <th>@Resource.Status</th>
+                            <th>@Resource.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="sectionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content dark-modal">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalTitle">@Resource.AddNewSection</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="sectionForm">
+                    <input type="hidden" id="sectionId" value="0" />
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.Department <span class="text-danger">*</span></label>
+                        <select id="departmentId" class="form-select" asp-items="ViewBag.Departments" required>
+                            <option value="">@Resource.SelectDepartment</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.Code <span class="text-danger">*</span></label>
+                        <input type="text" id="sectionCode" class="form-control" placeholder="e.g. SEC-DEV" required />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.ArabicName <span class="text-danger">*</span></label>
+                        <input type="text" id="sectionNameAr" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.EnglishName</label>
+                        <input type="text" id="sectionNameEn" class="form-control" />
+                    </div>
+
+                    <div class="form-check form-switch text-start">
+                        <input class="form-check-input" type="checkbox" id="isActive" checked>
+                        <label class="form-check-label text-white ms-2" for="isActive">@Resource.IsActive</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resource.Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveSection()">
+                    <i class="bi bi-save me-1"></i> @Resource.SaveData
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+        let sectionModal;
+
+        // تجهيز نصوص الموارد لمنع مشاكل الـ HTML Encoding والنصوص المشفرة
+        const txtAddNewSection = @Html.Raw(Json.Serialize(Resource.AddNewSection));
+        const txtEditSection = @Html.Raw(Json.Serialize(Resource.EditSection));
+        const txtRequiredFields = @Html.Raw(Json.Serialize(Resource.RequiredFieldsErrorMessage));
+        const txtAnErrorOccurred = @Html.Raw(Json.Serialize(Resource.AnErrorOccurred));
+        const txtActive = @Html.Raw(Json.Serialize(Resource.Active));
+        const txtInactive = @Html.Raw(Json.Serialize(Resource.Inactive));
+
+        $(document).ready(function () {
+            sectionModal = new bootstrap.Modal(document.getElementById('sectionModal'));
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            let isArabic = '@currentCulture' === 'ar';
+
+            table = $('#sectionsTable').DataTable({
+                pagingType: 'simple',
+                ajax: {
+                    url: '@Url.Action("GetJson", "Sections", new { area = "HRConfig" })',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'sectionId', width: '5%' },
+                    {
+                        data: 'sectionCode',
+                        render: function (data) {
+                            return `<span class="badge dark-badge-code font-monospace px-2 py-1">${data || ''}</span>`;
+                        }
+                    },
+                    { data: 'sectionNameAr' },
+                    { data: 'sectionNameEn', render: d => d || '-' },
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            return isArabic
+                                ? (row.departmentNameAr || '-')
+                                : (row.departmentNameEn || row.departmentNameAr || '-');
+                        }
+                    },
+                    {
+                        data: 'isActive',
+                        render: function (data) {
+                            return data ? `<span class="badge neon-badge-info">${txtActive}</span>`
+                                        : `<span class="badge neon-badge-muted">${txtInactive}</span>`;
+                        }
+                    },
+                    {
+                        data: 'sectionId',
+                        render: function (data) {
+                            return `<button class="btn btn-sm btn-action-edit" onclick="editSection(${data})">
+                                        <i class="bi bi-pencil-square me-1"></i>${txtEditSection}
+                                    </button>`;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        }
+
+        function openAddModal() {
+            $('#sectionId').val(0);
+            $('#sectionForm')[0].reset();
+            $('#isActive').prop('checked', true);
+            $('#modalTitle').html(txtAddNewSection);
+            sectionModal.show();
+        }
+
+        function editSection(id) {
+            $.get('@Url.Action("GetById", "Sections", new { area = "HRConfig" })/' + id, function (data) {
+                if (data) {
+                    $('#sectionId').val(data.sectionId);
+                    $('#departmentId').val(data.departmentId);
+                    $('#sectionCode').val(data.sectionCode);
+                    $('#sectionNameAr').val(data.sectionNameAr);
+                    $('#sectionNameEn').val(data.sectionNameEn);
+                    $('#isActive').prop('checked', data.isActive);
+
+                    $('#modalTitle').html(txtEditSection);
+                    sectionModal.show();
+                }
+            });
+        }
+
+        function saveSection() {
+            let model = {
+                SectionId: parseInt($('#sectionId').val()) || 0,
+                DepartmentId: parseInt($('#departmentId').val()) || 0,
+                SectionCode: $('#sectionCode').val(),
+                SectionNameAr: $('#sectionNameAr').val(),
+                SectionNameEn: $('#sectionNameEn').val(),
+                IsActive: $('#isActive').is(':checked')
+            };
+
+            if (!model.DepartmentId || !model.SectionCode || !model.SectionNameAr) {
+                alert(txtRequiredFields);
+                return;
+            }
+
+            let token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '@Url.Action("Save", "Sections", new { area = "HRConfig" })',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: { "RequestVerificationToken": token },
+                data: JSON.stringify(model),
+                success: function (response) {
+                    if (response.success) {
+                        sectionModal.hide();
+                        table.ajax.reload(null, false);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert(txtAnErrorOccurred);
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,100 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+
+@{
+    ViewData["Title"] = Resource.Employees;
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-people fs-3 lh-1 flex-shrink-0 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@Resource.Employees</h4>
+                    <p class="text-muted mb-0 small">@Resource.EmployeesDescription</p>
+                </div>
+            </div>
+            <a asp-action="Create" class="btn btn-primary px-3 py-2">
+                <i class="bi bi-plus-lg me-1"></i> @Resource.AddNewEmployee
+            </a>
+        </div>
+    </div>
+
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="employeesTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.EmployeeCode</th>
+                            <th>@Resource.ArabicName</th>
+                            <th>@Resource.EnglishName</th>
+                            <th>@Resource.NationalId</th>
+                            <th>@Resource.Status</th>
+                            <th>@Resource.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+        const editUrl = '@Url.Action("Edit", "Employees", new { area = "HR" })';
+
+        const localizedStrings = {
+            editBtn: @Html.Raw(Json.Serialize(Resource.EditEmployee)),
+            active: @Html.Raw(Json.Serialize(Resource.Active)),
+            inactive: @Html.Raw(Json.Serialize(Resource.Inactive))
+        };
+
+        $(document).ready(function () {
+            table = $('#employeesTable').DataTable({
+                pagingType: 'simple',
+                ajax: {
+                    url: '@Url.Action("GetJson", "Employees", new { area = "HR" })',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'employeeId', width: '5%' },
+                    {
+                        data: 'employeeCode',
+                        render: data => `<span class="badge dark-badge-code font-monospace px-2 py-1">${data || ''}</span>`
+                    },
+                    { data: 'fullNameAr' },
+                    { data: 'fullNameEn' },
+                    {
+                        data: 'nationalIdNo',
+                        render: data => data ? `<span class="font-monospace text-info">${data}</span>` : '-'
+                    },
+                    {
+                        data: 'isActive',
+                        render: function (data) {
+                            return data ? `<span class="badge neon-badge-info">${localizedStrings.active}</span>`
+                                        : `<span class="badge neon-badge-muted">${localizedStrings.inactive}</span>`;
+                        }
+                    },
+                    {
+                        data: 'employeeId',
+                        render: function (data) {
+                            return `<a href="${editUrl}/${data}" class="btn btn-sm btn-action-edit">
+                                        <i class="bi bi-pencil-square me-1"></i>${localizedStrings.editBtn}
+                                    </a>`;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        });
+    </script>
+}

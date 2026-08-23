@@ -1,0 +1,243 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+
+@{
+    ViewData["Title"] = Resource.CostCenters;
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-diagram-3 fs-3 lh-1 flex-shrink-0 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@Resource.CostCenters</h4>
+                    <p class="text-muted mb-0 small">@Resource.CostCentersDescription</p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary px-3 py-2" onclick="openAddModal()">
+                <i class="bi bi-plus-lg me-1"></i> @Resource.AddNewCostCenter
+            </button>
+        </div>
+    </div>
+
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="costCentersTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.CostCenterCode</th>
+                            <th>@Resource.ArabicName</th>
+                            <th>@Resource.EnglishName</th>
+                            <th>@Resource.ParentCostCenter</th>
+                            <th>@Resource.Level</th>
+                            <th>@Resource.Status</th>
+                            <th>@Resource.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="costCenterModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content dark-modal">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalTitle">@Resource.AddNewCostCenter</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="costCenterForm">
+                    <input type="hidden" id="costCenterId" value="0" />
+
+                    <div class="row mb-3 text-start">
+                        <div class="col-md-6">
+                            <label class="form-label text-white">@Resource.ParentCostCenter</label>
+                            <select id="parentCostCenterId" class="form-select">
+                                <option value="">-- @Resource.SelectParent --</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-white">@Resource.CostCenterCode <span class="text-danger">*</span></label>
+                            <input type="text" id="costCenterCode" class="form-control" placeholder="e.g. CC-101" required />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3 text-start">
+                        <div class="col-md-6">
+                            <label class="form-label text-white">@Resource.ArabicName <span class="text-danger">*</span></label>
+                            <input type="text" id="costCenterNameAr" class="form-control" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-white">@Resource.EnglishName</label>
+                            <input type="text" id="costCenterNameEn" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-check form-switch text-start mt-4">
+                        <input class="form-check-input" type="checkbox" id="isActive" checked>
+                        <label class="form-check-label text-white ms-2" for="isActive">@Resource.IsActive</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resource.Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveCostCenter()">
+                    <i class="bi bi-save me-1"></i> @Resource.SaveData
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+        let costCenterModal;
+
+        const localizedStrings = {
+            addTitle: @Html.Raw(Json.Serialize(Resource.AddNewCostCenter)),
+            editTitle: @Html.Raw(Json.Serialize(Resource.EditCostCenter)),
+            editBtn: @Html.Raw(Json.Serialize(Resource.EditCostCenter)),
+            active: @Html.Raw(Json.Serialize(Resource.Active)),
+            inactive: @Html.Raw(Json.Serialize(Resource.Inactive)),
+            requiredError: @Html.Raw(Json.Serialize(Resource.RequiredFieldsErrorMessage)),
+            saveError: @Html.Raw(Json.Serialize(Resource.SaveErrorMessage))
+        };
+
+        $(document).ready(function () {
+            costCenterModal = new bootstrap.Modal(document.getElementById('costCenterModal'));
+            loadParentsDropdown();
+            loadDataTable();
+        });
+
+        function loadParentsDropdown() {
+            $.get('@Url.Action("GetParentDropdown", "CostCenters")', function (data) {
+                let ddl = $('#parentCostCenterId');
+                ddl.empty().append('<option value="">-- ' + @Html.Raw(Json.Serialize(Resource.SelectParent)) + ' --</option>');
+                $.each(data, function (i, item) {
+                    ddl.append($('<option>', { value: item.id, text: item.name }));
+                });
+            });
+        }
+
+        function loadDataTable() {
+            table = $('#costCentersTable').DataTable({
+                pagingType: 'simple',
+                ajax: {
+                    url: '@Url.Action("GetJson", "CostCenters")',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'costCenterId', width: '5%' },
+                    {
+                        data: 'costCenterCode',
+                        render: function (data) {
+                            return `<span class="badge dark-badge-code font-monospace px-2 py-1">${data || ''}</span>`;
+                        }
+                    },
+                    { data: 'costCenterNameAr' },
+                    { data: 'costCenterNameEn', render: data => data || '-' },
+                    { data: 'parentCostCenterName', render: data => data || '-' },
+                    {
+                        data: 'costCenterLevel',
+                        render: function (data) {
+                            return `<span class="badge bg-secondary font-monospace">${data}</span>`;
+                        }
+                    },
+                    {
+                        data: 'isActive',
+                        render: function (data) {
+                            return data ? `<span class="badge neon-badge-info">${localizedStrings.active}</span>`
+                                        : `<span class="badge neon-badge-muted">${localizedStrings.inactive}</span>`;
+                        }
+                    },
+                    {
+                        data: 'costCenterId',
+                        render: function (data) {
+                            return `<button class="btn btn-sm btn-action-edit" onclick="editCostCenter(${data})">
+                                        <i class="bi bi-pencil-square me-1"></i>${localizedStrings.editBtn}
+                                    </button>`;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        }
+
+        function openAddModal() {
+            $('#costCenterId').val(0);
+            $('#costCenterForm')[0].reset();
+            $('#isActive').prop('checked', true);
+            $('#modalTitle').html(localizedStrings.addTitle);
+            loadParentsDropdown();
+            costCenterModal.show();
+        }
+
+        function editCostCenter(id) {
+            $.get('@Url.Action("GetById", "CostCenters")/' + id, function (data) {
+                if (data) {
+                    $('#costCenterId').val(data.costCenterId);
+                    $('#parentCostCenterId').val(data.parentCostCenterId || '');
+                    $('#costCenterCode').val(data.costCenterCode);
+                    $('#costCenterNameAr').val(data.costCenterNameAr);
+                    $('#costCenterNameEn').val(data.costCenterNameEn);
+                    $('#isActive').prop('checked', data.isActive);
+
+                    $('#modalTitle').html(localizedStrings.editTitle);
+                    costCenterModal.show();
+                }
+            });
+        }
+
+        function saveCostCenter() {
+            let parentIdVal = $('#parentCostCenterId').val();
+            let model = {
+                CostCenterId: parseInt($('#costCenterId').val()) || 0,
+                ParentCostCenterId: parentIdVal ? parseInt(parentIdVal) : null,
+                CostCenterCode: $('#costCenterCode').val(),
+                CostCenterNameAr: $('#costCenterNameAr').val(),
+                CostCenterNameEn: $('#costCenterNameEn').val(),
+                IsActive: $('#isActive').is(':checked')
+            };
+
+            if (!model.CostCenterCode || !model.CostCenterNameAr) {
+                alert(localizedStrings.requiredError);
+                return;
+            }
+
+            let token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '@Url.Action("Save", "CostCenters")',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: { "RequestVerificationToken": token },
+                data: JSON.stringify(model),
+                success: function (response) {
+                    if (response.success) {
+                        costCenterModal.hide();
+                        loadParentsDropdown();
+                        table.ajax.reload(null, false);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert(localizedStrings.saveError);
+                }
+            });
+        }
+    </script>
+}

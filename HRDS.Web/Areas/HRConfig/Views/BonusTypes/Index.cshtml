@@ -1,0 +1,237 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+
+@{
+    ViewData["Title"] = Resource.BonusTypes;
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-gift fs-3 lh-1 flex-shrink-0 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@Resource.BonusTypes</h4>
+                    <p class="text-muted mb-0 small">@Resource.BonusTypesDescription</p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary px-3 py-2" onclick="openAddModal()">
+                <i class="bi bi-plus-lg me-1"></i> @Resource.AddNewBonusType
+            </button>
+        </div>
+    </div>
+
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="bonusTypesTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.Code</th>
+                            <th>@Resource.ArabicName</th>
+                            <th>@Resource.EnglishName</th>
+                            <th>@Resource.IsTaxable</th>
+                            <th>@Resource.Status</th>
+                            <th>@Resource.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal الإضافة والتعديل -->
+<div class="modal fade" id="bonusTypeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content dark-modal">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalTitle">@Resource.AddNewBonusType</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="bonusTypeForm">
+                    <input type="hidden" id="bonusTypeId" value="0" />
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.Code <span class="text-danger">*</span></label>
+                        <input type="text" id="bonusTypeCode" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.ArabicName <span class="text-danger">*</span></label>
+                        <input type="text" id="bonusTypeNameAr" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.EnglishName</label>
+                        <input type="text" id="bonusTypeNameEn" class="form-control" />
+                    </div>
+
+                    <hr class="border-secondary my-3" />
+
+                    <div class="row">
+                        <div class="col-md-6 mb-2 text-start">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="isTaxable">
+                                <label class="form-check-label text-white me-2" for="isTaxable">@Resource.IsTaxable</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-2 text-start">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="isActive" checked>
+                                <label class="form-check-label text-white me-2" for="isActive">@Resource.IsActive</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resource.Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveBonusType()">
+                    <i class="bi bi-save me-1"></i> @Resource.SaveData
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+        let bonusTypeModal;
+
+        // تحويل الموارد والنصوص إلى JSON صريح لمنع مشكلة الـ HTML Encoding
+        const localizedStrings = {
+            addTitle: @Html.Raw(Json.Serialize(Resource.AddNewBonusType)),
+            editTitle: @Html.Raw(Json.Serialize(Resource.EditBonusType)),
+            editBtn: @Html.Raw(Json.Serialize(Resource.EditBonusType)),
+            active: @Html.Raw(Json.Serialize(Resource.Active)),
+            inactive: @Html.Raw(Json.Serialize(Resource.Inactive)),
+            yes: @Html.Raw(Json.Serialize(Resource.Yes)),
+            no: @Html.Raw(Json.Serialize(Resource.No)),
+            requiredError: @Html.Raw(Json.Serialize(Resource.RequiredFieldsErrorMessage)),
+            saveError: @Html.Raw(Json.Serialize(Resource.SaveErrorMessage))
+        };
+
+        $(document).ready(function () {
+            bonusTypeModal = new bootstrap.Modal(document.getElementById('bonusTypeModal'));
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            table = $('#bonusTypesTable').DataTable({
+                pagingType: 'simple',
+                ajax: {
+                    url: '@Url.Action("GetJson", "BonusTypes")',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'bonusTypeId', width: '5%' },
+                    {
+                        data: 'bonusTypeCode',
+                        render: function (data) {
+                            return `<span class="badge dark-badge-code font-monospace px-2 py-1">${data || ''}</span>`;
+                        }
+                    },
+                    { data: 'bonusTypeNameAr' },
+                    { data: 'bonusTypeNameEn', render: function (data) { return data || '-'; } },
+                    {
+                        data: 'isTaxable',
+                        render: function (data) {
+                            return data
+                                ? `<span class="badge neon-badge-info">${localizedStrings.yes}</span>`
+                                : `<span class="badge neon-badge-muted">${localizedStrings.no}</span>`;
+                        }
+                    },
+                    {
+                        data: 'isActive',
+                        render: function (data) {
+                            return data ? `<span class="badge neon-badge-info">${localizedStrings.active}</span>`
+                                        : `<span class="badge neon-badge-muted">${localizedStrings.inactive}</span>`;
+                        }
+                    },
+                    {
+                        data: 'bonusTypeId',
+                        render: function (data) {
+                            return `<button class="btn btn-sm btn-action-edit" onclick="editBonusType(${data})">
+                                        <i class="bi bi-pencil-square me-1"></i>${localizedStrings.editBtn}
+                                    </button>`;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        }
+
+        function openAddModal() {
+            $('#bonusTypeId').val(0);
+            $('#bonusTypeForm')[0].reset();
+            $('#isActive').prop('checked', true);
+            $('#modalTitle').html(localizedStrings.addTitle);
+            bonusTypeModal.show();
+        }
+
+        function editBonusType(id) {
+            $.get('@Url.Action("GetById", "BonusTypes")/' + id, function (data) {
+                if (data) {
+                    $('#bonusTypeId').val(data.bonusTypeId);
+                    $('#bonusTypeCode').val(data.bonusTypeCode);
+                    $('#bonusTypeNameAr').val(data.bonusTypeNameAr);
+                    $('#bonusTypeNameEn').val(data.bonusTypeNameEn);
+                    $('#isTaxable').prop('checked', data.isTaxable);
+                    $('#isActive').prop('checked', data.isActive);
+
+                    $('#modalTitle').html(localizedStrings.editTitle);
+                    bonusTypeModal.show();
+                }
+            });
+        }
+
+        function saveBonusType() {
+            let model = {
+                BonusTypeId: parseInt($('#bonusTypeId').val()) || 0,
+                BonusTypeCode: $('#bonusTypeCode').val(),
+                BonusTypeNameAr: $('#bonusTypeNameAr').val(),
+                BonusTypeNameEn: $('#bonusTypeNameEn').val(),
+                IsTaxable: $('#isTaxable').is(':checked'),
+                IsActive: $('#isActive').is(':checked')
+            };
+
+            if (!model.BonusTypeCode || !model.BonusTypeNameAr) {
+                alert(localizedStrings.requiredError);
+                return;
+            }
+
+            let token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '@Url.Action("Save", "BonusTypes")',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: { "RequestVerificationToken": token },
+                data: JSON.stringify(model),
+                success: function (response) {
+                    if (response.success) {
+                        bonusTypeModal.hide();
+                        table.ajax.reload(null, false);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert(localizedStrings.saveError);
+                }
+            });
+        }
+    </script>
+}

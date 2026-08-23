@@ -199,6 +199,11 @@ namespace HRDS.Web.ViewComponents
             // Core Data
             "COREDATA" => "bi bi-database-fill text-primary",
 
+            // HR Configuration
+            "HRCONFIG" => "bi bi-person-gear text-warning",
+
+            "FINCONFIG" => "bi bi-gear-wide-connected text-success",
+
             // Default
             _ => "bi bi-folder2-open text-info"
         };

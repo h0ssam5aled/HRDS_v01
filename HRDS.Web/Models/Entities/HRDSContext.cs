@@ -189,6 +189,8 @@ public partial class HRDSContext : DbContext
 
     public virtual DbSet<RequestStatus> RequestStatuses { get; set; }
 
+    public virtual DbSet<ResignationReason> ResignationReasons { get; set; }
+
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<RolePermission> RolePermissions { get; set; }
@@ -2159,6 +2161,28 @@ public partial class HRDSContext : DbContext
             entity.Property(e => e.StatusNameEn)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<ResignationReason>(entity =>
+        {
+            entity.ToTable("ResignationReasons", "HR");
+
+            entity.HasIndex(e => e.ResignationReasonCode, "UX_ResignationReasons_Code")
+                .IsUnique()
+                .HasFilter("([IsDeleted]=(0))");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.DeletedAt).HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(250);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ResignationReasonCode)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+            entity.Property(e => e.ResignationReasonNameAr).HasMaxLength(100);
+            entity.Property(e => e.ResignationReasonNameEn).HasMaxLength(100);
+            entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
         });
 
         modelBuilder.Entity<Role>(entity =>

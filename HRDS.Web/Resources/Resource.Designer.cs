@@ -61,11 +61,119 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Academic Faculties.
+        /// </summary>
+        public static string AcademicFaculties {
+            get {
+                return ResourceManager.GetString("AcademicFaculties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Academic Faculties Description.
+        /// </summary>
+        public static string AcademicFacultiesDescription {
+            get {
+                return ResourceManager.GetString("AcademicFacultiesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Academic Majors.
+        /// </summary>
+        public static string AcademicMajors {
+            get {
+                return ResourceManager.GetString("AcademicMajors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Academic Majors Description.
+        /// </summary>
+        public static string AcademicMajorsDescription {
+            get {
+                return ResourceManager.GetString("AcademicMajorsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accent Color.
+        /// </summary>
+        public static string AccentColor {
+            get {
+                return ResourceManager.GetString("AccentColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Code.
+        /// </summary>
+        public static string AccountCode {
+            get {
+                return ResourceManager.GetString("AccountCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Nature.
+        /// </summary>
+        public static string AccountNature {
+            get {
+                return ResourceManager.GetString("AccountNature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accounts.
+        /// </summary>
+        public static string Accounts {
+            get {
+                return ResourceManager.GetString("Accounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View the List of Accounts and Their Assigned Roles.
         /// </summary>
         public static string AccountsAndAssignedRolesOverview {
             get {
                 return ResourceManager.GetString("AccountsAndAssignedRolesOverview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accounts Description.
+        /// </summary>
+        public static string AccountsDescription {
+            get {
+                return ResourceManager.GetString("AccountsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Type.
+        /// </summary>
+        public static string AccountType {
+            get {
+                return ResourceManager.GetString("AccountType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Types.
+        /// </summary>
+        public static string AccountTypes {
+            get {
+                return ResourceManager.GetString("AccountTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Types Description.
+        /// </summary>
+        public static string AccountTypesDescription {
+            get {
+                return ResourceManager.GetString("AccountTypesDescription", resourceCulture);
             }
         }
         
@@ -115,6 +223,141 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Leave Type.
+        /// </summary>
+        public static string AddLeaveType {
+            get {
+                return ResourceManager.GetString("AddLeaveType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Academic Faculty.
+        /// </summary>
+        public static string AddNewAcademicFaculty {
+            get {
+                return ResourceManager.GetString("AddNewAcademicFaculty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Academic Major.
+        /// </summary>
+        public static string AddNewAcademicMajor {
+            get {
+                return ResourceManager.GetString("AddNewAcademicMajor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Account.
+        /// </summary>
+        public static string AddNewAccount {
+            get {
+                return ResourceManager.GetString("AddNewAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Account Type.
+        /// </summary>
+        public static string AddNewAccountType {
+            get {
+                return ResourceManager.GetString("AddNewAccountType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Allowance Type.
+        /// </summary>
+        public static string AddNewAllowanceType {
+            get {
+                return ResourceManager.GetString("AddNewAllowanceType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Approver Type.
+        /// </summary>
+        public static string AddNewApproverType {
+            get {
+                return ResourceManager.GetString("AddNewApproverType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Asset Type.
+        /// </summary>
+        public static string AddNewAssetType {
+            get {
+                return ResourceManager.GetString("AddNewAssetType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Assignment Reason.
+        /// </summary>
+        public static string AddNewAssignmentReason {
+            get {
+                return ResourceManager.GetString("AddNewAssignmentReason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Bank.
+        /// </summary>
+        public static string AddNewBank {
+            get {
+                return ResourceManager.GetString("AddNewBank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Bank Account Type.
+        /// </summary>
+        public static string AddNewBankAccountType {
+            get {
+                return ResourceManager.GetString("AddNewBankAccountType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Bonus Type.
+        /// </summary>
+        public static string AddNewBonusType {
+            get {
+                return ResourceManager.GetString("AddNewBonusType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Branch.
+        /// </summary>
+        public static string AddNewBranch {
+            get {
+                return ResourceManager.GetString("AddNewBranch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Break.
+        /// </summary>
+        public static string AddNewBreak {
+            get {
+                return ResourceManager.GetString("AddNewBreak", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Business Mission Type.
+        /// </summary>
+        public static string AddNewBusinessMissionType {
+            get {
+                return ResourceManager.GetString("AddNewBusinessMissionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New City.
         /// </summary>
         public static string AddNewCity {
@@ -124,11 +367,119 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New Cost Center.
+        /// </summary>
+        public static string AddNewCostCenter {
+            get {
+                return ResourceManager.GetString("AddNewCostCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New Country.
         /// </summary>
         public static string AddNewCountry {
             get {
                 return ResourceManager.GetString("AddNewCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Currency.
+        /// </summary>
+        public static string AddNewCurrency {
+            get {
+                return ResourceManager.GetString("AddNewCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Currency Rate.
+        /// </summary>
+        public static string AddNewCurrencyRate {
+            get {
+                return ResourceManager.GetString("AddNewCurrencyRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Deduction Type.
+        /// </summary>
+        public static string AddNewDeductionType {
+            get {
+                return ResourceManager.GetString("AddNewDeductionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Department.
+        /// </summary>
+        public static string AddNewDepartment {
+            get {
+                return ResourceManager.GetString("AddNewDepartment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Document Type.
+        /// </summary>
+        public static string AddNewDocumentType {
+            get {
+                return ResourceManager.GetString("AddNewDocumentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Educational Institution.
+        /// </summary>
+        public static string AddNewEducationalInstitution {
+            get {
+                return ResourceManager.GetString("AddNewEducationalInstitution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Educational Institution Type.
+        /// </summary>
+        public static string AddNewEducationalInstitutionType {
+            get {
+                return ResourceManager.GetString("AddNewEducationalInstitutionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Employee.
+        /// </summary>
+        public static string AddNewEmployee {
+            get {
+                return ResourceManager.GetString("AddNewEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Employee Status.
+        /// </summary>
+        public static string AddNewEmployeeStatus {
+            get {
+                return ResourceManager.GetString("AddNewEmployeeStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Employment Type.
+        /// </summary>
+        public static string AddNewEmploymentType {
+            get {
+                return ResourceManager.GetString("AddNewEmploymentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Expense Type.
+        /// </summary>
+        public static string AddNewExpenseType {
+            get {
+                return ResourceManager.GetString("AddNewExpenseType", resourceCulture);
             }
         }
         
@@ -147,6 +498,78 @@ namespace HRDS.Web.Resources {
         public static string AddNewGovernorate {
             get {
                 return ResourceManager.GetString("AddNewGovernorate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Educational Grade.
+        /// </summary>
+        public static string AddNewGrade {
+            get {
+                return ResourceManager.GetString("AddNewGrade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Holiday.
+        /// </summary>
+        public static string AddNewHoliday {
+            get {
+                return ResourceManager.GetString("AddNewHoliday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Job Group.
+        /// </summary>
+        public static string AddNewJobGroup {
+            get {
+                return ResourceManager.GetString("AddNewJobGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Job Level.
+        /// </summary>
+        public static string AddNewJobLevel {
+            get {
+                return ResourceManager.GetString("AddNewJobLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Job Title.
+        /// </summary>
+        public static string AddNewJobTitle {
+            get {
+                return ResourceManager.GetString("AddNewJobTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Leave Category.
+        /// </summary>
+        public static string AddNewLeaveCategory {
+            get {
+                return ResourceManager.GetString("AddNewLeaveCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Leave Type.
+        /// </summary>
+        public static string AddNewLeaveType {
+            get {
+                return ResourceManager.GetString("AddNewLeaveType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Academic Major.
+        /// </summary>
+        public static string AddNewMajor {
+            get {
+                return ResourceManager.GetString("AddNewMajor", resourceCulture);
             }
         }
         
@@ -178,11 +601,92 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New Payment Method.
+        /// </summary>
+        public static string AddNewPaymentMethod {
+            get {
+                return ResourceManager.GetString("AddNewPaymentMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Penalty Type.
+        /// </summary>
+        public static string AddNewPenaltyType {
+            get {
+                return ResourceManager.GetString("AddNewPenaltyType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New Permission.
         /// </summary>
         public static string AddNewPermission {
             get {
                 return ResourceManager.GetString("AddNewPermission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Permission Type.
+        /// </summary>
+        public static string AddNewPermissionType {
+            get {
+                return ResourceManager.GetString("AddNewPermissionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Position.
+        /// </summary>
+        public static string AddNewPosition {
+            get {
+                return ResourceManager.GetString("AddNewPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Position Status.
+        /// </summary>
+        public static string AddNewPositionStatus {
+            get {
+                return ResourceManager.GetString("AddNewPositionStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Probation Status.
+        /// </summary>
+        public static string AddNewProbationStatus {
+            get {
+                return ResourceManager.GetString("AddNewProbationStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Process Type.
+        /// </summary>
+        public static string AddNewProcessType {
+            get {
+                return ResourceManager.GetString("AddNewProcessType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Process Code.
+        /// </summary>
+        public static string AddNewProcessTypeAr {
+            get {
+                return ResourceManager.GetString("AddNewProcessTypeAr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Educational Qualification.
+        /// </summary>
+        public static string AddNewQualification {
+            get {
+                return ResourceManager.GetString("AddNewQualification", resourceCulture);
             }
         }
         
@@ -196,11 +700,29 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New Resignation Reason.
+        /// </summary>
+        public static string AddNewResignationReason {
+            get {
+                return ResourceManager.GetString("AddNewResignationReason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New Role.
         /// </summary>
         public static string AddNewRole {
             get {
                 return ResourceManager.GetString("AddNewRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Safety Type.
+        /// </summary>
+        public static string AddNewSafetyType {
+            get {
+                return ResourceManager.GetString("AddNewSafetyType", resourceCulture);
             }
         }
         
@@ -214,11 +736,155 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New Section.
+        /// </summary>
+        public static string AddNewSection {
+            get {
+                return ResourceManager.GetString("AddNewSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Shift.
+        /// </summary>
+        public static string AddNewShift {
+            get {
+                return ResourceManager.GetString("AddNewShift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Shift Type.
+        /// </summary>
+        public static string AddNewShiftType {
+            get {
+                return ResourceManager.GetString("AddNewShiftType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Status.
+        /// </summary>
+        public static string AddNewStatus {
+            get {
+                return ResourceManager.GetString("AddNewStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Unit.
+        /// </summary>
+        public static string AddNewUnit {
+            get {
+                return ResourceManager.GetString("AddNewUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New User.
         /// </summary>
         public static string AddNewUser {
             get {
                 return ResourceManager.GetString("AddNewUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allowance Type Code.
+        /// </summary>
+        public static string AllowanceTypeCode {
+            get {
+                return ResourceManager.GetString("AllowanceTypeCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allowance Types.
+        /// </summary>
+        public static string AllowanceTypes {
+            get {
+                return ResourceManager.GetString("AllowanceTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allowance Types Description.
+        /// </summary>
+        public static string AllowanceTypesDescription {
+            get {
+                return ResourceManager.GetString("AllowanceTypesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allow Carry Forward.
+        /// </summary>
+        public static string AllowCarryForward {
+            get {
+                return ResourceManager.GetString("AllowCarryForward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allow Late Deduction.
+        /// </summary>
+        public static string AllowLateDeduction {
+            get {
+                return ResourceManager.GetString("AllowLateDeduction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allow Overtime.
+        /// </summary>
+        public static string AllowOvertime {
+            get {
+                return ResourceManager.GetString("AllowOvertime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred..
+        /// </summary>
+        public static string AnErrorOccurred {
+            get {
+                return ResourceManager.GetString("AnErrorOccurred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approver Type Code.
+        /// </summary>
+        public static string ApproverTypeCode {
+            get {
+                return ResourceManager.GetString("ApproverTypeCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approver Types.
+        /// </summary>
+        public static string ApproverTypes {
+            get {
+                return ResourceManager.GetString("ApproverTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approver Types Description.
+        /// </summary>
+        public static string ApproverTypesDescription {
+            get {
+                return ResourceManager.GetString("ApproverTypesDescription", resourceCulture);
             }
         }
         
@@ -232,6 +898,60 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Asset Type Code.
+        /// </summary>
+        public static string AssetTypeCode {
+            get {
+                return ResourceManager.GetString("AssetTypeCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Asset Types.
+        /// </summary>
+        public static string AssetTypes {
+            get {
+                return ResourceManager.GetString("AssetTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Asset Types Description.
+        /// </summary>
+        public static string AssetTypesDescription {
+            get {
+                return ResourceManager.GetString("AssetTypesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assignment Reason Code.
+        /// </summary>
+        public static string AssignmentReasonCode {
+            get {
+                return ResourceManager.GetString("AssignmentReasonCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assignment Reasons.
+        /// </summary>
+        public static string AssignmentReasons {
+            get {
+                return ResourceManager.GetString("AssignmentReasons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assignment Reasons Description.
+        /// </summary>
+        public static string AssignmentReasonsDescription {
+            get {
+                return ResourceManager.GetString("AssignmentReasonsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assign Roles.
         /// </summary>
         public static string AssignRoles {
@@ -241,11 +961,128 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto Close Attendance.
+        /// </summary>
+        public static string AutoCloseAttendance {
+            get {
+                return ResourceManager.GetString("AutoCloseAttendance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back to List.
         /// </summary>
         public static string BackToList {
             get {
                 return ResourceManager.GetString("BackToList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badge Class.
+        /// </summary>
+        public static string BadgeClass {
+            get {
+                return ResourceManager.GetString("BadgeClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Badge Style.
+        /// </summary>
+        public static string BadgeStyle {
+            get {
+                return ResourceManager.GetString("BadgeStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank.
+        /// </summary>
+        public static string Bank {
+            get {
+                return ResourceManager.GetString("Bank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank Account Type Code.
+        /// </summary>
+        public static string BankAccountTypeCode {
+            get {
+                return ResourceManager.GetString("BankAccountTypeCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank Account Types.
+        /// </summary>
+        public static string BankAccountTypes {
+            get {
+                return ResourceManager.GetString("BankAccountTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank Account Types Description.
+        /// </summary>
+        public static string BankAccountTypesDescription {
+            get {
+                return ResourceManager.GetString("BankAccountTypesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank Branches.
+        /// </summary>
+        public static string BankBranches {
+            get {
+                return ResourceManager.GetString("BankBranches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank Branches Description.
+        /// </summary>
+        public static string BankBranchesDescription {
+            get {
+                return ResourceManager.GetString("BankBranchesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank Code.
+        /// </summary>
+        public static string BankCode {
+            get {
+                return ResourceManager.GetString("BankCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Banks.
+        /// </summary>
+        public static string Banks {
+            get {
+                return ResourceManager.GetString("Banks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Banks Description.
+        /// </summary>
+        public static string BanksDescription {
+            get {
+                return ResourceManager.GetString("BanksDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Base Currency.
+        /// </summary>
+        public static string BaseCurrency {
+            get {
+                return ResourceManager.GetString("BaseCurrency", resourceCulture);
             }
         }
         
@@ -268,11 +1105,83 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bonus Types.
+        /// </summary>
+        public static string BonusTypes {
+            get {
+                return ResourceManager.GetString("BonusTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bonus Types Description.
+        /// </summary>
+        public static string BonusTypesDescription {
+            get {
+                return ResourceManager.GetString("BonusTypesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Branch Code.
+        /// </summary>
+        public static string BranchCode {
+            get {
+                return ResourceManager.GetString("BranchCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Break Code.
+        /// </summary>
+        public static string BreakCode {
+            get {
+                return ResourceManager.GetString("BreakCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Business Mission Types.
+        /// </summary>
+        public static string BusinessMissionTypes {
+            get {
+                return ResourceManager.GetString("BusinessMissionTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Business Mission Types Description.
+        /// </summary>
+        public static string BusinessMissionTypesDescription {
+            get {
+                return ResourceManager.GetString("BusinessMissionTypesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Carry Forward Limit.
+        /// </summary>
+        public static string CarryForwardLimit {
+            get {
+                return ResourceManager.GetString("CarryForwardLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string Category {
+            get {
+                return ResourceManager.GetString("Category", resourceCulture);
             }
         }
         
@@ -291,6 +1200,15 @@ namespace HRDS.Web.Resources {
         public static string CityCode {
             get {
                 return ResourceManager.GetString("CityCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code.
+        /// </summary>
+        public static string Code {
+            get {
+                return ResourceManager.GetString("Code", resourceCulture);
             }
         }
         
@@ -376,6 +1294,33 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cost Center Code.
+        /// </summary>
+        public static string CostCenterCode {
+            get {
+                return ResourceManager.GetString("CostCenterCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cost Centers.
+        /// </summary>
+        public static string CostCenters {
+            get {
+                return ResourceManager.GetString("CostCenters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cost Centers Description.
+        /// </summary>
+        public static string CostCentersDescription {
+            get {
+                return ResourceManager.GetString("CostCentersDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Country.
         /// </summary>
         public static string Country {
@@ -394,11 +1339,389 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Credit.
+        /// </summary>
+        public static string Credit {
+            get {
+                return ResourceManager.GetString("Credit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cross Midnight.
+        /// </summary>
+        public static string CrossMidnight {
+            get {
+                return ResourceManager.GetString("CrossMidnight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currencies.
+        /// </summary>
+        public static string Currencies {
+            get {
+                return ResourceManager.GetString("Currencies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currencies Description.
+        /// </summary>
+        public static string CurrenciesDescription {
+            get {
+                return ResourceManager.GetString("CurrenciesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        public static string Currency {
+            get {
+                return ResourceManager.GetString("Currency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency Code.
+        /// </summary>
+        public static string CurrencyCode {
+            get {
+                return ResourceManager.GetString("CurrencyCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency Rates.
+        /// </summary>
+        public static string CurrencyRates {
+            get {
+                return ResourceManager.GetString("CurrencyRates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency Rates Description.
+        /// </summary>
+        public static string CurrencyRatesDescription {
+            get {
+                return ResourceManager.GetString("CurrencyRatesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End date must be greater than or equal to start date..
+        /// </summary>
+        public static string DateErrorMessage {
+            get {
+                return ResourceManager.GetString("DateErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date of Birth.
+        /// </summary>
+        public static string DateOfBirth {
+            get {
+                return ResourceManager.GetString("DateOfBirth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Days.
+        /// </summary>
+        public static string Days {
+            get {
+                return ResourceManager.GetString("Days", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Debit.
+        /// </summary>
+        public static string Debit {
+            get {
+                return ResourceManager.GetString("Debit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deduct from Leave Balance.
+        /// </summary>
+        public static string DeductFromLeaveBalance {
+            get {
+                return ResourceManager.GetString("DeductFromLeaveBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deduct from Salary.
+        /// </summary>
+        public static string DeductFromSalary {
+            get {
+                return ResourceManager.GetString("DeductFromSalary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deduction Type Code.
+        /// </summary>
+        public static string DeductionTypeCode {
+            get {
+                return ResourceManager.GetString("DeductionTypeCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deduction Types.
+        /// </summary>
+        public static string DeductionTypes {
+            get {
+                return ResourceManager.GetString("DeductionTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deduction Types Description.
+        /// </summary>
+        public static string DeductionTypesDescription {
+            get {
+                return ResourceManager.GetString("DeductionTypesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Deduction Amount.
+        /// </summary>
+        public static string DefaultDeductionAmount {
+            get {
+                return ResourceManager.GetString("DefaultDeductionAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Deduction Days.
+        /// </summary>
+        public static string DefaultDeductionDays {
+            get {
+                return ResourceManager.GetString("DefaultDeductionDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Working Hours.
+        /// </summary>
+        public static string DefaultWorkingHours {
+            get {
+                return ResourceManager.GetString("DefaultWorkingHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Department.
+        /// </summary>
+        public static string Department {
+            get {
+                return ResourceManager.GetString("Department", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Departments.
+        /// </summary>
+        public static string Departments {
+            get {
+                return ResourceManager.GetString("Departments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Departments Description.
+        /// </summary>
+        public static string DepartmentsDescription {
+            get {
+                return ResourceManager.GetString("DepartmentsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
             get {
                 return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display Order.
+        /// </summary>
+        public static string DisplayOrder {
+            get {
+                return ResourceManager.GetString("DisplayOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document Types.
+        /// </summary>
+        public static string DocumentTypes {
+            get {
+                return ResourceManager.GetString("DocumentTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document Types Description.
+        /// </summary>
+        public static string DocumentTypesDescription {
+            get {
+                return ResourceManager.GetString("DocumentTypesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Driver License Number.
+        /// </summary>
+        public static string DriverLicenseNumber {
+            get {
+                return ResourceManager.GetString("DriverLicenseNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Academic Faculty.
+        /// </summary>
+        public static string EditAcademicFaculty {
+            get {
+                return ResourceManager.GetString("EditAcademicFaculty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Academic Major.
+        /// </summary>
+        public static string EditAcademicMajor {
+            get {
+                return ResourceManager.GetString("EditAcademicMajor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Academic Major.
+        /// </summary>
+        public static string EditAcademicMajors {
+            get {
+                return ResourceManager.GetString("EditAcademicMajors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Account.
+        /// </summary>
+        public static string EditAccount {
+            get {
+                return ResourceManager.GetString("EditAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Account Type.
+        /// </summary>
+        public static string EditAccountType {
+            get {
+                return ResourceManager.GetString("EditAccountType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Allowance Type.
+        /// </summary>
+        public static string EditAllowanceType {
+            get {
+                return ResourceManager.GetString("EditAllowanceType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Approver Type.
+        /// </summary>
+        public static string EditApproverType {
+            get {
+                return ResourceManager.GetString("EditApproverType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Asset Type.
+        /// </summary>
+        public static string EditAssetType {
+            get {
+                return ResourceManager.GetString("EditAssetType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Assignment Reason.
+        /// </summary>
+        public static string EditAssignmentReason {
+            get {
+                return ResourceManager.GetString("EditAssignmentReason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Bank.
+        /// </summary>
+        public static string EditBank {
+            get {
+                return ResourceManager.GetString("EditBank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Bank Account Type.
+        /// </summary>
+        public static string EditBankAccountType {
+            get {
+                return ResourceManager.GetString("EditBankAccountType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Bonus Type.
+        /// </summary>
+        public static string EditBonusType {
+            get {
+                return ResourceManager.GetString("EditBonusType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Branch.
+        /// </summary>
+        public static string EditBranch {
+            get {
+                return ResourceManager.GetString("EditBranch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Break.
+        /// </summary>
+        public static string EditBreak {
+            get {
+                return ResourceManager.GetString("EditBreak", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Business Mission Type.
+        /// </summary>
+        public static string EditBusinessMissionType {
+            get {
+                return ResourceManager.GetString("EditBusinessMissionType", resourceCulture);
             }
         }
         
@@ -412,11 +1735,119 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Cost Center.
+        /// </summary>
+        public static string EditCostCenter {
+            get {
+                return ResourceManager.GetString("EditCostCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit Country.
         /// </summary>
         public static string EditCountry {
             get {
                 return ResourceManager.GetString("EditCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Currency.
+        /// </summary>
+        public static string EditCurrency {
+            get {
+                return ResourceManager.GetString("EditCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Currency Rate.
+        /// </summary>
+        public static string EditCurrencyRate {
+            get {
+                return ResourceManager.GetString("EditCurrencyRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Deduction Type.
+        /// </summary>
+        public static string EditDeductionType {
+            get {
+                return ResourceManager.GetString("EditDeductionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Department.
+        /// </summary>
+        public static string EditDepartment {
+            get {
+                return ResourceManager.GetString("EditDepartment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Document Type.
+        /// </summary>
+        public static string EditDocumentType {
+            get {
+                return ResourceManager.GetString("EditDocumentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Educational Institution.
+        /// </summary>
+        public static string EditEducationalInstitution {
+            get {
+                return ResourceManager.GetString("EditEducationalInstitution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Educational Institution Type.
+        /// </summary>
+        public static string EditEducationalInstitutionType {
+            get {
+                return ResourceManager.GetString("EditEducationalInstitutionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Employee.
+        /// </summary>
+        public static string EditEmployee {
+            get {
+                return ResourceManager.GetString("EditEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Employee Status.
+        /// </summary>
+        public static string EditEmployeeStatus {
+            get {
+                return ResourceManager.GetString("EditEmployeeStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Employment Type.
+        /// </summary>
+        public static string EditEmploymentType {
+            get {
+                return ResourceManager.GetString("EditEmploymentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Expense Type.
+        /// </summary>
+        public static string EditExpenseType {
+            get {
+                return ResourceManager.GetString("EditExpenseType", resourceCulture);
             }
         }
         
@@ -439,6 +1870,69 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Educational Grade.
+        /// </summary>
+        public static string EditGrade {
+            get {
+                return ResourceManager.GetString("EditGrade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Holiday.
+        /// </summary>
+        public static string EditHoliday {
+            get {
+                return ResourceManager.GetString("EditHoliday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Job Group.
+        /// </summary>
+        public static string EditJobGroup {
+            get {
+                return ResourceManager.GetString("EditJobGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Job Level.
+        /// </summary>
+        public static string EditJobLevel {
+            get {
+                return ResourceManager.GetString("EditJobLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Job Title.
+        /// </summary>
+        public static string EditJobTitle {
+            get {
+                return ResourceManager.GetString("EditJobTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Leave Category.
+        /// </summary>
+        public static string EditLeaveCategory {
+            get {
+                return ResourceManager.GetString("EditLeaveCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Leave Type.
+        /// </summary>
+        public static string EditLeaveType {
+            get {
+                return ResourceManager.GetString("EditLeaveType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit Marital Status.
         /// </summary>
         public static string EditMaritalStatus {
@@ -457,11 +1951,38 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Model.
+        /// </summary>
+        public static string EditModel {
+            get {
+                return ResourceManager.GetString("EditModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit Nationality.
         /// </summary>
         public static string EditNationality {
             get {
                 return ResourceManager.GetString("EditNationality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Payment Method.
+        /// </summary>
+        public static string EditpaymentMethod {
+            get {
+                return ResourceManager.GetString("EditpaymentMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Penalty Type.
+        /// </summary>
+        public static string EditPenaltyType {
+            get {
+                return ResourceManager.GetString("EditPenaltyType", resourceCulture);
             }
         }
         
@@ -475,11 +1996,74 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Permission Type.
+        /// </summary>
+        public static string EditPermissionType {
+            get {
+                return ResourceManager.GetString("EditPermissionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Position.
+        /// </summary>
+        public static string EditPosition {
+            get {
+                return ResourceManager.GetString("EditPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Position Status.
+        /// </summary>
+        public static string EditPositionStatus {
+            get {
+                return ResourceManager.GetString("EditPositionStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Probation Status.
+        /// </summary>
+        public static string EditProbationStatus {
+            get {
+                return ResourceManager.GetString("EditProbationStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Process Type.
+        /// </summary>
+        public static string EditProcessType {
+            get {
+                return ResourceManager.GetString("EditProcessType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Qualification.
+        /// </summary>
+        public static string EditQualification {
+            get {
+                return ResourceManager.GetString("EditQualification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit Religion.
         /// </summary>
         public static string EditReligion {
             get {
                 return ResourceManager.GetString("EditReligion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Resignation Reason.
+        /// </summary>
+        public static string EditResignationReason {
+            get {
+                return ResourceManager.GetString("EditResignationReason", resourceCulture);
             }
         }
         
@@ -493,11 +2077,65 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Safety Type.
+        /// </summary>
+        public static string EditSafetyType {
+            get {
+                return ResourceManager.GetString("EditSafetyType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit Screen.
         /// </summary>
         public static string EditScreen {
             get {
                 return ResourceManager.GetString("EditScreen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Section.
+        /// </summary>
+        public static string EditSection {
+            get {
+                return ResourceManager.GetString("EditSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Shift.
+        /// </summary>
+        public static string EditShift {
+            get {
+                return ResourceManager.GetString("EditShift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Shift Type.
+        /// </summary>
+        public static string EditShiftType {
+            get {
+                return ResourceManager.GetString("EditShiftType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Status.
+        /// </summary>
+        public static string EditStatus {
+            get {
+                return ResourceManager.GetString("EditStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Unit.
+        /// </summary>
+        public static string EditUnit {
+            get {
+                return ResourceManager.GetString("EditUnit", resourceCulture);
             }
         }
         
@@ -511,11 +2149,209 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Educational Institution.
+        /// </summary>
+        public static string EducationalInstitution {
+            get {
+                return ResourceManager.GetString("EducationalInstitution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Educational Institutions.
+        /// </summary>
+        public static string EducationalInstitutions {
+            get {
+                return ResourceManager.GetString("EducationalInstitutions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Educational Institutions Description.
+        /// </summary>
+        public static string EducationalInstitutionsDescription {
+            get {
+                return ResourceManager.GetString("EducationalInstitutionsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Educational Institution Types.
+        /// </summary>
+        public static string EducationalInstitutionTypes {
+            get {
+                return ResourceManager.GetString("EducationalInstitutionTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Educational Institution Types Description.
+        /// </summary>
+        public static string EducationalInstitutionTypesDescription {
+            get {
+                return ResourceManager.GetString("EducationalInstitutionTypesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Educational Grades.
+        /// </summary>
+        public static string EducationGrades {
+            get {
+                return ResourceManager.GetString("EducationGrades", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Educational Grades Description.
+        /// </summary>
+        public static string EducationGradesDescription {
+            get {
+                return ResourceManager.GetString("EducationGradesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Educational Qualifications.
+        /// </summary>
+        public static string EducationQualifications {
+            get {
+                return ResourceManager.GetString("EducationQualifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Educational Qualifications Description.
+        /// </summary>
+        public static string EducationQualificationsDescription {
+            get {
+                return ResourceManager.GetString("EducationQualificationsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effective From.
+        /// </summary>
+        public static string EffectiveFrom {
+            get {
+                return ResourceManager.GetString("EffectiveFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effective To.
+        /// </summary>
+        public static string EffectiveTo {
+            get {
+                return ResourceManager.GetString("EffectiveTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email Address.
         /// </summary>
         public static string EmailAddress {
             get {
                 return ResourceManager.GetString("EmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee Code.
+        /// </summary>
+        public static string EmployeeCode {
+            get {
+                return ResourceManager.GetString("EmployeeCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employees.
+        /// </summary>
+        public static string Employees {
+            get {
+                return ResourceManager.GetString("Employees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employees Description.
+        /// </summary>
+        public static string EmployeesDescription {
+            get {
+                return ResourceManager.GetString("EmployeesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee Status.
+        /// </summary>
+        public static string EmployeeStatus {
+            get {
+                return ResourceManager.GetString("EmployeeStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee Status Code.
+        /// </summary>
+        public static string EmployeeStatusCode {
+            get {
+                return ResourceManager.GetString("EmployeeStatusCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee Status Description.
+        /// </summary>
+        public static string EmployeeStatusDescription {
+            get {
+                return ResourceManager.GetString("EmployeeStatusDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employment Type Code.
+        /// </summary>
+        public static string EmploymentTypeCode {
+            get {
+                return ResourceManager.GetString("EmploymentTypeCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employment Types.
+        /// </summary>
+        public static string EmploymentTypes {
+            get {
+                return ResourceManager.GetString("EmploymentTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employment Types Description.
+        /// </summary>
+        public static string EmploymentTypesDescription {
+            get {
+                return ResourceManager.GetString("EmploymentTypesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Date.
+        /// </summary>
+        public static string EndDate {
+            get {
+                return ResourceManager.GetString("EndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Time.
+        /// </summary>
+        public static string EndTime {
+            get {
+                return ResourceManager.GetString("EndTime", resourceCulture);
             }
         }
         
@@ -534,6 +2370,87 @@ namespace HRDS.Web.Resources {
         public static string EnterUsername {
             get {
                 return ResourceManager.GetString("EnterUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exchange Rate.
+        /// </summary>
+        public static string ExchangeRate {
+            get {
+                return ResourceManager.GetString("ExchangeRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expense Types.
+        /// </summary>
+        public static string ExpenseTypes {
+            get {
+                return ResourceManager.GetString("ExpenseTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expense Types Description.
+        /// </summary>
+        public static string ExpenseTypesDescription {
+            get {
+                return ResourceManager.GetString("ExpenseTypesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expiry Alert Days.
+        /// </summary>
+        public static string ExpiryAlertDays {
+            get {
+                return ResourceManager.GetString("ExpiryAlertDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Faculty.
+        /// </summary>
+        public static string Faculty {
+            get {
+                return ResourceManager.GetString("Faculty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Faculty Code.
+        /// </summary>
+        public static string FacultyCode {
+            get {
+                return ResourceManager.GetString("FacultyCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Name (Arabic).
+        /// </summary>
+        public static string FirstNameAr {
+            get {
+                return ResourceManager.GetString("FirstNameAr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Name (English).
+        /// </summary>
+        public static string FirstNameEn {
+            get {
+                return ResourceManager.GetString("FirstNameEn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From Time.
+        /// </summary>
+        public static string FromTime {
+            get {
+                return ResourceManager.GetString("FromTime", resourceCulture);
             }
         }
         
@@ -574,6 +2491,78 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Grace Period (Minutes).
+        /// </summary>
+        public static string GraceInMinutes {
+            get {
+                return ResourceManager.GetString("GraceInMinutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grace Period for Late Departure (Minutes).
+        /// </summary>
+        public static string GraceOutMinutes {
+            get {
+                return ResourceManager.GetString("GraceOutMinutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grade Code.
+        /// </summary>
+        public static string GradeCode {
+            get {
+                return ResourceManager.GetString("GradeCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Has Allowance.
+        /// </summary>
+        public static string HasAllowance {
+            get {
+                return ResourceManager.GetString("HasAllowance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Headcount.
+        /// </summary>
+        public static string HeadCount {
+            get {
+                return ResourceManager.GetString("HeadCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Holiday Calendar.
+        /// </summary>
+        public static string HolidayCalendar {
+            get {
+                return ResourceManager.GetString("HolidayCalendar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Holiday Calendar Description.
+        /// </summary>
+        public static string HolidayCalendarDescription {
+            get {
+                return ResourceManager.GetString("HolidayCalendarDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hours.
+        /// </summary>
+        public static string Hours {
+            get {
+                return ResourceManager.GetString("Hours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inactive.
         /// </summary>
         public static string Inactive {
@@ -583,11 +2572,326 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Institution Code.
+        /// </summary>
+        public static string InstitutionCode {
+            get {
+                return ResourceManager.GetString("InstitutionCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Institution Type.
+        /// </summary>
+        public static string InstitutionType {
+            get {
+                return ResourceManager.GetString("InstitutionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid username or password.
         /// </summary>
         public static string InvalidUsernameOrPassword {
             get {
                 return ResourceManager.GetString("InvalidUsernameOrPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active.
+        /// </summary>
+        public static string IsActive {
+            get {
+                return ResourceManager.GetString("IsActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Base Currency.
+        /// </summary>
+        public static string IsBaseCurrency {
+            get {
+                return ResourceManager.GetString("IsBaseCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is Expiry Date Required?.
+        /// </summary>
+        public static string IsExpiryRequired {
+            get {
+                return ResourceManager.GetString("IsExpiryRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Final Status.
+        /// </summary>
+        public static string IsFinal {
+            get {
+                return ResourceManager.GetString("IsFinal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leave Eligible.
+        /// </summary>
+        public static string IsLeaveEligible {
+            get {
+                return ResourceManager.GetString("IsLeaveEligible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Managerial Position.
+        /// </summary>
+        public static string IsManagerial {
+            get {
+                return ResourceManager.GetString("IsManagerial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mandatory.
+        /// </summary>
+        public static string IsMandatory {
+            get {
+                return ResourceManager.GetString("IsMandatory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overtime Allowed.
+        /// </summary>
+        public static string IsOvertimeAllowed {
+            get {
+                return ResourceManager.GetString("IsOvertimeAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paid.
+        /// </summary>
+        public static string IsPaid {
+            get {
+                return ResourceManager.GetString("IsPaid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paid Break.
+        /// </summary>
+        public static string IsPaidBreak {
+            get {
+                return ResourceManager.GetString("IsPaidBreak", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recurring.
+        /// </summary>
+        public static string IsRecurring {
+            get {
+                return ResourceManager.GetString("IsRecurring", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sub Account.
+        /// </summary>
+        public static string IsSubAccount {
+            get {
+                return ResourceManager.GetString("IsSubAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Taxable.
+        /// </summary>
+        public static string IsTaxable {
+            get {
+                return ResourceManager.GetString("IsTaxable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Group.
+        /// </summary>
+        public static string JobGroup {
+            get {
+                return ResourceManager.GetString("JobGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Group Code.
+        /// </summary>
+        public static string JobGroupCode {
+            get {
+                return ResourceManager.GetString("JobGroupCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Groups.
+        /// </summary>
+        public static string JobGroups {
+            get {
+                return ResourceManager.GetString("JobGroups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Groups Description.
+        /// </summary>
+        public static string JobGroupsDescription {
+            get {
+                return ResourceManager.GetString("JobGroupsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Level.
+        /// </summary>
+        public static string JobLevel {
+            get {
+                return ResourceManager.GetString("JobLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Level Code.
+        /// </summary>
+        public static string JobLevelCode {
+            get {
+                return ResourceManager.GetString("JobLevelCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Levels.
+        /// </summary>
+        public static string JobLevels {
+            get {
+                return ResourceManager.GetString("JobLevels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Levels Description.
+        /// </summary>
+        public static string JobLevelsDescription {
+            get {
+                return ResourceManager.GetString("JobLevelsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Title.
+        /// </summary>
+        public static string JobTitle {
+            get {
+                return ResourceManager.GetString("JobTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Title Code.
+        /// </summary>
+        public static string JobTitleCode {
+            get {
+                return ResourceManager.GetString("JobTitleCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Titles.
+        /// </summary>
+        public static string JobTitles {
+            get {
+                return ResourceManager.GetString("JobTitles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Titles Description.
+        /// </summary>
+        public static string JobTitlesDescription {
+            get {
+                return ResourceManager.GetString("JobTitlesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Name (Arabic).
+        /// </summary>
+        public static string LastNameAr {
+            get {
+                return ResourceManager.GetString("LastNameAr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Name (English).
+        /// </summary>
+        public static string LastNameEn {
+            get {
+                return ResourceManager.GetString("LastNameEn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leave Categories.
+        /// </summary>
+        public static string LeaveCategories {
+            get {
+                return ResourceManager.GetString("LeaveCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leave Categories Description.
+        /// </summary>
+        public static string LeaveCategoriesDescription {
+            get {
+                return ResourceManager.GetString("LeaveCategoriesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leave Types.
+        /// </summary>
+        public static string LeaveTypes {
+            get {
+                return ResourceManager.GetString("LeaveTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Leave Types, Balance Policies, and Deductions.
+        /// </summary>
+        public static string LeaveTypesDescription {
+            get {
+                return ResourceManager.GetString("LeaveTypesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level.
+        /// </summary>
+        public static string Level {
+            get {
+                return ResourceManager.GetString("Level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Limits and Days.
+        /// </summary>
+        public static string LimitsAndDays {
+            get {
+                return ResourceManager.GetString("LimitsAndDays", resourceCulture);
             }
         }
         
@@ -606,6 +2910,15 @@ namespace HRDS.Web.Resources {
         public static string MainModule {
             get {
                 return ResourceManager.GetString("MainModule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Major Code.
+        /// </summary>
+        public static string MajorCode {
+            get {
+                return ResourceManager.GetString("MajorCode", resourceCulture);
             }
         }
         
@@ -637,6 +2950,15 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mandatory.
+        /// </summary>
+        public static string Mandatory {
+            get {
+                return ResourceManager.GetString("Mandatory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Marital Status Management.
         /// </summary>
         public static string MaritalStatusManagement {
@@ -646,11 +2968,83 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum Count per Month.
+        /// </summary>
+        public static string MaxCountPerMonth {
+            get {
+                return ResourceManager.GetString("MaxCountPerMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum Days per Request.
+        /// </summary>
+        public static string MaxDaysPerRequest {
+            get {
+                return ResourceManager.GetString("MaxDaysPerRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum Days per Year.
+        /// </summary>
+        public static string MaxDaysPerYear {
+            get {
+                return ResourceManager.GetString("MaxDaysPerYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum Hours per Month.
+        /// </summary>
+        public static string MaxHoursPerMonth {
+            get {
+                return ResourceManager.GetString("MaxHoursPerMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum Amount Limit.
+        /// </summary>
+        public static string MaxLimitAmount {
+            get {
+                return ResourceManager.GetString("MaxLimitAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Middle Name (Arabic).
+        /// </summary>
+        public static string MiddleNameAr {
+            get {
+                return ResourceManager.GetString("MiddleNameAr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Middle Name (English).
+        /// </summary>
+        public static string MiddleNameEn {
+            get {
+                return ResourceManager.GetString("MiddleNameEn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Military Status Management.
         /// </summary>
         public static string MilitaryStatusManagement {
             get {
                 return ResourceManager.GetString("MilitaryStatusManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Overtime Minutes.
+        /// </summary>
+        public static string MinimumOvertimeMinutes {
+            get {
+                return ResourceManager.GetString("MinimumOvertimeMinutes", resourceCulture);
             }
         }
         
@@ -673,11 +3067,38 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to National ID.
+        /// </summary>
+        public static string NationalId {
+            get {
+                return ResourceManager.GetString("NationalId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nationality Management.
         /// </summary>
         public static string NationalitiesManagement {
             get {
                 return ResourceManager.GetString("NationalitiesManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old Code.
+        /// </summary>
+        public static string OldCode {
+            get {
+                return ResourceManager.GetString("OldCode", resourceCulture);
             }
         }
         
@@ -691,6 +3112,15 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Optional.
+        /// </summary>
+        public static string Optional {
+            get {
+                return ResourceManager.GetString("Optional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Order.
         /// </summary>
         public static string Order {
@@ -700,11 +3130,38 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parent Account.
+        /// </summary>
+        public static string ParentAccount {
+            get {
+                return ResourceManager.GetString("ParentAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parent Cost Center.
+        /// </summary>
+        public static string ParentCostCenter {
+            get {
+                return ResourceManager.GetString("ParentCostCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parent Module.
         /// </summary>
         public static string ParentModule {
             get {
                 return ResourceManager.GetString("ParentModule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passport Number.
+        /// </summary>
+        public static string PassportNumber {
+            get {
+                return ResourceManager.GetString("PassportNumber", resourceCulture);
             }
         }
         
@@ -723,6 +3180,42 @@ namespace HRDS.Web.Resources {
         public static string PasswordRequired {
             get {
                 return ResourceManager.GetString("PasswordRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment Methods.
+        /// </summary>
+        public static string PaymentMethods {
+            get {
+                return ResourceManager.GetString("PaymentMethods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment Methods Description.
+        /// </summary>
+        public static string PaymentMethodsDescription {
+            get {
+                return ResourceManager.GetString("PaymentMethodsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Penalty Types.
+        /// </summary>
+        public static string PenaltyTypes {
+            get {
+                return ResourceManager.GetString("PenaltyTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Penalty Types Description.
+        /// </summary>
+        public static string PenaltyTypesDescription {
+            get {
+                return ResourceManager.GetString("PenaltyTypesDescription", resourceCulture);
             }
         }
         
@@ -781,6 +3274,33 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Permission Types.
+        /// </summary>
+        public static string PermissionTypes {
+            get {
+                return ResourceManager.GetString("PermissionTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Permission Types Description.
+        /// </summary>
+        public static string PermissionTypesDescription {
+            get {
+                return ResourceManager.GetString("PermissionTypesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone.
+        /// </summary>
+        public static string Phone {
+            get {
+                return ResourceManager.GetString("Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select a country.
         /// </summary>
         public static string PleaseSelectCountry {
@@ -799,6 +3319,141 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Position Code.
+        /// </summary>
+        public static string PositionCode {
+            get {
+                return ResourceManager.GetString("PositionCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position Name.
+        /// </summary>
+        public static string PositionName {
+            get {
+                return ResourceManager.GetString("PositionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Positions.
+        /// </summary>
+        public static string Positions {
+            get {
+                return ResourceManager.GetString("Positions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Positions Description.
+        /// </summary>
+        public static string PositionsDescription {
+            get {
+                return ResourceManager.GetString("PositionsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position Status.
+        /// </summary>
+        public static string PositionStatus {
+            get {
+                return ResourceManager.GetString("PositionStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position Status Code.
+        /// </summary>
+        public static string PositionStatusCode {
+            get {
+                return ResourceManager.GetString("PositionStatusCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position Statuses.
+        /// </summary>
+        public static string PositionStatuses {
+            get {
+                return ResourceManager.GetString("PositionStatuses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position Statuses Description.
+        /// </summary>
+        public static string PositionStatusesDescription {
+            get {
+                return ResourceManager.GetString("PositionStatusesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Probation Statuses.
+        /// </summary>
+        public static string ProbationStatuses {
+            get {
+                return ResourceManager.GetString("ProbationStatuses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Probation Statuses Description.
+        /// </summary>
+        public static string ProbationStatusesDescription {
+            get {
+                return ResourceManager.GetString("ProbationStatusesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Process Code.
+        /// </summary>
+        public static string ProcessCode {
+            get {
+                return ResourceManager.GetString("ProcessCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Process Types.
+        /// </summary>
+        public static string ProcessTypes {
+            get {
+                return ResourceManager.GetString("ProcessTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Process Types Description.
+        /// </summary>
+        public static string ProcessTypesDescription {
+            get {
+                return ResourceManager.GetString("ProcessTypesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Qualification Code.
+        /// </summary>
+        public static string QualificationCode {
+            get {
+                return ResourceManager.GetString("QualificationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rate Date.
+        /// </summary>
+        public static string RateDate {
+            get {
+                return ResourceManager.GetString("RateDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Religion Management.
         /// </summary>
         public static string ReligionManagement {
@@ -808,11 +3463,146 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remarks.
+        /// </summary>
+        public static string Remarks {
+            get {
+                return ResourceManager.GetString("Remarks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remember Me.
         /// </summary>
         public static string RememberMe {
             get {
                 return ResourceManager.GetString("RememberMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reports To.
+        /// </summary>
+        public static string ReportsTo {
+            get {
+                return ResourceManager.GetString("ReportsTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request Statuses.
+        /// </summary>
+        public static string RequestStatuses {
+            get {
+                return ResourceManager.GetString("RequestStatuses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request Statuses Description.
+        /// </summary>
+        public static string RequestStatusesDescription {
+            get {
+                return ResourceManager.GetString("RequestStatusesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please fill in all required fields..
+        /// </summary>
+        public static string RequiredFieldsErrorMessage {
+            get {
+                return ResourceManager.GetString("RequiredFieldsErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please fill in all required fields..
+        /// </summary>
+        public static string RequiredFieldsMessage {
+            get {
+                return ResourceManager.GetString("RequiredFieldsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requires Approval.
+        /// </summary>
+        public static string RequiresApproval {
+            get {
+                return ResourceManager.GetString("RequiresApproval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requires Attachment.
+        /// </summary>
+        public static string RequiresAttachment {
+            get {
+                return ResourceManager.GetString("RequiresAttachment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requires Balance.
+        /// </summary>
+        public static string RequiresBalance {
+            get {
+                return ResourceManager.GetString("RequiresBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requires Employee.
+        /// </summary>
+        public static string RequiresEmployee {
+            get {
+                return ResourceManager.GetString("RequiresEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requires Job Title.
+        /// </summary>
+        public static string RequiresJobTitle {
+            get {
+                return ResourceManager.GetString("RequiresJobTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requires Receipt.
+        /// </summary>
+        public static string RequiresReceipt {
+            get {
+                return ResourceManager.GetString("RequiresReceipt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requires Workflow.
+        /// </summary>
+        public static string RequiresWorkflow {
+            get {
+                return ResourceManager.GetString("RequiresWorkflow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resignation Reasons.
+        /// </summary>
+        public static string ResignationReasons {
+            get {
+                return ResourceManager.GetString("ResignationReasons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resignation Reasons Description.
+        /// </summary>
+        public static string ResignationReasonsDescription {
+            get {
+                return ResourceManager.GetString("ResignationReasonsDescription", resourceCulture);
             }
         }
         
@@ -844,11 +3634,56 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rules and Policies.
+        /// </summary>
+        public static string RulesAndPolicies {
+            get {
+                return ResourceManager.GetString("RulesAndPolicies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Safety Type Code.
+        /// </summary>
+        public static string SafetyTypeCode {
+            get {
+                return ResourceManager.GetString("SafetyTypeCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Safety Types.
+        /// </summary>
+        public static string SafetyTypes {
+            get {
+                return ResourceManager.GetString("SafetyTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Safety Types Description.
+        /// </summary>
+        public static string SafetyTypesDescription {
+            get {
+                return ResourceManager.GetString("SafetyTypesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save Data.
         /// </summary>
         public static string SaveData {
             get {
                 return ResourceManager.GetString("SaveData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while saving the data..
+        /// </summary>
+        public static string SaveErrorMessage {
+            get {
+                return ResourceManager.GetString("SaveErrorMessage", resourceCulture);
             }
         }
         
@@ -880,11 +3715,56 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Section.
+        /// </summary>
+        public static string Section {
+            get {
+                return ResourceManager.GetString("Section", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sections.
+        /// </summary>
+        public static string Sections {
+            get {
+                return ResourceManager.GetString("Sections", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sections Description.
+        /// </summary>
+        public static string SectionsDescription {
+            get {
+                return ResourceManager.GetString("SectionsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Security Data.
         /// </summary>
         public static string SecurityData {
             get {
                 return ResourceManager.GetString("SecurityData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select.
+        /// </summary>
+        public static string Select {
+            get {
+                return ResourceManager.GetString("Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Account Type.
+        /// </summary>
+        public static string SelectAccountType {
+            get {
+                return ResourceManager.GetString("SelectAccountType", resourceCulture);
             }
         }
         
@@ -898,11 +3778,74 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Bank.
+        /// </summary>
+        public static string SelectBank {
+            get {
+                return ResourceManager.GetString("SelectBank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Base Currency.
+        /// </summary>
+        public static string SelectBaseCurrency {
+            get {
+                return ResourceManager.GetString("SelectBaseCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Category.
+        /// </summary>
+        public static string SelectCategory {
+            get {
+                return ResourceManager.GetString("SelectCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ...Select Country....
         /// </summary>
         public static string SelectCountry {
             get {
                 return ResourceManager.GetString("SelectCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Currency.
+        /// </summary>
+        public static string SelectCurrency {
+            get {
+                return ResourceManager.GetString("SelectCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Department.
+        /// </summary>
+        public static string SelectDepartment {
+            get {
+                return ResourceManager.GetString("SelectDepartment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Educational Institution.
+        /// </summary>
+        public static string SelectEducationalInstitution {
+            get {
+                return ResourceManager.GetString("SelectEducationalInstitution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Faculty.
+        /// </summary>
+        public static string SelectFaculty {
+            get {
+                return ResourceManager.GetString("SelectFaculty", resourceCulture);
             }
         }
         
@@ -916,11 +3859,38 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Institution Type.
+        /// </summary>
+        public static string SelectInstitutionType {
+            get {
+                return ResourceManager.GetString("SelectInstitutionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Module.
         /// </summary>
         public static string SelectModule {
             get {
                 return ResourceManager.GetString("SelectModule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Parent.
+        /// </summary>
+        public static string SelectParent {
+            get {
+                return ResourceManager.GetString("SelectParent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Parent Account.
+        /// </summary>
+        public static string SelectParentAccount {
+            get {
+                return ResourceManager.GetString("SelectParentAccount", resourceCulture);
             }
         }
         
@@ -934,6 +3904,141 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Section.
+        /// </summary>
+        public static string SelectSection {
+            get {
+                return ResourceManager.GetString("SelectSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Severity Level.
+        /// </summary>
+        public static string SeverityLevel {
+            get {
+                return ResourceManager.GetString("SeverityLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift.
+        /// </summary>
+        public static string Shift {
+            get {
+                return ResourceManager.GetString("Shift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift Breaks.
+        /// </summary>
+        public static string ShiftBreaks {
+            get {
+                return ResourceManager.GetString("ShiftBreaks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift Breaks Description.
+        /// </summary>
+        public static string ShiftBreaksDescription {
+            get {
+                return ResourceManager.GetString("ShiftBreaksDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift Code.
+        /// </summary>
+        public static string ShiftCode {
+            get {
+                return ResourceManager.GetString("ShiftCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shifts.
+        /// </summary>
+        public static string Shifts {
+            get {
+                return ResourceManager.GetString("Shifts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shifts Description.
+        /// </summary>
+        public static string ShiftsDescription {
+            get {
+                return ResourceManager.GetString("ShiftsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift Type.
+        /// </summary>
+        public static string ShiftType {
+            get {
+                return ResourceManager.GetString("ShiftType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift Type Code.
+        /// </summary>
+        public static string ShiftTypeCode {
+            get {
+                return ResourceManager.GetString("ShiftTypeCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift Types.
+        /// </summary>
+        public static string ShiftTypes {
+            get {
+                return ResourceManager.GetString("ShiftTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift Types Description.
+        /// </summary>
+        public static string ShiftTypesDescription {
+            get {
+                return ResourceManager.GetString("ShiftTypesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard Working Hours.
+        /// </summary>
+        public static string StandardHours {
+            get {
+                return ResourceManager.GetString("StandardHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Date.
+        /// </summary>
+        public static string StartDate {
+            get {
+                return ResourceManager.GetString("StartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Time.
+        /// </summary>
+        public static string StartTime {
+            get {
+                return ResourceManager.GetString("StartTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         public static string Status {
@@ -943,11 +4048,101 @@ namespace HRDS.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Status Code.
+        /// </summary>
+        public static string StatusCode {
+            get {
+                return ResourceManager.GetString("StatusCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SWIFT Code.
+        /// </summary>
+        public static string SwiftCode {
+            get {
+                return ResourceManager.GetString("SwiftCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Symbol.
+        /// </summary>
+        public static string Symbol {
+            get {
+                return ResourceManager.GetString("Symbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timing.
+        /// </summary>
+        public static string Timing {
+            get {
+                return ResourceManager.GetString("Timing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toggle Status.
         /// </summary>
         public static string ToggleStatus {
             get {
                 return ResourceManager.GetString("ToggleStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Days.
+        /// </summary>
+        public static string TotalDays {
+            get {
+                return ResourceManager.GetString("TotalDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To Time.
+        /// </summary>
+        public static string ToTime {
+            get {
+                return ResourceManager.GetString("ToTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type Code.
+        /// </summary>
+        public static string TypeCode {
+            get {
+                return ResourceManager.GetString("TypeCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit.
+        /// </summary>
+        public static string Unit {
+            get {
+                return ResourceManager.GetString("Unit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Units.
+        /// </summary>
+        public static string Units {
+            get {
+                return ResourceManager.GetString("Units", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Units Description.
+        /// </summary>
+        public static string UnitsDescription {
+            get {
+                return ResourceManager.GetString("UnitsDescription", resourceCulture);
             }
         }
         
@@ -1092,6 +4287,24 @@ namespace HRDS.Web.Resources {
         public static string Welcome {
             get {
                 return ResourceManager.GetString("Welcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year.
+        /// </summary>
+        public static string Year {
+            get {
+                return ResourceManager.GetString("Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

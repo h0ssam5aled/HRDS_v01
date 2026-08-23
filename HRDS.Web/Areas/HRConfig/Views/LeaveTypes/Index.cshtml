@@ -1,0 +1,372 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+
+@{
+    ViewData["Title"] = Resource.LeaveTypes;
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-calendar-event fs-3 lh-1 flex-shrink-0 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@Resource.LeaveTypes</h4>
+                    <p class="text-muted mb-0 small">@Resource.LeaveTypesDescription</p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary px-3 py-2" onclick="openAddModal()">
+                <i class="bi bi-plus-lg me-1"></i> @Resource.AddNewLeaveType
+            </button>
+        </div>
+    </div>
+
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="leaveTypesTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.Code</th>
+                            <th>@Resource.ArabicName</th>
+                            <th>@Resource.Category</th>
+                            <th>@Resource.IsPaid</th>
+                            <th>@Resource.RequiresBalance</th>
+                            <th>@Resource.MaxDaysPerYear</th>
+                            <th>@Resource.Status</th>
+                            <th>@Resource.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Tabbed -->
+<div class="modal fade" id="leaveTypeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content dark-modal">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalTitle">@Resource.AddLeaveType</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs border-secondary mb-3" id="leaveTabs" role="tablist">
+                    <li class="nav-item">
+                        <button class="nav-link active" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button">@Resource.BasicData</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" id="rules-tab" data-bs-toggle="tab" data-bs-target="#rules" type="button">@Resource.RulesAndPolicies</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" id="limits-tab" data-bs-toggle="tab" data-bs-target="#limits" type="button">@Resource.LimitsAndDays</button>
+                    </li>
+                </ul>
+
+                <form id="leaveTypeForm">
+                    <input type="hidden" id="leaveTypeId" value="0" />
+
+                    <div class="tab-content">
+                        <!-- Tab 1: Basic -->
+                        <div class="tab-pane fade show active" id="basic">
+                            <div class="row g-3 text-start">
+                                <div class="col-md-4">
+                                    <label class="form-label text-white">@Resource.Code <span class="text-danger">*</span></label>
+                                    <input type="text" id="leaveCode" class="form-control" required />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label text-white">@Resource.ArabicName <span class="text-danger">*</span></label>
+                                    <input type="text" id="leaveNameAr" class="form-control" required />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label text-white">@Resource.EnglishName</label>
+                                    <input type="text" id="leaveNameEn" class="form-control" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-white">@Resource.Category</label>
+                                    <select id="leaveCategoryId" class="form-select" asp-items="ViewBag.Categories">
+                                        <option value="">-- @Resource.SelectCategory --</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label text-white">@Resource.AccentColor</label>
+                                    <input type="color" id="colorCode" class="form-control form-control-color w-100" value="#0d6efd" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label text-white">@Resource.DisplayOrder</label>
+                                    <input type="number" id="displayOrder" class="form-control" value="1" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 2: Rules -->
+                        <div class="tab-pane fade" id="rules">
+                            <div class="row g-3 text-start">
+                                <div class="col-md-4">
+                                    <div class="form-check form-switch mt-2">
+                                        <input class="form-check-input" type="checkbox" id="isPaid" checked>
+                                        <label class="form-check-label text-white me-2">@Resource.IsPaid</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-check form-switch mt-2">
+                                        <input class="form-check-input" type="checkbox" id="requiresBalance" checked>
+                                        <label class="form-check-label text-white me-2">@Resource.RequiresBalance</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-check form-switch mt-2">
+                                        <input class="form-check-input" type="checkbox" id="requiresAttachment">
+                                        <label class="form-check-label text-white me-2">@Resource.RequiresAttachment</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-check form-switch mt-2">
+                                        <input class="form-check-input" type="checkbox" id="requiresApproval" checked>
+                                        <label class="form-check-label text-white me-2">@Resource.RequiresApproval</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-check form-switch mt-2">
+                                        <input class="form-check-input" type="checkbox" id="requiresWorkflow" checked>
+                                        <label class="form-check-label text-white me-2">@Resource.RequiresWorkflow</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-check form-switch mt-2">
+                                        <input class="form-check-input" type="checkbox" id="deductFromSalary">
+                                        <label class="form-check-label text-white me-2">@Resource.DeductFromSalary</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 3: Limits -->
+                        <div class="tab-pane fade" id="limits">
+                            <div class="row g-3 text-start">
+                                <div class="col-md-6">
+                                    <label class="form-label text-white">@Resource.MaxDaysPerRequest</label>
+                                    <input type="number" step="0.5" id="maxDaysPerRequest" class="form-control" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-white">@Resource.MaxDaysPerYear</label>
+                                    <input type="number" step="0.5" id="maxDaysPerYear" class="form-control" />
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check form-switch mt-4">
+                                        <input class="form-check-input" type="checkbox" id="allowCarryForward">
+                                        <label class="form-check-label text-white me-2">@Resource.AllowCarryForward</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-white">@Resource.CarryForwardLimit</label>
+                                    <input type="number" step="0.5" id="carryForwardLimit" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="border-secondary my-3" />
+                    <div class="form-check form-switch text-start">
+                        <input class="form-check-input" type="checkbox" id="isActive" checked>
+                        <label class="form-check-label text-white me-2" for="isActive">@Resource.IsActive</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resource.Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveLeaveType()">
+                    <i class="bi bi-save me-1"></i> @Resource.SaveData
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+        let leaveTypeModal;
+
+        // تحويل الموارد إلى JSON صريح لتجنب مشكلة الـ HTML Encoding
+        const localizedStrings = {
+            addTitle: @Html.Raw(Json.Serialize(Resource.AddNewLeaveType)),
+            editTitle: @Html.Raw(Json.Serialize(Resource.EditLeaveType)),
+            yes: @Html.Raw(Json.Serialize(Resource.Yes)),
+            no: @Html.Raw(Json.Serialize(Resource.No)),
+            requiredError: @Html.Raw(Json.Serialize(Resource.RequiredFieldsErrorMessage)),
+            saveError: @Html.Raw(Json.Serialize(Resource.SaveErrorMessage)),
+            active: @Html.Raw(Json.Serialize(Resource.Active)),
+            inactive: @Html.Raw(Json.Serialize(Resource.Inactive))
+        };
+
+        $(document).ready(function () {
+            leaveTypeModal = new bootstrap.Modal(document.getElementById('leaveTypeModal'));
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            table = $('#leaveTypesTable').DataTable({
+                pagingType: 'simple',
+                ajax: {
+                    url: '@Url.Action("GetJson", "LeaveTypes", new { area = "HRConfig" })',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'leaveTypeId', width: '5%' },
+                    {
+                        data: 'leaveCode',
+                        render: function (data) {
+                            return `<span class="badge dark-badge-code font-monospace px-2 py-1">${data || ''}</span>`;
+                        }
+                    },
+                    { data: 'leaveNameAr' },
+                    { data: 'leaveCategoryName' },
+                    {
+                        data: 'isPaid',
+                        render: function (data) {
+                            return data ? `<span class="badge bg-success">${localizedStrings.yes}</span>` : `<span class="badge bg-danger">${localizedStrings.no}</span>`;
+                        }
+                    },
+                    {
+                        data: 'requiresBalance',
+                        render: function (data) {
+                            return data ? `<span class="badge bg-info">${localizedStrings.yes}</span>` : `<span class="badge bg-secondary">${localizedStrings.no}</span>`;
+                        }
+                    },
+                    { data: 'maxDaysPerYear', render: function(d) { return d || '-'; } },
+                    {
+                        data: 'isActive',
+                        render: function (data) {
+                            return data ? `<span class="badge neon-badge-info">${localizedStrings.active}</span>`
+                                        : `<span class="badge neon-badge-muted">${localizedStrings.inactive}</span>`;
+                        }
+                    },
+                    {
+                        data: 'leaveTypeId',
+                        render: function (data) {
+                            return `<button class="btn btn-sm btn-action-edit" onclick="editLeaveType(${data})">
+                                        <i class="bi bi-pencil-square me-1"></i>${localizedStrings.editTitle}
+                                    </button>`;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        }
+
+        function openAddModal() {
+            $('#leaveTypeId').val(0);
+            $('#leaveTypeForm')[0].reset();
+            $('#isActive').prop('checked', true);
+            $('#isPaid').prop('checked', true);
+            $('#requiresBalance').prop('checked', true);
+            $('#requiresApproval').prop('checked', true);
+            $('#requiresWorkflow').prop('checked', true);
+            $('#modalTitle').html(localizedStrings.addTitle);
+
+            let firstTab = document.querySelector('#leaveTabs button:first-child');
+            if(firstTab) {
+                bootstrap.Tab.getInstance(firstTab)?.show() || new bootstrap.Tab(firstTab).show();
+            }
+            leaveTypeModal.show();
+        }
+
+        function editLeaveType(id) {
+            $.get('@Url.Action("GetById", "LeaveTypes", new { area = "HRConfig" })/' + id, function (data) {
+                if (data) {
+                    $('#leaveTypeId').val(data.leaveTypeId);
+                    $('#leaveCode').val(data.leaveCode);
+                    $('#leaveNameAr').val(data.leaveNameAr);
+                    $('#leaveNameEn').val(data.leaveNameEn);
+                    $('#leaveCategoryId').val(data.leaveCategoryId);
+
+                    $('#isPaid').prop('checked', data.isPaid);
+                    $('#requiresBalance').prop('checked', data.requiresBalance);
+                    $('#requiresAttachment').prop('checked', data.requiresAttachment);
+                    $('#requiresApproval').prop('checked', data.requiresApproval);
+                    $('#requiresWorkflow').prop('checked', data.requiresWorkflow);
+                    $('#deductFromSalary').prop('checked', data.deductFromSalary);
+
+                    $('#maxDaysPerRequest').val(data.maxDaysPerRequest);
+                    $('#maxDaysPerYear').val(data.maxDaysPerYear);
+                    $('#allowCarryForward').prop('checked', data.allowCarryForward);
+                    $('#carryForwardLimit').val(data.carryForwardLimit);
+
+                    $('#colorCode').val(data.colorCode || '#0d6efd');
+                    $('#displayOrder').val(data.displayOrder || 1);
+                    $('#isActive').prop('checked', data.isActive);
+
+                    $('#modalTitle').html(localizedStrings.editTitle);
+
+                    let firstTab = document.querySelector('#leaveTabs button:first-child');
+                    if(firstTab) {
+                        bootstrap.Tab.getInstance(firstTab)?.show() || new bootstrap.Tab(firstTab).show();
+                    }
+                    leaveTypeModal.show();
+                }
+            });
+        }
+
+        function saveLeaveType() {
+            let model = {
+                LeaveTypeId: parseInt($('#leaveTypeId').val()) || 0,
+                LeaveCode: $('#leaveCode').val(),
+                LeaveNameAr: $('#leaveNameAr').val(),
+                LeaveNameEn: $('#leaveNameEn').val(),
+                LeaveCategoryId: $('#leaveCategoryId').val() ? parseInt($('#leaveCategoryId').val()) : null,
+
+                IsPaid: $('#isPaid').is(':checked'),
+                RequiresBalance: $('#requiresBalance').is(':checked'),
+                RequiresAttachment: $('#requiresAttachment').is(':checked'),
+                RequiresApproval: $('#requiresApproval').is(':checked'),
+                RequiresWorkflow: $('#requiresWorkflow').is(':checked'),
+                DeductFromSalary: $('#deductFromSalary').is(':checked'),
+
+                MaxDaysPerRequest: $('#maxDaysPerRequest').val() ? parseFloat($('#maxDaysPerRequest').val()) : null,
+                MaxDaysPerYear: $('#maxDaysPerYear').val() ? parseFloat($('#maxDaysPerYear').val()) : null,
+                AllowCarryForward: $('#allowCarryForward').is(':checked'),
+                CarryForwardLimit: $('#carryForwardLimit').val() ? parseFloat($('#carryForwardLimit').val()) : null,
+
+                ColorCode: $('#colorCode').val(),
+                DisplayOrder: $('#displayOrder').val() ? parseInt($('#displayOrder').val()) : null,
+                IsActive: $('#isActive').is(':checked')
+            };
+
+            if (!model.LeaveCode || !model.LeaveNameAr) {
+                alert(localizedStrings.requiredError);
+                return;
+            }
+
+            let token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '@Url.Action("Save", "LeaveTypes", new { area = "HRConfig" })',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: { "RequestVerificationToken": token },
+                data: JSON.stringify(model),
+                success: function (response) {
+                    if (response.success) {
+                        leaveTypeModal.hide();
+                        table.ajax.reload(null, false);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert(localizedStrings.saveError);
+                }
+            });
+        }
+    </script>
+}

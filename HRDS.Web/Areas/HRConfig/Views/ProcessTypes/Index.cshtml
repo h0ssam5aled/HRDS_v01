@@ -1,0 +1,209 @@
+﻿@using HRDS.Web.Resources
+@using System.Globalization
+
+@{
+    ViewData["Title"] = Resource.ProcessTypes;
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+    var isRtl = currentCulture == "ar";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container-fluid py-3" lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+    <div class="card dark-card shadow-sm mb-4">
+        <div class="card-body d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <i class="bi bi-gear-wide-connected fs-3 lh-1 flex-shrink-0 text-info"></i>
+                <div class="d-flex flex-column align-items-start text-start">
+                    <h4 class="mb-1 fw-bold">@Resource.ProcessTypes</h4>
+                    <p class="text-muted mb-0 small">@Resource.ProcessTypesDescription</p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary px-3 py-2" onclick="openAddModal()">
+                <i class="bi bi-plus-lg me-1"></i> @Resource.AddNewProcessType
+            </button>
+        </div>
+    </div>
+
+    <div class="card dark-card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="processTypesTable" class="table align-middle w-100 m-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Resource.ProcessCode</th>
+                            <th>@Resource.ArabicName</th>
+                            <th>@Resource.EnglishName</th>
+                            <th>@Resource.Status</th>
+                            <th>@Resource.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="processTypeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content dark-modal">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalTitle">@Resource.AddNewProcessType</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="processTypeForm">
+                    <input type="hidden" id="processTypeId" value="0" />
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.ProcessCode <span class="text-danger">*</span></label>
+                        <input type="text" id="processCode" class="form-control" placeholder="e.g. LEAVE_REQ" required />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.ArabicName <span class="text-danger">*</span></label>
+                        <input type="text" id="processNameAr" class="form-control" required />
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label text-white">@Resource.EnglishName</label>
+                        <input type="text" id="processNameEn" class="form-control" />
+                    </div>
+
+                    <div class="form-check form-switch text-start">
+                        <input class="form-check-input" type="checkbox" id="isActive" checked>
+                        <label class="form-check-label text-white ms-2" for="isActive">@Resource.IsActive</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Resource.Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveProcessType()">
+                    <i class="bi bi-save me-1"></i> @Resource.SaveData
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let table;
+        let processTypeModal;
+
+        const localizedStrings = {
+            addTitle: @Html.Raw(Json.Serialize(Resource.AddNewProcessType)),
+            editTitle: @Html.Raw(Json.Serialize(Resource.EditProcessType)),
+            editBtn: @Html.Raw(Json.Serialize(Resource.EditProcessType)),
+            active: @Html.Raw(Json.Serialize(Resource.Active)),
+            inactive: @Html.Raw(Json.Serialize(Resource.Inactive)),
+            requiredError: @Html.Raw(Json.Serialize(Resource.RequiredFieldsErrorMessage)),
+            saveError: @Html.Raw(Json.Serialize(Resource.SaveErrorMessage))
+        };
+
+        $(document).ready(function () {
+            processTypeModal = new bootstrap.Modal(document.getElementById('processTypeModal'));
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            table = $('#processTypesTable').DataTable({
+                pagingType: 'simple',
+                ajax: {
+                    url: '@Url.Action("GetJson", "ProcessTypes")',
+                    dataSrc: 'data'
+                },
+                columns: [
+                    { data: 'processTypeId', width: '5%' },
+                    {
+                        data: 'processCode',
+                        render: function (data) {
+                            return `<span class="badge dark-badge-code font-monospace px-2 py-1">${data || ''}</span>`;
+                        }
+                    },
+                    { data: 'processNameAr' },
+                    { data: 'processNameEn', render: data => data || '-' },
+                    {
+                        data: 'isActive',
+                        render: function (data) {
+                            return data ? `<span class="badge neon-badge-info">${localizedStrings.active}</span>`
+                                        : `<span class="badge neon-badge-muted">${localizedStrings.inactive}</span>`;
+                        }
+                    },
+                    {
+                        data: 'processTypeId',
+                        render: function (data) {
+                            return `<button class="btn btn-sm btn-action-edit" onclick="editProcessType(${data})">
+                                        <i class="bi bi-pencil-square me-1"></i>${localizedStrings.editBtn}
+                                    </button>`;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/@(currentCulture == "ar" ? "ar.json" : "en-GB.json")'
+                }
+            });
+        }
+
+        function openAddModal() {
+            $('#processTypeId').val(0);
+            $('#processTypeForm')[0].reset();
+            $('#isActive').prop('checked', true);
+            $('#modalTitle').html(localizedStrings.addTitle);
+            processTypeModal.show();
+        }
+
+        function editProcessType(id) {
+            $.get('@Url.Action("GetById", "ProcessTypes")/' + id, function (data) {
+                if (data) {
+                    $('#processTypeId').val(data.processTypeId);
+                    $('#processCode').val(data.processCode);
+                    $('#processNameAr').val(data.processNameAr);
+                    $('#processNameEn').val(data.processNameEn);
+                    $('#isActive').prop('checked', data.isActive);
+
+                    $('#modalTitle').html(localizedStrings.editTitle);
+                    processTypeModal.show();
+                }
+            });
+        }
+
+        function saveProcessType() {
+            let model = {
+                ProcessTypeId: parseInt($('#processTypeId').val()) || 0,
+                ProcessCode: $('#processCode').val(),
+                ProcessNameAr: $('#processNameAr').val(),
+                ProcessNameEn: $('#processNameEn').val(),
+                IsActive: $('#isActive').is(':checked')
+            };
+
+            if (!model.ProcessCode || !model.ProcessNameAr) {
+                alert(localizedStrings.requiredError);
+                return;
+            }
+
+            let token = $('input[name="__RequestVerificationToken"]').val();
+
+            $.ajax({
+                url: '@Url.Action("Save", "ProcessTypes")',
+                type: 'POST',
+                contentType: 'application/json',
+                headers: { "RequestVerificationToken": token },
+                data: JSON.stringify(model),
+                success: function (response) {
+                    if (response.success) {
+                        processTypeModal.hide();
+                        table.ajax.reload(null, false);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert(localizedStrings.saveError);
+                }
+            });
+        }
+    </script>
+}

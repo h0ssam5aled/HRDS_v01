@@ -7,9 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Areas\FINCONFIG\ViewModels\CurrencyRateViewModel.cs%29" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Areas\Config\Models\" />
     <Folder Include="Areas\CoreData\Models\" />
-    <Folder Include="Areas\HRMasterData\" />
+    <Folder Include="Areas\FINCONFIG\Models\" />
+    <Folder Include="Areas\HRConfig\Models\" />
+    <Folder Include="Areas\HR\Data\" />
+    <Folder Include="Areas\HR\Models\" />
     <Folder Include="wwwroot\fonts\cairo\" />
     <Folder Include="wwwroot\fonts\plus-jakarta-sans\" />
   </ItemGroup>

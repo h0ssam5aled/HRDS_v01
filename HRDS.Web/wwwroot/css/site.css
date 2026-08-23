@@ -2,7 +2,7 @@
 
 :root {
     --erp-header-height: 64px;
-    --erp-sidebar-width: 265px;
+    --erp-sidebar-width: 350px;
     /* ألوان شاشة الـ Login الفاخرة */
     --erp-bg-main: #070a12; /* خلفية ليلية عميقة جداً */
     --erp-surface-1: #0f172a; /* خلفية الهيدر والسيدبار */
